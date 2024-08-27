@@ -6,12 +6,12 @@
 #    By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/19 12:03:15 by azinchen          #+#    #+#              #
-#    Updated: 2024/08/27 19:35:50 by azinchen         ###   ########.fr        #
+#    Updated: 2024/08/27 19:36:57 by azinchen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Standard
-NAME 			=	libft.a
+NAME 			=	libft.a 
 
 # Directories
 INCLUDE_DIR 	=	include/
