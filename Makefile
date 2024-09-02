@@ -6,7 +6,7 @@
 #    By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2024/08/28 18:04:21 by azinchen         ###   ########.fr        #
+#    Updated: 2024/09/02 19:52:43 by azinchen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,23 @@
 NAME 			=	fdf
 
 # Directories
-LIBFT			= 	./libft/libft.a
-LIBMLX			=	./libmlx/MLX42
-INCLUDE_DIR 	=	include/
+LIBFT_DIR		= 	./libft/
+MLX_DIR			=	./MLX42
 SRC_DIR 		=	src/
 OBJ_DIR 		=	obj/
+
+#Includes
+LIBFT_INC		=	$(LIBFT_DIR)/include
+MLX_INC			=	$(MLX_DIR)/include
+INCLUDE 	=	include/
+
+#Libraries (do I need first 2? omg I'm going mad with this Makefile)
+LIBFT			=	$(LIBFT_DIR)/libft.a
+MLX42			=	$(MLX_DIR)/build/libmlx42.a
+LIB				=	-L$(MLX_DIR)/build -lmlx42 -L$(LIBFT_DIR) -ldl -lglfw -pthread -lm
+
+#HZ!!!!!!!!!!!!!!!!!!!!!!!!!111
+-framework OpenGL -framework AppKit
 
 # Compiler and compilation flags
 CC 				=	cc
@@ -39,7 +51,7 @@ $(LIBFT):
 				@make -C ./libft
 
 $(NAME): 		$(OBJ) $(LIBFT)
-				@$(CC) $(CFLAGS) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) 
+				@$(CC) $(CFLAGS) $(OBJ) -Lmlx -lmlx  -o $(NAME) 
 
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
 				@mkdir -p $(@D)
