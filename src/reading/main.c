@@ -73,7 +73,6 @@ t_read *read_map(char *file_name)
 				exit(1);
 			x++;
 		}
-		
 		next_line = NULL;
 		y++;
 	}
@@ -95,7 +94,7 @@ int main(int argc, char *argv[])
 	cur = first;
 	while (cur != NULL)
 	{
-		printf("[%d]: %d, %d, %d", i, cur->x, cur->y, cur->z);
+		printf("[%d]: %d, %d, %d\n", i, cur->x, cur->y, cur->z);
 		i++;
 		cur = cur->next;
 	}

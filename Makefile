@@ -16,25 +16,23 @@ NAME 			=	fdf
 # Directories
 LIBFT_DIR		= 	./libft/
 MLX_DIR			=	./MLX42
-SRC_DIR 		=	src/
-OBJ_DIR 		=	obj/
+SRC_DIR 		=	./src/
+OBJ_DIR 		=	./obj/
 
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
 MLX_INC			=	$(MLX_DIR)/include
-INCLUDE 	=	include/
+INCLUDE 		=	./include/
+HEADERS			=	-I$(LIBFT_INC)/libft.h -I$(LIBFT_INC)/get_next_line.h -I$(MLX_INC)
 
-#Libraries (do I need first 2? omg I'm going mad with this Makefile)
+#Libraries
 LIBFT			=	$(LIBFT_DIR)/libft.a
 MLX42			=	$(MLX_DIR)/build/libmlx42.a
 LIB				=	-L$(MLX_DIR)/build -lmlx42 -L$(LIBFT_DIR) -ldl -lglfw -pthread -lm
 
-#HZ!!!!!!!!!!!!!!!!!!!!!!!!!111
--framework OpenGL -framework AppKit
-
 # Compiler and compilation flags
 CC 				=	cc
-CFLAGS 			=	-g -Wall -Wextra -Werror -I
+CFLAGS 			=	-g -Wall -Wextra -Werror
 RM				=	rm -f
 
 # Source files
@@ -50,8 +48,12 @@ all: 			$(NAME)
 $(LIBFT):
 				@make -C ./libft
 
-$(NAME): 		$(OBJ) $(LIBFT)
-				@$(CC) $(CFLAGS) $(OBJ) -Lmlx -lmlx  -o $(NAME) 
+$(MLX42):
+				@cmake $(MLX_DIR) -B $(MLX_DIR)/build
+				@cmake --build $(MLX_DIR)/build -j4
+
+$(NAME): 		$(OBJ) $(LIBFT) $(MLX42)
+				@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(HEADERS) $(LIB) -o $(NAME) 
 
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
 				@mkdir -p $(@D)
