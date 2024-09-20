@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/get_next_line.h"
+#include "../../include/get_next_line_utils.h"
 
 static char	*free_string(char **str)
 {

@@ -26,8 +26,8 @@ CFLAGS 			=	-g -Wall -Wextra -Werror -I
 RM				=	rm -f
 
 # Source files
-SRC				=	$(SRC_DIR)fdf.c \
-					$(SRC_DIR)mouse.c \
+READING_DIR		=	$(SRC_DIR)reading/main.c
+SRC				=	$(READING_DIR)
 
 # Object files         
 OBJ 			=	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
