@@ -17,5 +17,12 @@ typedef struct s_read
 }	t_read;
 //double?
 
+//Reading
+t_read *read_map(char *file_name);
+
+//Utils
+int	add_back(t_read **stack, int x, int y, int z);
+
+
 
 #endif

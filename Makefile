@@ -14,10 +14,10 @@
 NAME 			=	fdf
 
 # Directories
-LIBFT_DIR		= 	./libft/
+LIBFT_DIR		= 	./libft
 MLX_DIR			=	./MLX42
-SRC_DIR 		=	./src/
-OBJ_DIR 		=	./obj/
+SRC_DIR 		=	./src
+OBJ_DIR 		=	./obj
 
 #Includes
 LIBFT_INC		=	$(LIBFT_DIR)/include
@@ -36,11 +36,13 @@ CFLAGS 			=	-g -Wall -Wextra -Werror
 RM				=	rm -f
 
 # Source files
-READING_DIR		=	$(SRC_DIR)reading/main.c
+READING_DIR		=	$(SRC_DIR)/reading/read_map.c \
+					$(SRC_DIR)/reading/read_utils.c \
+					$(SRC_DIR)/main.c
 SRC				=	$(READING_DIR)
 
 # Object files         
-OBJ 			=	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
+OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
 
 #Build rules
 all: 			$(NAME)
@@ -59,6 +61,7 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
 				@mkdir -p $(@D)
 				@$(CC) $(CFLAGS) $(INCLUDE_DIR) -Imlx -c $< -o $@
 
+#TODO: Check!
 clean:
 				@$(RM) -r $(OBJ_DIR)
 				@$(RM) .cache_exists
@@ -67,6 +70,7 @@ clean:
 fclean: 		clean 
 				@$(RM) $(NAME)
 				@$(RM) $(LIBFT)
+				@$(RM) -r $(MLX_DIR)/build
 			
 re: 			fclean all
 
