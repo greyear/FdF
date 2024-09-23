@@ -36,10 +36,12 @@ CFLAGS 			=	-g -Wall -Wextra -Werror
 RM				=	rm -f
 
 # Source files
-READING_DIR		=	$(SRC_DIR)/reading/read_map.c \
-					$(SRC_DIR)/reading/read_utils.c \
-					$(SRC_DIR)/main.c
-SRC				=	$(READING_DIR)
+READING_DIR			=	$(SRC_DIR)/reading/read_map.c \
+						$(SRC_DIR)/reading/read_utils.c
+TRANSFORMING_DIR	= 	$(SRC_DIR)/transforming/transform_coordinates.c
+SRC					=	$(READING_DIR) \
+						$(TRANSFORMING_DIR) \
+						$(SRC_DIR)/main.c
 
 # Object files         
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
@@ -55,9 +57,9 @@ $(MLX42):
 				@cmake --build $(MLX_DIR)/build -j4
 
 $(NAME): 		$(OBJ) $(LIBFT) $(MLX42)
-				@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(HEADERS) $(LIB) -o $(NAME) 
+				$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(HEADERS) $(LIB) -o $(NAME) 
 
-$(OBJ_DIR)%.o:	$(SRC_DIR)%.c
+$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c
 				@mkdir -p $(@D)
 				@$(CC) $(CFLAGS) $(INCLUDE_DIR) -Imlx -c $< -o $@
 

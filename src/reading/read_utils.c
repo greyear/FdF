@@ -3,7 +3,7 @@
 #include "../../include/fdf.h"
 #include "../../libft/include/get_next_line.h"
 
-static t_read	*last_elem(t_read *stack)
+t_read	*last_elem(t_read *stack)
 {
 	t_read	*cur;
 
