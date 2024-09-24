@@ -29,6 +29,21 @@ typedef struct s_output
 	struct s_read	*next;
 }	t_output;
 
+typedef	struct s_matrix
+{
+	t_output	**map;
+	int			width;
+	int			height;
+}	t_matrix;
+
+typedef struct s_map_extremum
+{
+	double	max_y;
+	double	min_y;
+	double	max_x;
+	double	min_x;
+}	t_map_extremum;
+
 //Reading
 t_read *read_map(char *file_name);
 
@@ -37,7 +52,13 @@ t_read	*last_elem(t_read *stack);
 int	add_back(t_read **stack, int x, int y, int z);
 
 //Transforming
-t_output    **transform_map(t_read *stack, double angle);
+t_matrix	transform_to_matrix(t_read *stack, double angle);
 
+//Drawing
+int		pixel_color(int r, int g, int b, int a); //Ubrat'
+void	put_matrix(mlx_image_t *image, t_matrix matrix);
+
+//Drawing utils
+t_map_extremum find_extremum(t_matrix matrix);
 
 #endif

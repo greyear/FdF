@@ -12,7 +12,7 @@ static t_output    transform_point(t_read point, double angle)
     return (res);
 }
 
-t_output    **transform_map(t_read *stack, double angle)
+t_matrix    transform_to_matrix(t_read *stack, double angle)
 {
     t_read  *cur;
     int     i;
@@ -20,6 +20,7 @@ t_output    **transform_map(t_read *stack, double angle)
     int     width;
     int     height;
     t_output    **map;
+    t_matrix    matrix;
 
     width = last_elem(stack)->x + 1;
     height = last_elem(stack)->y + 1;
@@ -27,14 +28,14 @@ t_output    **transform_map(t_read *stack, double angle)
     map = (t_output **)malloc(height * sizeof(t_output *));
     //what to return? what error msg?
     if (!map)
-        return (NULL);
+        exit(1);
     j = 0;
     while (j < height)
     {
         map[j] = (t_output *)malloc(width * sizeof(t_output));
         //what to return? what error msg?
         if (!map[j])
-            return (NULL);
+            exit(1);
         j++;
     }
     cur = stack;
@@ -50,5 +51,8 @@ t_output    **transform_map(t_read *stack, double angle)
         }
         j++;
     }
-    return (map);
+    matrix.map = map;
+    matrix.width = width;
+    matrix.height = height;
+    return (matrix);
 }
