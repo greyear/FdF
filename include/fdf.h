@@ -9,6 +9,7 @@
 # include "../libft/include/get_next_line.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
+# include <stdlib.h> //razobrat'sya s abs
 
 typedef struct s_read
 {
@@ -18,18 +19,24 @@ typedef struct s_read
 	struct s_read	*next;
 }	t_read;
 
-typedef struct s_output
+typedef struct s_isometric
 {
 	double			x;
 	double			y;
 	int				z;
+}	t_isometric;
+
+typedef struct s_pixel
+{
+	int				x;
+	int				y;
+	int				z;
 	int				color;
-	//struct s_read	*next; Do we need it?
-}	t_output;
+} t_pixel;
 
 typedef	struct s_matrix
 {
-	t_output	**map;
+	t_isometric	**map;
 	int			width;
 	int			height;
 }	t_matrix;
@@ -44,15 +51,6 @@ typedef struct s_map_extremum
 	int		min_z;
 }	t_map_extremum;
 
-/*
-typedef struct s_color
-{
-	int	r;
-	int	g;
-	int	b;
-	int	a;
-}	t_color; */
-
 //Reading
 t_read			*read_map(char *file_name);
 
@@ -66,6 +64,7 @@ t_matrix		transform_to_matrix(t_read *stack, double angle);
 //Drawing
 int				pixel_color(int r, int g, int b, int a); //Ubrat'
 void			put_matrix(mlx_image_t *image, t_matrix matrix);
+void	draw_line(mlx_image_t *image, t_pixel a, t_pixel b);
 
 //Drawing utils
 t_map_extremum	find_extremum(t_matrix matrix);
