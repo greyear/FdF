@@ -16,12 +16,12 @@ int main(int argc, char *argv[])
 	read = read_map(argv[1]);
 	matrix = transform_to_matrix(read, M_PI / 6);
 
-    if (!(mlx = mlx_init(1010, 1010, "FDF", true)))
+    if (!(mlx = mlx_init(1000, 1000, "FDF", true)))
     {
         puts(mlx_strerror(mlx_errno));
         return (EXIT_FAILURE);
     }
-    if (!(image = mlx_new_image(mlx, 1010, 1010)))
+    if (!(image = mlx_new_image(mlx, 1000, 1000)))
     {
         mlx_close_window(mlx);
         puts(mlx_strerror(mlx_errno));

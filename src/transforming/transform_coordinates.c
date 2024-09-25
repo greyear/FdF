@@ -8,6 +8,7 @@ static t_output    transform_point(t_read point, double angle)
 
     res.x = point.x * cos(angle) + point.y * cos(angle + 2 * M_PI / 3) + point.z * cos(angle - 2 * M_PI / 3);
     res.y = point.x * sin(angle) + point.y * sin(angle + 2 * M_PI / 3) + point.z * sin(angle - 2 * M_PI / 3);
+    res.z = point.z;
 
     return (res);
 }
