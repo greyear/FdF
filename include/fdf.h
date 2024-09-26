@@ -79,6 +79,8 @@ t_iso_matrix		transform_to_matrix(t_read *stack, double angle);
 //Drawing
 int				pixel_color(int r, int g, int b, int a); //Ubrat'
 void			put_matrix(mlx_image_t *image, t_iso_matrix matrix);
+t_pixel_matrix	create_pixel_matrix(mlx_image_t *image, t_iso_matrix iso_matrix);
+void	put_pixel_matrix(mlx_image_t *image, t_pixel_matrix matrix);
 void	draw_line(mlx_image_t *image, t_pixel a, t_pixel b);
 
 //Drawing utils
