@@ -13,7 +13,7 @@ static t_isometric    transform_point(t_read point, double angle)
 	return (res);
 }
 
-t_matrix    transform_to_matrix(t_read *stack, double angle)
+t_iso_matrix    transform_to_matrix(t_read *stack, double angle)
 {
 	t_read  *cur;
 	int     i;
@@ -21,7 +21,7 @@ t_matrix    transform_to_matrix(t_read *stack, double angle)
 	int     width;
 	int     height;
 	t_isometric    **map;
-	t_matrix    matrix;
+	t_iso_matrix    matrix;
 
 	width = last_elem(stack)->x + 1;
 	height = last_elem(stack)->y + 1;

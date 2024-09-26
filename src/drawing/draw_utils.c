@@ -1,9 +1,9 @@
 
 #include "../../include/fdf.h"
 
-t_map_extremum find_extremum(t_matrix matrix)
+t_extremum find_extremum(t_iso_matrix matrix)
 {
-	t_map_extremum	extremum;
+	t_extremum	extremum;
 	int				i;
 	int				j;
 

@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
 	//t_read	*read;
-	//t_matrix	matrix;
+	//t_iso_matrix	matrix;
 
 	mlx_t	*mlx;
     mlx_image_t	*image;

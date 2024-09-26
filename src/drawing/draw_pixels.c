@@ -1,18 +1,9 @@
 
 #include "../../include/fdf.h"
+#include <stdio.h>
 
-int	fake_color(void)
+int	mix_color(int r, int g, int b, int a)
 {
-	int	r;
-	int	g;
-	int	b;
-	int	a;
-
-	r = 0;
-	g = 128;
-	b = 0;
-	a = 255;
-
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
@@ -31,12 +22,27 @@ int	set_color(int z, int max_z, int min_z)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-void	put_matrix(mlx_image_t *image, t_matrix matrix)
+t_color	intermediate_color(t_pixel start, t_pixel cur, t_pixel end)
+{
+	int	del_small;
+	int	del_big;
+	t_color	res;
+
+	del_small = abs(cur.x - start.x) + abs(cur.y - start.y);
+	del_big = abs(end.x - start.x) + abs(end.y - start.y);
+	res.r = start.color.r + ((end.color.r - start.color.r) * del_small) / del_big;
+	res.g = start.color.g + ((end.color.g - start.color.g) * del_small) / del_big;
+	res.b = start.color.b + ((end.color.b - start.color.b) * del_small) / del_big;
+	res.a = start.color.a + ((end.color.a - start.color.a) * del_small) / del_big;
+	return (res);
+}
+
+void	put_matrix(mlx_image_t *image, t_iso_matrix matrix)
 {
 	int				i;
 	int				j;
 	int				color;
-	t_map_extremum	extremum;
+	t_extremum	extremum;
 	double			zoom_x;
 	//double			zoom_y;
 
@@ -69,7 +75,9 @@ void	draw_line(mlx_image_t *image, t_pixel a, t_pixel b)
 	int	sign_y;
 	int	error;
 	int	error2;
-	int	color;
+	t_color	color;
+	int		pixel_color;
+	t_pixel a_copy;
 
 	del_x = abs(b.x - a.x);
 	del_y = abs(b.y - a.y);
@@ -82,11 +90,15 @@ void	draw_line(mlx_image_t *image, t_pixel a, t_pixel b)
 	else
 		sign_y = -1;
 	error = del_x - del_y;
-	color = fake_color();
-	mlx_put_pixel(image, b.x, b.y, color);
+
+	pixel_color = mix_color(b.color.r, b.color.g, b.color.b, b.color.a);
+	mlx_put_pixel(image, b.x, b.y, pixel_color);
+	a_copy = a;
 	while (a.x != b.x || a.y != b.y)
 	{
-		mlx_put_pixel(image, a.x, a.y, color);
+		color = intermediate_color(a_copy, a, b);
+		pixel_color = mix_color(color.r, color.g, color.b, color.a);
+		mlx_put_pixel(image, a.x, a.y, pixel_color);
 		error2 = error * 2;
 		if (error2 > -del_y)
 		{
