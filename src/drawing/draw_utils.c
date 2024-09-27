@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/27 15:53:31 by azinchen          #+#    #+#             */
+/*   Updated: 2024/09/27 16:41:24 by azinchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/fdf.h"
 
 t_extremum find_extremum(t_iso_matrix matrix)
 {
-	t_extremum	extremum;
+	t_extremum		extremum;
 	int				i;
 	int				j;
 

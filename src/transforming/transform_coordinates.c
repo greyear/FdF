@@ -1,39 +1,51 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   transform_coordinates.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/27 15:55:31 by azinchen          #+#    #+#             */
+/*   Updated: 2024/09/27 18:26:57 by azinchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/fdf.h"
 
-static t_isometric    transform_point(t_read point, double angle)
+static t_iso	transform_point(t_read p, double ang)
 {
-	t_isometric    res;
+	t_iso	res;
+	double		rot;
 
-	res.x = point.x * cos(angle) + point.y * cos(angle + 2 * M_PI / 3) + point.z * cos(angle - 2 * M_PI / 3);
-	res.y = point.x * sin(angle) + point.y * sin(angle + 2 * M_PI / 3) + point.z * sin(angle - 2 * M_PI / 3);
-	res.z = point.z;
+	rot = 2 * M_PI / 3;
+	res.x = p.x * cos(ang) + p.y * cos(ang + rot) + p.z * cos(ang - rot);
+	res.y = p.x * sin(ang) + p.y * sin(ang + rot) + p.z * sin(ang - rot);
+	res.z = p.z;
 
 	return (res);
 }
 
-t_iso_matrix    transform_to_matrix(t_read *stack, double angle)
+t_iso_matrix	to_iso_matrix(t_read *stack, double angle)
 {
-	t_read  *cur;
-	int     i;
-	int     j;
-	int     width;
-	int     height;
-	t_isometric    **map;
-	t_iso_matrix    matrix;
+	t_read			*cur;
+	int				i;
+	int				j;
+	int				width;
+	int				height;
+	t_iso		**map;
+	t_iso_matrix	matrix;
 
 	width = last_elem(stack)->x + 1;
 	height = last_elem(stack)->y + 1;
 
-	map = (t_isometric **)malloc(height * sizeof(t_isometric *));
+	map = (t_iso **)malloc(height * sizeof(t_iso *));
 	//what to return? what error msg?
 	if (!map)
 		exit(1);
 	j = 0;
 	while (j < height)
 	{
-		map[j] = (t_isometric *)malloc(width * sizeof(t_isometric));
+		map[j] = (t_iso *)malloc(width * sizeof(t_iso));
 		//what to return? what error msg?
 		if (!map[j])
 			exit(1);

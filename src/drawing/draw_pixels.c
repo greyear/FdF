@@ -1,50 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_pixels.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/27 15:53:14 by azinchen          #+#    #+#             */
+/*   Updated: 2024/09/27 18:42:14 by azinchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/fdf.h"
-#include <stdio.h>
 
-int	mix_color(int r, int g, int b, int a)
+void	draw_line(mlx_image_t *image, t_px a, t_px b)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
-t_color	set_color(int z, int max_z, int min_z)
-{
-	t_color	res;
-
-	res.r = 0 + (255 - 0) / (max_z - min_z) * (z - min_z);
-	res.g = 128;
-	res.b = 0 + (255 - 0) / (max_z - min_z) * (z - min_z);
-	res.a = 255;
-
-	return (res);
-}
-
-t_color	intermediate_color(t_pixel start, t_pixel cur, t_pixel end)
-{
-	int	del_small;
-	int	del_big;
-	t_color	res;
-
-	del_small = abs(cur.x - start.x) + abs(cur.y - start.y);
-	del_big = abs(end.x - start.x) + abs(end.y - start.y);
-	res.r = start.color.r + ((end.color.r - start.color.r) * del_small) / del_big;
-	res.g = start.color.g + ((end.color.g - start.color.g) * del_small) / del_big;
-	res.b = start.color.b + ((end.color.b - start.color.b) * del_small) / del_big;
-	res.a = start.color.a + ((end.color.a - start.color.a) * del_small) / del_big;
-	return (res);
-}
-
-void	draw_line(mlx_image_t *image, t_pixel a, t_pixel b)
-{
-	int	del_x;
-	int	del_y;
-	int	sign_x;
-	int	sign_y;
-	int	error;
-	int	error2;
+	int		del_x;
+	int		del_y;
+	int		sign_x;
+	int		sign_y;
+	int		error;
+	int		error2;
 	t_color	color;
 	int		pixel_color;
-	t_pixel a_copy;
+	t_px	a_copy;
 
 	del_x = abs(b.x - a.x);
 	del_y = abs(b.y - a.y);
@@ -57,7 +35,6 @@ void	draw_line(mlx_image_t *image, t_pixel a, t_pixel b)
 	else
 		sign_y = -1;
 	error = del_x - del_y;
-
 	pixel_color = mix_color(b.color.r, b.color.g, b.color.b, b.color.a);
 	mlx_put_pixel(image, b.x, b.y, pixel_color);
 	a_copy = a;
@@ -80,51 +57,19 @@ void	draw_line(mlx_image_t *image, t_pixel a, t_pixel b)
 	}
 }
 
-/*
-void	put_matrix(mlx_image_t *image, t_iso_matrix matrix)
+t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
 {
 	int				i;
 	int				j;
 	int				color;
-	t_extremum	extremum;
+	t_extremum		extremum;
 	double			zoom_x;
-	//double			zoom_y;
-
-	extremum = find_extremum(matrix);
-	// TODO: if not 0
-	// TODO: change 1000!
-	zoom_x = 900 / (extremum.max_x - extremum.min_x);
-	//zoom_y = 900 / (extremum.max_y - extremum.min_y);
-	i = 0;
-	while (i < matrix.width)
-	{
-		j = 0;
-		while (j < matrix.height)
-		{
-
-			color = set_color(matrix.map[j][i].z, extremum.max_z, extremum.min_z);
-			//TODO: change to s_pixel
-			mlx_put_pixel(image, (matrix.map[j][i].x - extremum.min_x) * zoom_x + 50, (matrix.map[j][i].y - extremum.min_y) * zoom_x + 50, color);
-			j++;
-		}
-		i++;
-	}
-}*/
-
-t_pixel_matrix	create_pixel_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
-{
-	int				i;
-	int				j;
-	int				color;
-	t_extremum	extremum;
-	double			zoom_x;
-	//double			zoom_y;
-	t_pixel_matrix		res;
+	//double		zoom_y;
+	t_px_matrix		res;
 
 	res.width = iso_matrix.width;
 	res.height = iso_matrix.height;
-	res.map = (t_pixel **)malloc(res.height * sizeof(t_pixel *));
-
+	res.map = (t_px **)malloc(res.height * sizeof(t_px *));
 	extremum = find_extremum(iso_matrix);
 	// TODO: if not 0
 	// TODO: change 1000!
@@ -133,7 +78,7 @@ t_pixel_matrix	create_pixel_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
 	j = 0;
 	while (j < res.height)
 	{
-		res.map[j] = (t_pixel *)malloc(res.width * sizeof(t_pixel));
+		res.map[j] = (t_px *)malloc(res.width * sizeof(t_px));
 		i = 0;
 		while (i < res.width)
 		{
@@ -142,7 +87,7 @@ t_pixel_matrix	create_pixel_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
 			res.map[j][i].x = (iso_matrix.map[j][i].x - extremum.min_x) * zoom_x + 50;
 			res.map[j][i].y = (iso_matrix.map[j][i].y - extremum.min_y) * zoom_x + 50;
 			res.map[j][i].z = iso_matrix.map[j][i].z; //TODO: check if it's needed
-			//TODO: change to s_pixel
+			//TODO: change to t_px
 			mlx_put_pixel(image, res.map[j][i].x, res.map[j][i].y, color);
 			i++;
 		}
@@ -151,7 +96,7 @@ t_pixel_matrix	create_pixel_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
 	return (res);
 }
 
-void	put_pixel_matrix(mlx_image_t *image, t_pixel_matrix matrix)
+void	put_px_matrix(mlx_image_t *image, t_px_matrix matrix)
 {
 	int	i;
 	int	j;
@@ -166,6 +111,20 @@ void	put_pixel_matrix(mlx_image_t *image, t_pixel_matrix matrix)
 			draw_line(image, matrix.map[j][i], matrix.map[j + 1][i]);
 			i++;
 		}
+		j++;
+	}
+	j = matrix.height - 1;
+	i = 0;
+	while (i < matrix.width - 1)
+	{
+		draw_line(image, matrix.map[j][i], matrix.map[j][i + 1]);
+		i++;
+	}
+	i = matrix.width - 1;
+	j = 0;
+	while (j < matrix.height - 1)
+	{
+		draw_line(image, matrix.map[j][i], matrix.map[j + 1][i]);
 		j++;
 	}
 }

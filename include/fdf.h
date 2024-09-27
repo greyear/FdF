@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/27 18:16:05 by azinchen          #+#    #+#             */
+/*   Updated: 2024/09/27 18:40:31 by azinchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
@@ -9,7 +19,7 @@
 # include "../libft/include/get_next_line.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
-# include <stdlib.h> //razobrat'sya s abs
+# include <stdlib.h> //abs??
 
 typedef struct s_color
 {
@@ -27,34 +37,34 @@ typedef struct s_read
 	struct s_read	*next;
 }	t_read;
 
-typedef struct s_isometric
+typedef struct s_iso
 {
 	double			x;
 	double			y;
 	int				z;
-}	t_isometric;
+}	t_iso;
 
-typedef	struct s_iso_matrix
+typedef struct s_iso_matrix
 {
-	t_isometric	**map;
+	t_iso		**map;
 	int			width;
 	int			height;
 }	t_iso_matrix;
 
-typedef struct s_pixel
+typedef struct s_px
 {
 	int				x;
 	int				y;
 	int				z;
 	t_color			color;
-} t_pixel;
+}	t_px;
 
-typedef	struct s_pixel_matrix
+typedef struct s_px_matrix
 {
-	t_pixel		**map;
+	t_px		**map;
 	int			width;
 	int			height;
-}	t_pixel_matrix;
+}	t_px_matrix;
 
 typedef struct s_extremum
 {
@@ -68,22 +78,21 @@ typedef struct s_extremum
 
 //Reading
 t_read			*read_map(char *file_name);
-
-//Reading utils
 t_read			*last_elem(t_read *stack);
 int				add_back(t_read **stack, int x, int y, int z);
 
-//Transforming
-t_iso_matrix		transform_to_matrix(t_read *stack, double angle);
+//Transforming to 2D
+t_iso_matrix	to_iso_matrix(t_read *stack, double angle);
+
+//Colors
+int				mix_color(int r, int g, int b, int a);
+t_color			set_color(int z, int max_z, int min_z);
+t_color			intermediate_color(t_px start, t_px cur, t_px end);
 
 //Drawing
-int				pixel_color(int r, int g, int b, int a); //Ubrat'
-void			put_matrix(mlx_image_t *image, t_iso_matrix matrix);
-t_pixel_matrix	create_pixel_matrix(mlx_image_t *image, t_iso_matrix iso_matrix);
-void	put_pixel_matrix(mlx_image_t *image, t_pixel_matrix matrix);
-void	draw_line(mlx_image_t *image, t_pixel a, t_pixel b);
-
-//Drawing utils
-t_extremum	find_extremum(t_iso_matrix matrix);
+t_px_matrix		to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix);
+void			put_px_matrix(mlx_image_t *image, t_px_matrix matrix);
+void			draw_line(mlx_image_t *image, t_px a, t_px b);
+t_extremum		find_extremum(t_iso_matrix matrix);
 
 #endif

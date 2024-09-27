@@ -1,17 +1,26 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/27 15:54:21 by azinchen          #+#    #+#             */
+/*   Updated: 2024/09/27 16:13:32 by azinchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../include/fdf.h"
 
-t_read *read_map(char *file_name)
+t_read	*read_map(char *file_name)
 {
-	int			fd;
-	char		*next_line;
-	char		**split;
-	int			x;
-	int			y;
-	int			z;
-	t_read		*first;
-	//t_read		*cur;
+	int		fd;
+	char	*next_line;
+	char	**split;
+	int		x;
+	int		y;
+	int		z;
+	t_read	*first;
 	
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
