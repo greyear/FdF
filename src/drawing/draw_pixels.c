@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:53:14 by azinchen          #+#    #+#             */
-/*   Updated: 2024/09/27 18:42:14 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:48:31 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	draw_line(mlx_image_t *image, t_px a, t_px b)
 	else
 		sign_y = -1;
 	error = del_x - del_y;
-	pixel_color = mix_color(b.color.r, b.color.g, b.color.b, b.color.a);
+	pixel_color = mix_rgba(b.color.r, b.color.g, b.color.b, b.color.a);
 	mlx_put_pixel(image, b.x, b.y, pixel_color);
 	a_copy = a;
 	while (a.x != b.x || a.y != b.y)
 	{
-		color = intermediate_color(a_copy, a, b);
-		pixel_color = mix_color(color.r, color.g, color.b, color.a);
+		color = color_between(a_copy, a, b);
+		pixel_color = mix_rgba(color.r, color.g, color.b, color.a);
 		mlx_put_pixel(image, a.x, a.y, pixel_color);
 		error2 = error * 2;
 		if (error2 > -del_y)
@@ -82,8 +82,8 @@ t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
 		i = 0;
 		while (i < res.width)
 		{
-			res.map[j][i].color = set_color(iso_matrix.map[j][i].z, extremum.max_z, extremum.min_z);
-			color = mix_color(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
+			res.map[j][i].color = set_color_to_height(iso_matrix.map[j][i].z, extremum.max_z, extremum.min_z);
+			color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
 			res.map[j][i].x = (iso_matrix.map[j][i].x - extremum.min_x) * zoom_x + 50;
 			res.map[j][i].y = (iso_matrix.map[j][i].y - extremum.min_y) * zoom_x + 50;
 			res.map[j][i].z = iso_matrix.map[j][i].z; //TODO: check if it's needed

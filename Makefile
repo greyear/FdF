@@ -6,7 +6,7 @@
 #    By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2024/09/27 18:34:54 by azinchen         ###   ########.fr        #
+#    Updated: 2024/09/27 19:31:22 by azinchen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ RM				=	rm -f
 
 # Source files
 READING_DIR			=	$(SRC_DIR)/reading/read_map.c \
-						$(SRC_DIR)/reading/read_utils.c
+						$(SRC_DIR)/reading/read_utils.c \ 
+						$(SRC_DIR)/reading/map_check.c
 TRANSFORMING_DIR	= 	$(SRC_DIR)/transforming/transform_coordinates.c
 DRAWING_DIR			=	$(SRC_DIR)/drawing/draw_pixels.c \
 						$(SRC_DIR)/drawing/draw_utils.c \

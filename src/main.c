@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:52:38 by azinchen          #+#    #+#             */
-/*   Updated: 2024/09/27 18:40:58 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:51:06 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 	t_px_matrix		pixel_matrix;
 
 	if (argc != 2 || !argv[1])
-		exit(1);
+		exit(EXIT_FAILURE);
 	read = read_map(argv[1]);
 	iso_matrix = to_iso_matrix(read, M_PI / 6);
 	if (!(mlx = mlx_init(1000, 1000, "FDF", true)))

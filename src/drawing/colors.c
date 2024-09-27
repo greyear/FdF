@@ -6,18 +6,18 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:32:00 by azinchen          #+#    #+#             */
-/*   Updated: 2024/09/27 18:34:59 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:48:32 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
 
-int	mix_color(int r, int g, int b, int a)
+int	mix_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-t_color	set_color(int z, int max_z, int min_z)
+t_color	set_color_to_height(int z, int max_z, int min_z)
 {
 	t_color	res;
 
@@ -29,7 +29,7 @@ t_color	set_color(int z, int max_z, int min_z)
 	return (res);
 }
 
-t_color	intermediate_color(t_px start, t_px cur, t_px end)
+t_color	color_between(t_px start, t_px cur, t_px end)
 {
 	int		d_small;
 	int		d_big;

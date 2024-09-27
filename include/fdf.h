@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:16:05 by azinchen          #+#    #+#             */
-/*   Updated: 2024/09/27 18:40:31 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:48:31 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ int				add_back(t_read **stack, int x, int y, int z);
 t_iso_matrix	to_iso_matrix(t_read *stack, double angle);
 
 //Colors
-int				mix_color(int r, int g, int b, int a);
-t_color			set_color(int z, int max_z, int min_z);
-t_color			intermediate_color(t_px start, t_px cur, t_px end);
+int				mix_rgba(int r, int g, int b, int a);
+t_color			set_color_to_height(int z, int max_z, int min_z);
+t_color			color_between(t_px start, t_px cur, t_px end);
 
 //Drawing
 t_px_matrix		to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix);
