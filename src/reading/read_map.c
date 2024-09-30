@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:54:21 by azinchen          #+#    #+#             */
-/*   Updated: 2024/09/27 16:13:32 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:16:06 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ t_read	*read_map(char *file_name)
 	
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
+	{
 		// TODO: clean?
-		exit(1);
+		perror("Error opening file");
+		exit(EXIT_FAILURE);
+	}
 	first = NULL;
 	y = 0;
 	while (1)
@@ -41,8 +44,10 @@ t_read	*read_map(char *file_name)
 			//checks for atoi
 			z = ft_atoi(split[x]);
 			if (add_back(&first, x, y, z) == 1)
-				//clean
-				exit(1);
+			{
+				clean_read_map(&first);
+				exit(EXIT_FAILURE);
+			}	
 			x++;
 		}
 		next_line = NULL;

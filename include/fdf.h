@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:16:05 by azinchen          #+#    #+#             */
-/*   Updated: 2024/09/27 18:48:31 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:20:18 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../libft/include/get_next_line.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
+# include <stdio.h>
 # include <stdlib.h> //abs??
 
 typedef struct s_color
@@ -80,6 +81,9 @@ typedef struct s_extremum
 t_read			*read_map(char *file_name);
 t_read			*last_elem(t_read *stack);
 int				add_back(t_read **stack, int x, int y, int z);
+
+//Checkers and cleaners
+void			clean_read_map(t_read **stack);
 
 //Transforming to 2D
 t_iso_matrix	to_iso_matrix(t_read *stack, double angle);

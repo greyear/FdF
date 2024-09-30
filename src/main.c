@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:52:38 by azinchen          #+#    #+#             */
-/*   Updated: 2024/09/27 18:51:06 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/09/30 16:03:24 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int argc, char *argv[])
 	if (argc != 2 || !argv[1])
 		exit(EXIT_FAILURE);
 	read = read_map(argv[1]);
+	// TODO: checks of read
+	// TODO: if here function returned exit, will I have problems with memory?
 	iso_matrix = to_iso_matrix(read, M_PI / 6);
 	if (!(mlx = mlx_init(1000, 1000, "FDF", true)))
 	{

@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:54:35 by azinchen          #+#    #+#             */
-/*   Updated: 2024/09/27 15:54:54 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:13:36 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	add_back(t_read **stack, int x, int y, int z)
 
 	new = malloc(sizeof(t_read));
 	if (!new)
-		return (1);
+		return (EXIT_FAILURE);
 	new->x = x;
 	new->y = y;
 	new->z = z;
@@ -46,3 +46,5 @@ int	add_back(t_read **stack, int x, int y, int z)
 	}
 	return (0);
 }
+
+
