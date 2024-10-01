@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:16:05 by azinchen          #+#    #+#             */
-/*   Updated: 2024/09/30 18:20:18 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/01 18:23:55 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int				add_back(t_read **stack, int x, int y, int z);
 
 //Checkers and cleaners
 void			clean_read_map(t_read **stack);
+void			clean_iso_matrix(t_iso_matrix *matrix);
+void			clean_px_matrix(t_px_matrix *matrix);
 
 //Transforming to 2D
 t_iso_matrix	to_iso_matrix(t_read *stack, double angle);

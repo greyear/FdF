@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:53:14 by azinchen          #+#    #+#             */
-/*   Updated: 2024/09/27 18:48:31 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/01 19:39:42 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
 		i = 0;
 		while (i < res.width)
 		{
+			// TODO: add option in case of color in map
 			res.map[j][i].color = set_color_to_height(iso_matrix.map[j][i].z, extremum.max_z, extremum.min_z);
 			color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
 			res.map[j][i].x = (iso_matrix.map[j][i].x - extremum.min_x) * zoom_x + 50;

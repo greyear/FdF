@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_check.c                                        :+:      :+:    :+:   */
+/*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 18:52:30 by azinchen          #+#    #+#             */
-/*   Updated: 2024/10/01 19:38:37 by azinchen         ###   ########.fr       */
+/*   Created: 2024/10/01 18:25:22 by azinchen          #+#    #+#             */
+/*   Updated: 2024/10/01 19:39:03 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
 
-//empty map
+//zapataya + color
 
+int	num_check(char *str)
+{
+	int	i;
+	while (str[i] != '\n' && str[i] != '\0')
+	{
+		if (!ft_isdigit(str[i]) && !ft_issign(str[i]))
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
 
-//not rectangular
+/*
+0x + 6 or 8 digits in hexadecimal - okay, convert into color
+the other amount - exit with error
 
-//if map contains only heights or +colors:
- - if (all) colors: draw colors;
- - if no colors: according to heights;
- - if mixed: then e.g. for dots without colors print default color
+*/
+

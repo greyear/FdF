@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:55:31 by azinchen          #+#    #+#             */
-/*   Updated: 2024/09/27 18:26:57 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/01 17:10:25 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ t_iso_matrix	to_iso_matrix(t_read *stack, double angle)
 	map = (t_iso **)malloc(height * sizeof(t_iso *));
 	//what to return? what error msg?
 	if (!map)
-		exit(1);
+		exit(EXIT_FAILURE);
 	j = 0;
 	while (j < height)
 	{
 		map[j] = (t_iso *)malloc(width * sizeof(t_iso));
 		//what to return? what error msg?
 		if (!map[j])
-			exit(1);
+			exit(EXIT_FAILURE);
 		j++;
 	}
 	cur = stack;
