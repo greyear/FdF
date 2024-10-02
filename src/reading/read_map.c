@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:54:21 by azinchen          #+#    #+#             */
-/*   Updated: 2024/10/01 19:38:42 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/02 14:48:36 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,10 @@ t_read	*read_map(char *file_name)
 		while (split[x] != NULL)
 		{
 			/*
-			   1) check if we have forbidden symbols...
-			   2) check for ","
-			   3) split to 2 values
-			   4) convert 1st
-			   5) convert 2nd 
+			   1) check for ","
+			   2) split to 2 values
+			   3) check and convert 1st
+			   4) check and convert 2nd 
 
 
 			*/

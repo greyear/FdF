@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:32:00 by azinchen          #+#    #+#             */
-/*   Updated: 2024/10/01 19:38:59 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/02 15:27:51 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 int	mix_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
+}
+
+t_color extract_rgba(int color)
+{
+	t_color	res;
+
+	res.r = (color >> 24) & 0xFF;
+	res.g = (color >> 16) & 0xFF;
+	res.b = (color >> 8) & 0xFF;
+	res.a = (color) & 0xFF;
+	return (res);
 }
 
 t_color	set_color_to_height(int z, int max_z, int min_z)
