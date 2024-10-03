@@ -13,22 +13,6 @@
 #include "../../include/fdf.h"
 #include <stdio.h>
 
-int	contains_comma(char *str)
-{
-	char	c;
-	int		i;
-
-	c = ',';
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == c)
-			return (EXIT_FAILURE);
-		i++;
-	}
-	return (EXIT_SUCCESS);
-}
-
 int	height_check(char *str)
 {
 	int	i;

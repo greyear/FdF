@@ -25,17 +25,18 @@ t_read	*last_elem(t_read *stack)
 	return (cur);
 }
 
-int	add_back(t_read **stack, int x, int y, int z)
+int	add_back(t_read **stack, int x, int y, int z, t_color color)
 {
 	t_read	*last;
 	t_read	*new;
 
-	new = malloc(sizeof(t_read));
+	new = (t_read *)malloc(sizeof(t_read));
 	if (!new)
 		return (EXIT_FAILURE);
 	new->x = x;
 	new->y = y;
 	new->z = z;
+	new->color = color;
 	new->next = NULL;
 	if (!*stack)
 		*stack = new;
@@ -44,18 +45,31 @@ int	add_back(t_read **stack, int x, int y, int z)
 		last = last_elem(*stack);
 		last->next = new;
 	}
+	return (EXIT_SUCCESS);
+}
+
+int	contains_comma(char *str)
+{
+	char	c;
+	int		i;
+
+	c = ',';
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
 	return (0);
 }
 
-static int	conv_hexa_digit(char c)
+int	array_len(char	**separate)
 {
-	
-}
+	int	len;
 
-int	htoi_(char *str)
-{
-	int	res;
-	int	sign;
-
-
+	len = 0;
+	while (separate[len] != NULL) // TODO: \n?
+		len++;
+	return (len);
 }

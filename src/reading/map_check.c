@@ -17,7 +17,7 @@
 
 //not rectangular
 
-//if map contains only heights or +colors:
+/*if map contains only heights or +colors:
  - if (all) colors: draw colors;
  - if no colors: according to heights;
- - if mixed: then e.g. for dots without colors print default color
+ - if mixed: then e.g. for dots without colors print default color */

@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:55:31 by azinchen          #+#    #+#             */
-/*   Updated: 2024/10/01 17:10:25 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/09/27 18:26:57 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static t_iso	transform_point(t_read p, double ang)
 {
-	t_iso	res;
+	t_iso		res;
 	double		rot;
 
 	rot = 2 * M_PI / 3;
 	res.x = p.x * cos(ang) + p.y * cos(ang + rot) + p.z * cos(ang - rot);
 	res.y = p.x * sin(ang) + p.y * sin(ang + rot) + p.z * sin(ang - rot);
 	res.z = p.z;
-
+	res.color = p.color;
 	return (res);
 }
 

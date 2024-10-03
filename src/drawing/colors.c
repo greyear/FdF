@@ -17,14 +17,37 @@ int	mix_rgba(int r, int g, int b, int a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-t_color extract_rgba(int color)
+t_color fake_color(void)
 {
 	t_color	res;
 
-	res.r = (color >> 24) & 0xFF;
-	res.g = (color >> 16) & 0xFF;
-	res.b = (color >> 8) & 0xFF;
-	res.a = (color) & 0xFF;
+	res.r = -1;
+	res.g = -1;
+	res.b = -1;
+	res.a = -1;
+	return (res);
+}
+
+t_color white_color(void)
+{
+	t_color	res;
+
+	res.r = 255;
+	res.g = 255;
+	res.b = 255;
+	res.a = 255;
+	return (res);
+}
+
+t_color extract_rgba(int color) // TODO: make dependence on LENGTH!
+{
+	t_color	res;
+
+	//res.r = (color >> 24) & 0xFF;
+	res.r = (color >> 16) & 0xFF;
+	res.g = (color >> 8) & 0xFF;
+	res.b = (color) & 0xFF;
+	res.a = 255;
 	return (res);
 }
 

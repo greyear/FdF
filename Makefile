@@ -39,6 +39,7 @@ RM				=	rm -f
 READING_DIR			=	$(SRC_DIR)/reading/read_map.c \
 						$(SRC_DIR)/reading/read_utils.c \
 						$(SRC_DIR)/reading/map_check.c \
+						$(SRC_DIR)/reading/checkers.c \
 						$(SRC_DIR)/reading/cleaners.c
 TRANSFORMING_DIR	= 	$(SRC_DIR)/transforming/transform_coordinates.c
 DRAWING_DIR			=	$(SRC_DIR)/drawing/draw_pixels.c \

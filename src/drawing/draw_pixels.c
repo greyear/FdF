@@ -12,6 +12,53 @@
 
 #include "../../include/fdf.h"
 
+t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
+{
+	int				i;
+	int				j;
+	int				color;
+	t_extremum		extremum;
+	double			zoom_x;
+	//double		zoom_y;
+	t_px_matrix		res;
+
+	res.width = iso_matrix.width;
+	res.height = iso_matrix.height;
+	res.map = (t_px **)malloc(res.height * sizeof(t_px *));
+	extremum = find_extremum(iso_matrix);
+	// TODO: if not 0
+	// TODO: change 1000!
+	zoom_x = 900 / (extremum.max_x - extremum.min_x);
+	//zoom_y = 900 / (extremum.max_y - extremum.min_y);
+	j = 0;
+	while (j < res.height)
+	{
+		res.map[j] = (t_px *)malloc(res.width * sizeof(t_px));
+		i = 0;
+		while (i < res.width)
+		{
+			if (is_colorful_input(iso_matrix) == 1)
+			{
+				if (is_fake(iso_matrix.map[j][i].color) == 1)
+					res.map[j][i].color = white_color();
+				else
+					res.map[j][i].color = iso_matrix.map[j][i].color;
+			}
+			else
+				res.map[j][i].color = set_color_to_height(iso_matrix.map[j][i].z, extremum.max_z, extremum.min_z);
+			color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
+			res.map[j][i].x = (iso_matrix.map[j][i].x - extremum.min_x) * zoom_x + 50;
+			res.map[j][i].y = (iso_matrix.map[j][i].y - extremum.min_y) * zoom_x + 50;
+			res.map[j][i].z = iso_matrix.map[j][i].z;
+			//TODO: change to t_px
+			mlx_put_pixel(image, res.map[j][i].x, res.map[j][i].y, color);
+			i++;
+		}
+		j++;
+	}
+	return (res);
+}
+
 void	draw_line(mlx_image_t *image, t_px a, t_px b)
 {
 	int		del_x;
@@ -55,46 +102,6 @@ void	draw_line(mlx_image_t *image, t_px a, t_px b)
 			a.y += sign_y;
 		}
 	}
-}
-
-t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
-{
-	int				i;
-	int				j;
-	int				color;
-	t_extremum		extremum;
-	double			zoom_x;
-	//double		zoom_y;
-	t_px_matrix		res;
-
-	res.width = iso_matrix.width;
-	res.height = iso_matrix.height;
-	res.map = (t_px **)malloc(res.height * sizeof(t_px *));
-	extremum = find_extremum(iso_matrix);
-	// TODO: if not 0
-	// TODO: change 1000!
-	zoom_x = 900 / (extremum.max_x - extremum.min_x);
-	//zoom_y = 900 / (extremum.max_y - extremum.min_y);
-	j = 0;
-	while (j < res.height)
-	{
-		res.map[j] = (t_px *)malloc(res.width * sizeof(t_px));
-		i = 0;
-		while (i < res.width)
-		{
-			// TODO: add option in case of color in map
-			res.map[j][i].color = set_color_to_height(iso_matrix.map[j][i].z, extremum.max_z, extremum.min_z);
-			color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
-			res.map[j][i].x = (iso_matrix.map[j][i].x - extremum.min_x) * zoom_x + 50;
-			res.map[j][i].y = (iso_matrix.map[j][i].y - extremum.min_y) * zoom_x + 50;
-			res.map[j][i].z = iso_matrix.map[j][i].z; //TODO: check if it's needed
-			//TODO: change to t_px
-			mlx_put_pixel(image, res.map[j][i].x, res.map[j][i].y, color);
-			i++;
-		}
-		j++;
-	}
-	return (res);
 }
 
 void	put_px_matrix(mlx_image_t *image, t_px_matrix matrix)
