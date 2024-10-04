@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:16:05 by azinchen          #+#    #+#             */
-/*   Updated: 2024/10/02 17:27:02 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:56:24 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,6 @@ void			put_px_matrix(mlx_image_t *image, t_px_matrix matrix);
 void			draw_line(mlx_image_t *image, t_px a, t_px b);
 t_extremum		find_extremum(t_iso_matrix matrix);
 int				is_colorful_input(t_iso_matrix matrix);
+int				color_len(int color);
 
 #endif

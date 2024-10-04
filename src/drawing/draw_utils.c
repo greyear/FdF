@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:53:31 by azinchen          #+#    #+#             */
-/*   Updated: 2024/09/27 16:41:24 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:55:41 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,19 @@ int	is_colorful_input(t_iso_matrix matrix)
 		i++;
 	}
 	return (res);
+}
+
+int	color_len(int color)
+{
+	// TODO: checks?
+	int	len;
+
+	len = 0;
+	if ((color & 0xFF000000) != 0) len = 8;
+	else if ((color & 0x00FF0000) != 0) len = 6;
+	else if ((color & 0x0000FF00) != 0) len = 4;
+	else if ((color & 0x000000FF) != 0) len = 2;
+
+	return len;
 }
 

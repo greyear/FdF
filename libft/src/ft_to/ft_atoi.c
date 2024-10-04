@@ -6,9 +6,10 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:07:07 by azinchen          #+#    #+#             */
-/*   Updated: 2024/04/24 17:28:56 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:17:25 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 static int	ft_is_num(char c)
 {
 	if (c >= '0' && c <= '9')
@@ -55,5 +56,3 @@ int	ft_atoi(const char	*str)
 	}
 	return ((int)sign * res);
 }
-
-// TODO: atoh!

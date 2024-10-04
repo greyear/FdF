@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:25:22 by azinchen          #+#    #+#             */
-/*   Updated: 2024/10/02 19:41:46 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:20:55 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ int	color_check(char *str)
 {
 	int		i;
 	char	c;
+	int		len;
 
 	if (!str)
 		return (EXIT_FAILURE);
-	if (!(ft_strlen(str) == 8 || ft_strlen(str) == 10))
+	len = ft_strlen(str);
+	if (!(len == 10 || len == 8 || len == 6 || len == 4))
 		return (EXIT_FAILURE);
 	if (str[0] != '0' || ft_tolower(str[1]) != 'x')
 		return (EXIT_FAILURE);

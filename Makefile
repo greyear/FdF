@@ -6,7 +6,7 @@
 #    By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 16:27:22 by azinchen          #+#    #+#              #
-#    Updated: 2024/09/30 18:17:17 by azinchen         ###   ########.fr        #
+#    Updated: 2024/10/04 17:09:13 by azinchen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ READING_DIR			=	$(SRC_DIR)/reading/read_map.c \
 TRANSFORMING_DIR	= 	$(SRC_DIR)/transforming/transform_coordinates.c
 DRAWING_DIR			=	$(SRC_DIR)/drawing/draw_pixels.c \
 						$(SRC_DIR)/drawing/draw_utils.c \
-						$(SRC_DIR)/drawing/colors.c
+						$(SRC_DIR)/drawing/colors.c \
+						$(SRC_DIR)/drawing/colors_rgba.c
 SRC					=	$(READING_DIR) \
 						$(TRANSFORMING_DIR) \
 						$(DRAWING_DIR) \

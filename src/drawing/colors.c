@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:32:00 by azinchen          #+#    #+#             */
-/*   Updated: 2024/10/02 15:27:51 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/04 17:13:14 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,6 @@ t_color white_color(void)
 	res.r = 255;
 	res.g = 255;
 	res.b = 255;
-	res.a = 255;
-	return (res);
-}
-
-t_color extract_rgba(int color) // TODO: make dependence on LENGTH!
-{
-	t_color	res;
-
-	//res.r = (color >> 24) & 0xFF;
-	res.r = (color >> 16) & 0xFF;
-	res.g = (color >> 8) & 0xFF;
-	res.b = (color) & 0xFF;
 	res.a = 255;
 	return (res);
 }
