@@ -28,7 +28,7 @@ t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
 	extremum = find_extremum(iso_matrix);
 	// TODO: if not 0
 	// TODO: change 1000!
-	zoom_x = 900 / (extremum.max_x - extremum.min_x);
+	zoom_x = 300 / (extremum.max_x - extremum.min_x);
 	//zoom_y = 900 / (extremum.max_y - extremum.min_y);
 	j = 0;
 	while (j < res.height)

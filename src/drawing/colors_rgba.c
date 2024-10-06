@@ -56,13 +56,11 @@ static t_color extract_two(int color)
 	return (res);
 }
 
-t_color extract_rgba(int color) // TODO: make dependence on LENGTH!
+t_color extract_rgba(int color, int len) // TODO: make dependence on LENGTH!
 {
 	t_color	res;
-	int		len;
 
 	res = (t_color){255, 255, 255, 255}; //TODO: Does it make sense?
-	len = color_len(color);
 	if (len == 8)
 		res = extract_eight(color);
 	else if (len == 6)

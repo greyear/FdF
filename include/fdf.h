@@ -107,7 +107,7 @@ int				mix_rgba(int r, int g, int b, int a);
 t_color			fake_color(void);
 t_color			white_color(void);
 int				is_fake(t_color c);
-t_color			extract_rgba(int color);
+t_color			extract_rgba(int color, int len);
 t_color			set_color_to_height(int z, int max_z, int min_z);
 t_color			color_between(t_px start, t_px cur, t_px end);
 
@@ -117,6 +117,5 @@ void			put_px_matrix(mlx_image_t *image, t_px_matrix matrix);
 void			draw_line(mlx_image_t *image, t_px a, t_px b);
 t_extremum		find_extremum(t_iso_matrix matrix);
 int				is_colorful_input(t_iso_matrix matrix);
-int				color_len(int color);
 
 #endif

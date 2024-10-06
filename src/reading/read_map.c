@@ -62,7 +62,7 @@ t_read	*read_map(char *file_name)
 						exit(EXIT_FAILURE);
 					}
 				z = ft_atoi(separate[0]);
-				color = extract_rgba(ft_atoi(separate[1]));
+				color = extract_rgba(ft_atoi_color(separate[1]), ft_strlen(separate[1]) - 2);
 			}
 			else
 			{

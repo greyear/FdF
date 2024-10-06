@@ -78,18 +78,3 @@ int	is_colorful_input(t_iso_matrix matrix)
 	}
 	return (res);
 }
-
-int	color_len(int color)
-{
-	// TODO: checks?
-	int	len;
-
-	len = 0;
-	if ((color & 0xFF000000) != 0) len = 8;
-	else if ((color & 0x00FF0000) != 0) len = 6;
-	else if ((color & 0x0000FF00) != 0) len = 4;
-	else if ((color & 0x000000FF) != 0) len = 2;
-
-	return len;
-}
-

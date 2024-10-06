@@ -71,6 +71,7 @@ FTSTR_DIR		=	$(SRC_DIR)ft_str/ft_split.c \
 					$(SRC_DIR)ft_str/ft_substr.c
 				
 FTTO_DIR		=	$(SRC_DIR)ft_to/ft_atoi.c \
+					$(SRC_DIR)ft_to/ft_atoi_hexa.c \
 					$(SRC_DIR)ft_to/ft_itoa.c \
 					$(SRC_DIR)ft_to/ft_tolower.c \
 					$(SRC_DIR)ft_to/ft_toupper.c
