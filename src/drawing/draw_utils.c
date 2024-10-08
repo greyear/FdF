@@ -50,6 +50,24 @@ t_extremum find_extremum(t_iso_matrix matrix)
 	return (extremum);
 }
 
+double	find_zoom(t_iso_matrix matrix, int width, int height)
+{
+	t_extremum	extremum;
+	double		zoom;
+	double		del_x;
+	double		del_y;
+
+	extremum = find_extremum(matrix);
+	del_x = extremum.max_x - extremum.min_x;
+	del_y = extremum.max_y - extremum.min_y;
+	// TODO: if 0..
+	if (width / del_x < height / del_y)
+		zoom = width / del_x * 0.9;
+	else
+		zoom = height / del_y * 0.9;
+	return (zoom);
+}
+
 int	is_fake(t_color c)
 {
 	if (c.r == -1 && c.g == -1 && c.b == -1 && c.a == -1)
@@ -77,4 +95,11 @@ int	is_colorful_input(t_iso_matrix matrix)
 		i++;
 	}
 	return (res);
+}
+
+int	is_inside(t_px a, int limit_x, int limit_y)
+{
+	if (a.x <= limit_x && a.y <= limit_y) //TODO: or <?
+		return (1);
+	return (0);
 }

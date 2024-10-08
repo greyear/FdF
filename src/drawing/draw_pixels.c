@@ -12,14 +12,15 @@
 
 #include "../../include/fdf.h"
 
-t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
+t_px_matrix	to_px_matrix(t_iso_matrix iso_matrix)
 {
 	int				i;
 	int				j;
-	int				color;
+	//int				color;
 	t_extremum		extremum;
-	double			zoom_x;
-	//double		zoom_y;
+	double			zoom;
+	double		offset_x;
+	double		offset_y;
 	t_px_matrix		res;
 
 	res.width = iso_matrix.width;
@@ -28,8 +29,9 @@ t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
 	extremum = find_extremum(iso_matrix);
 	// TODO: if not 0
 	// TODO: change 1000!
-	zoom_x = 300 / (extremum.max_x - extremum.min_x);
-	//zoom_y = 900 / (extremum.max_y - extremum.min_y);
+	zoom = find_zoom(iso_matrix, 1000, 1000); //hardcode
+	offset_x = (1000 - zoom * (extremum.max_x - extremum.min_x)) / 2;
+	offset_y = (1000 - zoom * (extremum.max_y - extremum.min_y)) / 2;
 	j = 0;
 	while (j < res.height)
 	{
@@ -46,12 +48,11 @@ t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
 			}
 			else
 				res.map[j][i].color = set_color_to_height(iso_matrix.map[j][i].z, extremum.max_z, extremum.min_z);
-			color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
-			res.map[j][i].x = (iso_matrix.map[j][i].x - extremum.min_x) * zoom_x + 50;
-			res.map[j][i].y = (iso_matrix.map[j][i].y - extremum.min_y) * zoom_x + 50;
+			//color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
+			res.map[j][i].x = (iso_matrix.map[j][i].x - extremum.min_x) * zoom + offset_x;
+			res.map[j][i].y = (iso_matrix.map[j][i].y - extremum.min_y) * zoom + offset_y;
 			res.map[j][i].z = iso_matrix.map[j][i].z;
-			//TODO: change to t_px
-			mlx_put_pixel(image, res.map[j][i].x, res.map[j][i].y, color);
+			//mlx_put_pixel(image, res.map[j][i].x, res.map[j][i].y, color);
 			i++;
 		}
 		j++;
@@ -83,13 +84,15 @@ void	draw_line(mlx_image_t *image, t_px a, t_px b)
 		sign_y = -1;
 	error = del_x - del_y;
 	pixel_color = mix_rgba(b.color.r, b.color.g, b.color.b, b.color.a);
-	mlx_put_pixel(image, b.x, b.y, pixel_color);
+	if (is_inside(b, image->width, image->height)) // hardcode
+		mlx_put_pixel(image, b.x, b.y, pixel_color);
 	a_copy = a;
 	while (a.x != b.x || a.y != b.y)
 	{
 		color = color_between(a_copy, a, b);
 		pixel_color = mix_rgba(color.r, color.g, color.b, color.a);
-		mlx_put_pixel(image, a.x, a.y, pixel_color);
+		if (is_inside(a, 1000, 1000)) //hardcode
+			mlx_put_pixel(image, a.x, a.y, pixel_color);
 		error2 = error * 2;
 		if (error2 > -del_y)
 		{

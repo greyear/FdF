@@ -38,7 +38,7 @@ int	main(int argc, char *argv[])
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
-	pixel_matrix = to_px_matrix(image, iso_matrix);
+	pixel_matrix = to_px_matrix(iso_matrix);
 	put_px_matrix(image, pixel_matrix);
 	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
 	{
