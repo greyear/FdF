@@ -57,6 +57,7 @@ t_px_matrix	to_px_matrix(t_iso_matrix iso_matrix)
 		}
 		j++;
 	}
+	clean_iso_matrix(&iso_matrix);
 	return (res);
 }
 
@@ -138,4 +139,5 @@ void	put_px_matrix(mlx_image_t *image, t_px_matrix matrix)
 		draw_line(image, matrix.map[j][i], matrix.map[j + 1][i]);
 		j++;
 	}
+	clean_px_matrix(&matrix);
 }

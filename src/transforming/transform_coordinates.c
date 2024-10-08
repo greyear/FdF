@@ -67,5 +67,6 @@ t_iso_matrix	to_iso_matrix(t_read *stack, double angle)
 	matrix.map = map;
 	matrix.width = width;
 	matrix.height = height;
+	clean_read_map(&stack);
 	return (matrix);
 }

@@ -39,7 +39,8 @@ t_read	*read_map(char *file_name)
 		if (line == NULL)
 			break ;
 		point_info = ft_split(line, ' ');
-		//checks
+		//checks for point_info
+		free(line);
 		x = 0;
 		while (point_info[x] != NULL)
 		{
@@ -63,6 +64,7 @@ t_read	*read_map(char *file_name)
 					}
 				z = ft_atoi(separate[0]);
 				color = extract_rgba(ft_atoi_color(separate[1]), ft_strlen(separate[1]) - 2);
+				clean_arr(separate);
 			}
 			else
 			{
@@ -76,7 +78,8 @@ t_read	*read_map(char *file_name)
 			}
 			x++;
 		}
-		line = NULL;
+		line = NULL; //why do I need it?
+		clean_arr(point_info);
 		y++;
 	}
 	close(fd);

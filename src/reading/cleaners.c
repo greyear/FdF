@@ -65,3 +65,17 @@ void	clean_px_matrix(t_px_matrix *matrix)
 	matrix->map = NULL;
 }
 
+void	clean_arr(char **arr)
+{
+	int	len;
+	int	i;
+
+	len = array_len(arr);
+	i = 0;
+	while (i < len)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
