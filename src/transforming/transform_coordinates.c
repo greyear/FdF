@@ -58,6 +58,12 @@ t_iso_matrix	to_iso_matrix(t_read *stack, double angle)
 		i = 0;
 		while (i < width)
 		{
+			if (!cur)
+			{
+				// TODO: clean?
+				perror("Invalid map structure"); //TODO: why does this appear for mars map
+				exit(EXIT_FAILURE);
+			}
 			map[j][i] = transform_point(*cur, angle);
 			cur = cur->next;
 			i++;
