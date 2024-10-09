@@ -6,11 +6,12 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:54:21 by azinchen          #+#    #+#             */
-/*   Updated: 2024/10/02 14:48:36 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:41:08 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
+#include <stdio.h> // TODO: delete
 
 t_read	*read_map(char *file_name)
 {
@@ -41,6 +42,7 @@ t_read	*read_map(char *file_name)
 		point_info = ft_split(line, ' ');
 		//checks for point_info
 		free(line);
+		//printf("x:%d", x);
 		x = 0;
 		while (point_info[x] != NULL)
 		{
@@ -82,6 +84,7 @@ t_read	*read_map(char *file_name)
 		clean_arr(point_info);
 		y++;
 	}
+	//printf("y:%d", y);
 	close(fd);
 	return (first);
 }

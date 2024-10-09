@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 18:32:00 by azinchen          #+#    #+#             */
-/*   Updated: 2024/10/04 17:13:14 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:28:49 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,15 @@ t_color	set_color_to_height(int z, int max_z, int min_z)
 {
 	t_color	res;
 
-	res.r = 0 + (255 - 0) / (max_z - min_z) * (z - min_z);
-	res.g = 128;
-	res.b = 0 + (255 - 0) / (max_z - min_z) * (z - min_z);
-	res.a = 255;
-
+	if (max_z == min_z)
+		res = white_color();
+	else
+	{
+		res.r = 0 + (255 - 0) / (max_z - min_z) * (z - min_z);
+		res.g = 128;
+		res.b = 0 + (255 - 0) / (max_z - min_z) * (z - min_z);
+		res.a = 255;
+	}
 	return (res);
 }
 

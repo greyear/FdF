@@ -6,7 +6,7 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:53:31 by azinchen          #+#    #+#             */
-/*   Updated: 2024/10/04 15:55:41 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:04:00 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,19 @@ double	find_zoom(t_iso_matrix matrix, int width, int height)
 	extremum = find_extremum(matrix);
 	del_x = extremum.max_x - extremum.min_x;
 	del_y = extremum.max_y - extremum.min_y;
-	// TODO: if 0..
-	if (width / del_x < height / del_y)
+	if (del_x == 0 && del_y == 0)
+		zoom = 1.0; //TODO: is this right?
+	else if (del_x == 0)
+		zoom = height / del_y * 0.9;
+	else if (del_y == 0)
 		zoom = width / del_x * 0.9;
 	else
-		zoom = height / del_y * 0.9;
+	{
+		if (width / del_x < height / del_y)
+			zoom = width / del_x * 0.9;
+		else
+			zoom = height / del_y * 0.9;
+	}
 	return (zoom);
 }
 

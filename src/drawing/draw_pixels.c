@@ -6,17 +6,18 @@
 /*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:53:14 by azinchen          #+#    #+#             */
-/*   Updated: 2024/10/01 19:39:42 by azinchen         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:32:43 by azinchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
+#include <stdio.h>
 
 t_px_matrix	to_px_matrix(t_iso_matrix iso_matrix)
 {
 	int				i;
 	int				j;
-	//int				color;
+	int				color;
 	t_extremum		extremum;
 	double			zoom;
 	double		offset_x;
@@ -48,7 +49,7 @@ t_px_matrix	to_px_matrix(t_iso_matrix iso_matrix)
 			}
 			else
 				res.map[j][i].color = set_color_to_height(iso_matrix.map[j][i].z, extremum.max_z, extremum.min_z);
-			//color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
+			color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
 			res.map[j][i].x = (iso_matrix.map[j][i].x - extremum.min_x) * zoom + offset_x;
 			res.map[j][i].y = (iso_matrix.map[j][i].y - extremum.min_y) * zoom + offset_y;
 			res.map[j][i].z = iso_matrix.map[j][i].z;
