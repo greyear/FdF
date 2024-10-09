@@ -51,17 +51,17 @@ t_read	*read_map(char *file_name)
 				separate = ft_split(point_info[x], ',');
 				if (array_len(separate) != 2)
 					{
-						perror("Input data error");
+						perror("Input data error: array_len");
 						exit(EXIT_FAILURE);
 					}
 				if (height_check(separate[0]) == 1)
 					{
-						perror("Input data error");
+						perror("Input data error: height check");
 						exit(EXIT_FAILURE);
 					}
 				if (color_check(separate[1]) == 1)
 					{
-						perror("Input data error");
+						perror("Input data error: color check");
 						exit(EXIT_FAILURE);
 					}
 				z = ft_atoi(separate[0]);

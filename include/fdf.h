@@ -99,6 +99,7 @@ int				is_fake(t_color c);
 t_color			extract_rgba(int color, int len);
 t_color			set_color_to_height(int z, int max_z, int min_z);
 t_color			color_between(t_px start, t_px cur, t_px end);
+int				color_len(char *str);
 
 //Drawing
 t_px_matrix		to_px_matrix(t_iso_matrix iso_matrix);

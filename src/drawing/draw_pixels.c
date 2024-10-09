@@ -17,7 +17,7 @@ t_px_matrix	to_px_matrix(t_iso_matrix iso_matrix)
 {
 	int				i;
 	int				j;
-	int				color;
+	int				colorful;
 	t_extremum		extremum;
 	double			zoom;
 	double		offset_x;
@@ -33,6 +33,7 @@ t_px_matrix	to_px_matrix(t_iso_matrix iso_matrix)
 	zoom = find_zoom(iso_matrix, 1000, 1000); //hardcode
 	offset_x = (1000 - zoom * (extremum.max_x - extremum.min_x)) / 2;
 	offset_y = (1000 - zoom * (extremum.max_y - extremum.min_y)) / 2;
+	colorful = is_colorful_input(iso_matrix);
 	j = 0;
 	while (j < res.height)
 	{
@@ -40,7 +41,7 @@ t_px_matrix	to_px_matrix(t_iso_matrix iso_matrix)
 		i = 0;
 		while (i < res.width)
 		{
-			if (is_colorful_input(iso_matrix) == 1)
+			if (colorful == 1)
 			{
 				if (is_fake(iso_matrix.map[j][i].color) == 1)
 					res.map[j][i].color = white_color();
@@ -49,7 +50,7 @@ t_px_matrix	to_px_matrix(t_iso_matrix iso_matrix)
 			}
 			else
 				res.map[j][i].color = set_color_to_height(iso_matrix.map[j][i].z, extremum.max_z, extremum.min_z);
-			color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
+			//color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
 			res.map[j][i].x = (iso_matrix.map[j][i].x - extremum.min_x) * zoom + offset_x;
 			res.map[j][i].y = (iso_matrix.map[j][i].y - extremum.min_y) * zoom + offset_y;
 			res.map[j][i].z = iso_matrix.map[j][i].z;

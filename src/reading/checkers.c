@@ -46,13 +46,13 @@ int	color_check(char *str)
 
 	if (!str)
 		return (EXIT_FAILURE);
-	len = ft_strlen(str);
+	len = color_len(str);
 	if (!(len == 10 || len == 8 || len == 6 || len == 4))
 		return (EXIT_FAILURE);
 	if (str[0] != '0' || ft_tolower(str[1]) != 'x')
 		return (EXIT_FAILURE);
 	i = 2;
-	while (str[i] != '\0')
+	while (str[i] != '\0' && str[i] != '\n')
 	{
 		c = ft_tolower(str[i]);
 		if (!ft_isdigit(str[i]) && !(c >= 'a' && c <= 'f'))

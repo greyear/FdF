@@ -72,3 +72,13 @@ t_color	color_between(t_px start, t_px cur, t_px end)
 	res.a = start.color.a + ((end.color.a - start.color.a) * d_small) / d_big;
 	return (res);
 }
+
+int	color_len(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0' && str[i] != '\n')
+		i++;
+	return (i);
+}
