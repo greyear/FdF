@@ -20,7 +20,8 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include <stdio.h>
-# include <stdlib.h> //abs??
+# include <stdlib.h> //TODO: abs??
+# include <time.h> //TODO: measures
 
 typedef struct s_color
 {
