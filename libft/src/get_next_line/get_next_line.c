@@ -21,7 +21,7 @@ static char	*free_string(char **str)
 	return (NULL);
 }
 
-static char	*cut_up_to_nl(char *stash)
+/*static char	*cut_up_to_nl(char *stash)
 {
 	char	*up_to_nl;
 	int		i;
@@ -38,6 +38,29 @@ static char	*cut_up_to_nl(char *stash)
 		i++;
 	}
 	if (stash[i] == '\n')
+	{
+		up_to_nl[i] = stash[i];
+		i++;
+	}
+	up_to_nl[i] = '\0';
+	return (up_to_nl);
+}
+*/
+
+static char	*cut_up_to_nl(char *stash)
+{
+	char	*up_to_nl;
+	int		i;
+	int		nl;
+
+	if (!stash || stash[0] == '\0')
+		return (NULL);
+	nl = find_nl(stash);
+	up_to_nl = (char *)malloc((nl + 1) * sizeof(char));
+	if (!up_to_nl)
+		return (NULL);
+	i = 0;
+	while (i < nl)
 	{
 		up_to_nl[i] = stash[i];
 		i++;
@@ -70,6 +93,7 @@ static char	*new_stash(char *stash)
 	return (new);
 }
 
+/*
 static int	read_until_nl(int fd, char **stash, char **buf)
 {
 	char	*temp;
@@ -90,7 +114,30 @@ static int	read_until_nl(int fd, char **stash, char **buf)
 	}
 	return (0);
 }
+*/
 
+static int	read_until_nl(int fd, char **stash, char *buf)
+{
+	char	*temp;
+	int		bytes;
+
+	bytes = 1;
+	while (!ft_strchr(*stash, '\n') && (bytes != 0))
+	{
+		bytes = read(fd, buf, BUFFER_SIZE);
+		if (bytes == -1)
+			return (-1);
+		buf[bytes] = '\0';
+		temp = ft_strjoin_stash(*stash, buf);
+		if (!temp)
+			return (-1);
+		free_string(stash);
+		*stash = temp;
+	}
+	return (0);
+}
+
+/*
 char	*get_next_line(int fd)
 {
 	static char		*stash;
@@ -108,6 +155,26 @@ char	*get_next_line(int fd)
 		return (free_string(&stash));
 	}
 	free_string(&buf);
+	res = cut_up_to_nl(stash);
+	if (!res)
+		return (free_string(&stash));
+	stash = new_stash(stash);
+	return (res);
+}
+*/
+
+char	*get_next_line(int fd)
+{
+	static char		*stash;
+	char			buf[BUFFER_SIZE + 1];
+	char			*res;
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
+		return (NULL);
+	if (read_until_nl(fd, &stash, buf) == -1)
+	{
+		return (free_string(&stash));
+	}
 	res = cut_up_to_nl(stash);
 	if (!res)
 		return (free_string(&stash));
