@@ -86,6 +86,7 @@ t_read			*read_map(char *file_name);
 //Utils
 t_read			*last_elem(t_read *stack);
 int				add_back(t_read **stack, int x, int y, int z, t_color color);
+t_read			*add_to_last(t_read **old_last, int x, int y, int z, t_color color);
 int				contains_comma(char *str);
 int				array_len(char	**separate);
 

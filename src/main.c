@@ -21,12 +21,9 @@ int	main(int argc, char *argv[])
 	mlx_image_t		*image;
 	t_px_matrix		pixel_matrix;
 
-	clock_t time_start= clock(); 
-
 	if (argc != 2 || !argv[1])
-		exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE); //TODO: do we need error msg here?
 	read = read_map(argv[1]);
-
 	// TODO: checks of read
 	// TODO: if here function returned exit, will I have problems with memory?
 	iso_matrix = to_iso_matrix(read, M_PI / 6);
@@ -51,9 +48,5 @@ int	main(int argc, char *argv[])
 	}
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
-
-	clock_t time_2 = clock() - time_start;
-	printf("after all %f\n", (double)time_2 / CLOCKS_PER_SEC);
-
 	return (EXIT_SUCCESS);
 }

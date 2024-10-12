@@ -24,8 +24,7 @@ t_read	*read_map(char *file_name)
 	int		z;
 	t_color	color;
 	t_read	*first;
-	
-	clock_t time_start= clock(); 
+	t_read	*last;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
@@ -34,16 +33,13 @@ t_read	*read_map(char *file_name)
 		exit(EXIT_FAILURE);
 	}
 	first = NULL;
+	last = NULL;
 	y = 0;
-	while (1)
+	while (1) //while line != NULL
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		
-		clock_t time_1 = clock() - time_start;
-		printf("after gnl %f\n", (double)time_1 / CLOCKS_PER_SEC);
-		
 		point_info = ft_split(line, ' ');
 		//checks for point_info
 		free(line);
@@ -56,7 +52,7 @@ t_read	*read_map(char *file_name)
 				separate = ft_split(point_info[x], ',');
 				if (array_len(separate) != 2)
 					{
-						perror("Input data error: array_len");
+						perror("Input data error: array_len"); //TODO: do we need to clean first and separate?
 						exit(EXIT_FAILURE);
 					}
 				if (height_check(separate[0]) || color_check(separate[1]))
@@ -73,24 +69,20 @@ t_read	*read_map(char *file_name)
 				z = ft_atoi(point_info[x]);
 				color = fake_color();
 			}
-			if (add_back(&first, x, y, z, color) == 1)
+			last = add_to_last(&last, x, y, z, color);
+			if (last == NULL)
 			{
 				clean_read_map(&first);
 				exit(EXIT_FAILURE);
 			}
+			if (first == NULL)
+				first = last;
 			x++;
 		}
 		line = NULL; //why do I need it?
 		clean_arr(point_info);
 		y++;
-
-		clock_t time_3 = clock() - time_start;
-		printf("after everything else %f\n", (double)time_3 / CLOCKS_PER_SEC);
 	}
-
-	clock_t time_2 = clock() - time_start;
-	printf("after reading %f\n", (double)time_2 / CLOCKS_PER_SEC);
-
 	//printf("y:%d", y);
 	close(fd);
 	return (first);
