@@ -50,14 +50,12 @@ t_extremum find_extremum(t_iso_matrix matrix)
 	return (extremum);
 }
 
-double	find_zoom(t_iso_matrix matrix, int width, int height)
+double	find_zoom(t_extremum extremum, int width, int height)
 {
-	t_extremum	extremum;
 	double		zoom;
 	double		del_x;
 	double		del_y;
 
-	extremum = find_extremum(matrix);
 	del_x = extremum.max_x - extremum.min_x;
 	del_y = extremum.max_y - extremum.min_y;
 	if (del_x == 0 && del_y == 0)
@@ -87,9 +85,7 @@ int	is_colorful_input(t_iso_matrix matrix)
 {
 	int	i;
 	int	j;
-	int	res;
 
-	res = 0;
 	i = 0;
 	while (i < matrix.width)
 	{
@@ -97,12 +93,12 @@ int	is_colorful_input(t_iso_matrix matrix)
 		while (j < matrix.height)
 		{
 			if (is_fake(matrix.map[j][i].color) == 0)
-				res = 1;
+				return (1);
 			j++;
 		}
 		i++;
 	}
-	return (res);
+	return (0);
 }
 
 int	is_inside(t_px a, int limit_x, int limit_y)

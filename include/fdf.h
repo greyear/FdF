@@ -106,7 +106,7 @@ t_px_matrix		to_px_matrix(t_iso_matrix iso_matrix);
 void			put_px_matrix(mlx_image_t *image, t_px_matrix matrix);
 void			draw_line(mlx_image_t *image, t_px a, t_px b);
 t_extremum		find_extremum(t_iso_matrix matrix); // TODO: static
-double			find_zoom(t_iso_matrix matrix, int width, int height);
+double			find_zoom(t_extremum extremum, int width, int height);
 int				is_colorful_input(t_iso_matrix matrix);
 int				is_inside(t_px a, int limit_x, int limit_y);
 
