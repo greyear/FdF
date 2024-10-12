@@ -24,6 +24,11 @@ int	main(int argc, char *argv[])
 	if (argc != 2 || !argv[1])
 		exit(EXIT_FAILURE); //TODO: do we need error msg here?
 	read = read_map(argv[1]);
+	if (!read)
+	{
+		perror("Invalid map");
+		exit(EXIT_FAILURE);
+	}
 	// TODO: checks of read
 	// TODO: if here function returned exit, will I have problems with memory?
 	iso_matrix = to_iso_matrix(read, M_PI / 6);

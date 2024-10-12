@@ -12,12 +12,14 @@
 
 #include "../../include/fdf.h"
 
-//empty map
+//empty map - gives "Invalid map: success"
 
+//new line - opens window without image
 
-//not rectangular
+//map with 1 point,- opens window without image, but why?
 
-/*if map contains only heights or +colors:
- - if (all) colors: draw colors;
- - if no colors: according to heights;
- - if mixed: then e.g. for dots without colors print default color */
+//2 points - draws a line 
+
+//folder fdf - don't understand how to create haha
+
+//not rectangular - work, but is it okay?

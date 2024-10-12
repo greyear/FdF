@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
+#include <stdio.h>
 
 static t_iso	transform_point(t_read p, double ang)
 {
@@ -61,6 +62,7 @@ t_iso_matrix	to_iso_matrix(t_read *stack, double angle)
 			if (!cur)
 			{
 				// TODO: clean?
+				printf("i = %d, j = %d, map[j][i - 1].z = %d", i, j, map[j][i - 1].z);
 				perror("Invalid map structure"); //TODO: why does this appear for mars map
 				exit(EXIT_FAILURE);
 			}
