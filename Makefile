@@ -32,7 +32,7 @@ LIB				=	-L$(MLX_DIR)/build -lmlx42 -L$(LIBFT_DIR) -ldl -lglfw -pthread -lm
 
 # Compiler and compilation flags
 CC 				=	cc
-CFLAGS 			=	-g -Wall -Wextra -Werror
+CFLAGS 			=	-g -Wall -Wextra -Werror -Ofast
 RM				=	rm -f
 
 # Source files

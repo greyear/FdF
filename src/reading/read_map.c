@@ -25,10 +25,11 @@ t_read	*read_map(char *file_name)
 	t_color	color;
 	t_read	*first;
 	
+	clock_t time_start= clock(); 
+
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{
-		// TODO: clean?
 		perror("Error opening file");
 		exit(EXIT_FAILURE);
 	}
@@ -39,6 +40,10 @@ t_read	*read_map(char *file_name)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
+		
+		clock_t time_1 = clock() - time_start;
+		printf("after gnl %f\n", (double)time_1 / CLOCKS_PER_SEC);
+		
 		point_info = ft_split(line, ' ');
 		//checks for point_info
 		free(line);
@@ -54,14 +59,9 @@ t_read	*read_map(char *file_name)
 						perror("Input data error: array_len");
 						exit(EXIT_FAILURE);
 					}
-				if (height_check(separate[0]) == 1)
+				if (height_check(separate[0]) || color_check(separate[1]))
 					{
-						perror("Input data error: height check");
-						exit(EXIT_FAILURE);
-					}
-				if (color_check(separate[1]) == 1)
-					{
-						perror("Input data error: color check");
+						perror("Input data error");
 						exit(EXIT_FAILURE);
 					}
 				z = ft_atoi(separate[0]);
@@ -83,7 +83,14 @@ t_read	*read_map(char *file_name)
 		line = NULL; //why do I need it?
 		clean_arr(point_info);
 		y++;
+
+		clock_t time_3 = clock() - time_start;
+		printf("after everything else %f\n", (double)time_3 / CLOCKS_PER_SEC);
 	}
+
+	clock_t time_2 = clock() - time_start;
+	printf("after reading %f\n", (double)time_2 / CLOCKS_PER_SEC);
+
 	//printf("y:%d", y);
 	close(fd);
 	return (first);
