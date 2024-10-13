@@ -12,14 +12,22 @@
 
 #include "../../include/fdf.h"
 
-//empty map - gives "Invalid map: success"
+/*
 
-//new line - opens window without image
+empty map - gives "Invalid map: success", no leaks
 
-//map with 1 point,- opens window without image, but why?
+new line - opens window without image, no leaks
 
-//2 points - draws a line 
+map with 1 point,- opens window without image, but why? need to write separate function for 1 point
 
-//folder fdf - don't understand how to create haha
+2 points - draws a line, no leaks
 
-//not rectangular - work, but is it okay?
+folder fdf - "Invalid map: is a directory", no leaks
+
+not rectangular - work, but is it okay?
+specificly:
+- with extra symbol - doesn't draw, no leaks
+- without symbol - draws, no leaks
+
+mars - 
+*/
