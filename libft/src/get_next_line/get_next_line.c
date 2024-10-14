@@ -21,7 +21,7 @@ static char	*free_string(char **str)
 	return (NULL);
 }
 
-/*static char	*cut_up_to_nl(char *stash)
+static char	*cut_up_to_nl(char *stash)
 {
 	char	*up_to_nl;
 	int		i;
@@ -45,8 +45,8 @@ static char	*free_string(char **str)
 	up_to_nl[i] = '\0';
 	return (up_to_nl);
 }
-*/
 
+/*
 static char	*cut_up_to_nl(char *stash)
 {
 	char	*up_to_nl;
@@ -67,7 +67,7 @@ static char	*cut_up_to_nl(char *stash)
 	}
 	up_to_nl[i] = '\0';
 	return (up_to_nl);
-}
+}*/
 
 static char	*new_stash(char *stash)
 {
@@ -93,7 +93,7 @@ static char	*new_stash(char *stash)
 	return (new);
 }
 
-/*
+
 static int	read_until_nl(int fd, char **stash, char **buf)
 {
 	char	*temp;
@@ -114,8 +114,8 @@ static int	read_until_nl(int fd, char **stash, char **buf)
 	}
 	return (0);
 }
-*/
 
+/*
 static int	read_until_nl(int fd, char **stash, char *buf)
 {
 	char	*temp;
@@ -135,9 +135,8 @@ static int	read_until_nl(int fd, char **stash, char *buf)
 		*stash = temp;
 	}
 	return (0);
-}
+}*/
 
-/*
 char	*get_next_line(int fd)
 {
 	static char		*stash;
@@ -161,8 +160,8 @@ char	*get_next_line(int fd)
 	stash = new_stash(stash);
 	return (res);
 }
-*/
 
+/*
 char	*get_next_line(int fd)
 {
 	static char		*stash;
@@ -180,4 +179,4 @@ char	*get_next_line(int fd)
 		return (free_string(&stash));
 	stash = new_stash(stash);
 	return (res);
-}
+}*/

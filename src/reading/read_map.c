@@ -40,26 +40,42 @@ t_read	*read_map(char *file_name)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		point_info = ft_split(line, ' ');
+		if (is_nl(line)) //I added this to return error msg in maps with nl, but now I have a leak
+		{
+			free(line);
+			clean_read_map(&first); //??
+			perror("Input data error: empty line in map");
+			exit(EXIT_FAILURE);
+			//break ;
+		}
+		point_info = ft_split(line, ' '); //TODO: what about other types of spaces?
+		if (point_info == NULL)
+		{
+			free(line);
+			clean_read_map(&first); //??
+			perror("Input data error"); //TODO: do we need to clean first and separate?
+			exit(EXIT_FAILURE);
+		}
 		//checks for point_info
 		free(line);
 		//printf("x:%d", x);
 		x = 0;
 		while (point_info[x] != NULL)
 		{
+			//printf("[%d] '%s' - x, point_info[x]\n", x, point_info[x]);
 			if (contains_comma(point_info[x]) == 1)
 			{
 				separate = ft_split(point_info[x], ',');
 				if (array_len(separate) != 2)
-					{
-						perror("Input data error: array_len"); //TODO: do we need to clean first and separate?
-						exit(EXIT_FAILURE);
-					}
+				{
+					perror("Input data error: array_len"); //TODO: do we need to clean first and separate?
+					exit(EXIT_FAILURE);
+				}
 				if (height_check(separate[0]) || color_check(separate[1]))
-					{
-						perror("Input data error");
-						exit(EXIT_FAILURE);
-					}
+				{
+					perror("Input data error");
+					exit(EXIT_FAILURE);
+				}
 				z = ft_atoi(separate[0]);
 				color = extract_rgba(ft_atoi_color(separate[1]), ft_strlen(separate[1]) - 2);
 				clean_arr(separate);

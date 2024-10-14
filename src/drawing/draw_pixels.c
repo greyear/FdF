@@ -13,7 +13,7 @@
 #include "../../include/fdf.h"
 #include <stdio.h>
 
-t_px_matrix	to_px_matrix(t_iso_matrix iso_matrix)
+t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
 {
 	int				i;
 	int				j;
@@ -23,6 +23,7 @@ t_px_matrix	to_px_matrix(t_iso_matrix iso_matrix)
 	double		offset_x;
 	double		offset_y;
 	t_px_matrix		res;
+	int				color;
 
 	res.width = iso_matrix.width;
 	res.height = iso_matrix.height;
@@ -50,11 +51,12 @@ t_px_matrix	to_px_matrix(t_iso_matrix iso_matrix)
 			}
 			else
 				res.map[j][i].color = set_color_to_height(iso_matrix.map[j][i].z, extremum.max_z, extremum.min_z);
-			//color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
+			color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
 			res.map[j][i].x = (iso_matrix.map[j][i].x - extremum.min_x) * zoom + offset_x;
 			res.map[j][i].y = (iso_matrix.map[j][i].y - extremum.min_y) * zoom + offset_y;
 			res.map[j][i].z = iso_matrix.map[j][i].z;
-			//mlx_put_pixel(image, res.map[j][i].x, res.map[j][i].y, color);
+			//TODO: check if inside
+			mlx_put_pixel(image, res.map[j][i].x, res.map[j][i].y, color);
 			i++;
 		}
 		j++;

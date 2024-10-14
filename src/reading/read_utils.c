@@ -81,6 +81,16 @@ int	contains_comma(char *str)
 	return (0);
 }
 
+int	is_nl(char *str)
+{
+	char	*str2;
+
+	str2 = "\n";
+	if (ft_strncmp(str, str2, 1) == 0)
+		return (1);
+	return (0);
+}
+
 int	array_len(char	**separate)
 {
 	int	len;

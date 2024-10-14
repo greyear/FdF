@@ -13,16 +13,18 @@
 #include "../../include/fdf.h"
 
 /*
+empty map - gives "Invalid map: success" - is the message okay?, no leaks
 
-empty map - gives "Invalid map: success", no leaks
+new lines(s) - gives "Input data error: empty line in map", BUT has a leak in GNL with MORE than 1 nl
+repeating spaces - gives "Invalid data error: success", no leaks
 
-new line - opens window without image, no leaks
+another kind of spaces - 
 
-map with 1 point,- opens window without image, but why? need to write separate function for 1 point
++ map with 1 point - draws dot, no leaks
 
-2 points - draws a line, no leaks
++ 2 points - draws a line, no leaks
 
-folder fdf - "Invalid map: is a directory", no leaks
++ folder fdf - "Invalid map: is a directory", no leaks
 
 not rectangular - work, but is it okay?
 specificly:
