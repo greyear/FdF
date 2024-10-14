@@ -43,17 +43,14 @@ t_read	*read_map(char *file_name)
 		if (is_nl(line)) //I added this to return error msg in maps with nl, but now I have a leak
 		{
 			free(line);
-			clean_read_map(&first); //??
-			perror("Input data error: empty line in map");
-			exit(EXIT_FAILURE);
-			//break ;
+			continue ;
 		}
 		point_info = ft_split(line, ' '); //TODO: what about other types of spaces?
 		if (point_info == NULL)
 		{
 			free(line);
 			clean_read_map(&first); //??
-			perror("Input data error"); //TODO: do we need to clean first and separate?
+			ft_printf("Input data error\n"); //TODO: do we need to clean first and separate?
 			exit(EXIT_FAILURE);
 		}
 		//checks for point_info
@@ -66,14 +63,9 @@ t_read	*read_map(char *file_name)
 			if (contains_comma(point_info[x]) == 1)
 			{
 				separate = ft_split(point_info[x], ',');
-				if (array_len(separate) != 2)
+				if (array_len(separate) != 2 || height_check(separate[0]) || color_check(separate[1]))
 				{
-					perror("Input data error: array_len"); //TODO: do we need to clean first and separate?
-					exit(EXIT_FAILURE);
-				}
-				if (height_check(separate[0]) || color_check(separate[1]))
-				{
-					perror("Input data error");
+					ft_printf("Input data error\n"); //TODO: do we need to clean first and separate?
 					exit(EXIT_FAILURE);
 				}
 				z = ft_atoi(separate[0]);

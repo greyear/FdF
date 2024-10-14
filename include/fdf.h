@@ -16,6 +16,7 @@
 # define _GNU_SOURCE
 
 # include "../libft/include/libft.h"
+# include "../libft/include/ft_printf.h"
 # include "../libft/include/get_next_line.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>

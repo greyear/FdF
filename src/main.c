@@ -28,7 +28,7 @@ int	main(int argc, char *argv[])
 	read = read_map(argv[1]);
 	if (!read)
 	{
-		perror("Invalid map");
+		ft_printf("Invalid map\n");
 		exit(EXIT_FAILURE);
 	}
 	// TODO: checks of read
