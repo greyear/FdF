@@ -81,7 +81,7 @@ int	contains_comma(char *str)
 	return (0);
 }
 
-int	is_nl(char *str)
+int	is_nl(char *str) //TODO: check if we need it
 {
 	char	*str2;
 

@@ -118,6 +118,7 @@ void			clean_read_map(t_read **stack);
 void			clean_iso_matrix(t_iso_matrix *matrix);
 void			clean_px_matrix(t_px_matrix *matrix);
 void			clean_arr(char **arr);
+void			clean_gnl(int fd);
 
 //Checkers
 int				height_check(char *str);

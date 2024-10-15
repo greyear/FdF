@@ -79,3 +79,15 @@ void	clean_arr(char **arr)
 	}
 	free(arr);
 }
+
+void	clean_gnl(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+}

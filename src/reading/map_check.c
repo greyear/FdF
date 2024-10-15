@@ -34,4 +34,8 @@ specificly:
 - without symbol - gives "Map is not rectangular", no leaks
 
 + mars - draws, no leaks
+
++ map with letters instead of number
+ - with colors - gives "Input data error", no leaks
+ - without colors - gives "Input data error", no leaks
 */

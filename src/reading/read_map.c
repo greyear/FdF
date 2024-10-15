@@ -51,12 +51,6 @@ t_read	*read_map(char *file_name)
 			free(trimmed_line);
 			continue;
 		}
-		/*
-		if (is_nl(line))
-		{
-			free(line);
-			continue ;
-		}*/
 		point_info = ft_split(trimmed_line, ' '); //TODO: what about other types of spaces?
 		free(trimmed_line);
 		if (point_info == NULL)
@@ -91,6 +85,10 @@ t_read	*read_map(char *file_name)
 				if (array_len(separate) != 2 || height_check(separate[0]) || color_check(separate[1]))
 				{
 					ft_printf("Input data error\n"); //TODO: do we need to clean first and separate?
+					clean_read_map(&first);
+					clean_arr(point_info);
+					clean_arr(separate);
+					clean_gnl(fd);
 					exit(EXIT_FAILURE);
 				}
 				z = ft_atoi(separate[0]);
@@ -99,6 +97,14 @@ t_read	*read_map(char *file_name)
 			}
 			else
 			{
+				if (height_check(point_info[x]))
+				{
+					ft_printf("Input data error\n"); //TODO: do we need to clean first and separate?
+					clean_read_map(&first);
+					clean_arr(point_info);
+					clean_gnl(fd);
+					exit(EXIT_FAILURE);
+				}
 				z = ft_atoi(point_info[x]);
 				color = fake_color();
 			}

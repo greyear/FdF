@@ -34,7 +34,7 @@ int	main(int argc, char *argv[])
 	mlx_image_t		*image;
 	t_px_matrix		pixel_matrix;
 
-	clock_t time_start= clock(); 
+	//clock_t time_start= clock(); 
 
 	if (argc != 2 || !argv[1])
 		exit(EXIT_FAILURE); //TODO: do we need error msg here?
@@ -69,9 +69,9 @@ int	main(int argc, char *argv[])
 	}
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
-	
+	/*
 	clock_t time_2 = clock() - time_start;
 	printf("after all %f\n", (double)time_2 / CLOCKS_PER_SEC);
-
+	*/
 	return (EXIT_SUCCESS);
 }
