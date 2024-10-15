@@ -38,6 +38,8 @@ int	height_check(char *str)
 	return (EXIT_SUCCESS);
 }
 
+//TODO: overflow check!
+
 int	color_check(char *str)
 {
 	int		i;

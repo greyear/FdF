@@ -55,7 +55,8 @@ t_read	*read_map(char *file_name)
 		free(trimmed_line);
 		if (point_info == NULL)
 		{
-			clean_read_map(&first); //??
+			clean_read_map(&first);
+			clean_gnl(fd);
 			ft_printf("Input data error\n"); //TODO: do we need to clean first and separate?
 			exit(EXIT_FAILURE);
 		}
@@ -66,6 +67,7 @@ t_read	*read_map(char *file_name)
 		{
 			clean_read_map(&first);
 			clean_arr(point_info);
+			clean_gnl(fd);
 			ft_printf("Map is not rectangular\n");
 			exit(EXIT_FAILURE);
 		}
@@ -112,6 +114,8 @@ t_read	*read_map(char *file_name)
 			if (last == NULL)
 			{
 				clean_read_map(&first);
+				clean_arr(point_info);
+				clean_gnl(fd);
 				exit(EXIT_FAILURE);
 			}
 			if (first == NULL)
