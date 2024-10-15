@@ -13,23 +13,25 @@
 #include "../../include/fdf.h"
 
 /*
++ non existing map - gives "Error opening file: No such file or directory", no leaks
+
 + empty map - gives "Invalid map", no leaks
 
 + new lines(s) - gives "Invalid map", no leaks
-repeating spaces - gives "Input data error", no leaks
++ repeating spaces - gives "Invalid map", no leaks
 
 another kind of spaces - 
 
-map with 1 point - draws dot, no leaks
++ map with 1 point - draws dot, no leaks
 
-2 points - draws a line, no leaks
++ 2 points - draws a line, no leaks
 
-folder fdf - "Invalid map: is a directory", no leaks
++ folder fdf - "Invalid map: is a directory", no leaks
 
-not rectangular - work, but is it okay?
++ not rectangular
 specificly:
-- with extra symbol - doesn't draw, no leaks
-- without symbol - draws, no leaks
+- with extra symbol - gives "Map is not rectangular", no leaks
+- without symbol - gives "Map is not rectangular", no leaks
 
-mars - 
++ mars - draws, no leaks
 */

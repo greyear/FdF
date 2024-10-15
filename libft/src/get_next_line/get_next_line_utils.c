@@ -70,7 +70,7 @@ char	*ft_strjoin_stash(char *stash, char *buf)
 	return (res);
 }
 
-char	*ft_substr(char *stash, unsigned int start, size_t len)
+char	*ft_substrg(char *stash, unsigned int start, size_t len)
 {
 	size_t	i;
 	size_t	left;

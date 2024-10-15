@@ -13,6 +13,19 @@
 #include "../include/fdf.h"
 #include <stdio.h>
 
+/*
+static void print_nodes(t_read *head) {
+    t_read *current = head;
+    while (current != NULL) {
+        printf("Node:\n");
+        printf("  x: %d\n", current->x);
+        printf("  y: %d\n", current->y);
+        printf("  z: %d\n", current->z);
+        printf("  color: (%d, %d, %d)\n", current->color.r, current->color.g, current->color.b);
+        current = current->next;
+    }
+}*/
+
 int	main(int argc, char *argv[])
 {
 	t_read			*read;
@@ -26,6 +39,7 @@ int	main(int argc, char *argv[])
 	if (argc != 2 || !argv[1])
 		exit(EXIT_FAILURE); //TODO: do we need error msg here?
 	read = read_map(argv[1]);
+	//print_nodes(read);
 	if (!read)
 	{
 		ft_printf("Invalid map\n");

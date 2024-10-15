@@ -25,6 +25,9 @@ t_read	*read_map(char *file_name)
 	t_color	color;
 	t_read	*first;
 	t_read	*last;
+	char	*trimmed_line;
+	int		exp_len;
+	int		arr_len;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
@@ -34,31 +37,53 @@ t_read	*read_map(char *file_name)
 	}
 	first = NULL;
 	last = NULL;
+	exp_len = -1;
 	y = 0;
 	while (1) //while line != NULL
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		if (is_nl(line)) //I added this to return error msg in maps with nl, but now I have a leak
+		trimmed_line = ft_strtrim(line, " \n\t"); //TODO: add all others
+		free(line);
+		if (trimmed_line[0] == '\0')
+		{
+			free(trimmed_line);
+			continue;
+		}
+		/*
+		if (is_nl(line))
 		{
 			free(line);
 			continue ;
-		}
-		point_info = ft_split(line, ' '); //TODO: what about other types of spaces?
+		}*/
+		point_info = ft_split(trimmed_line, ' '); //TODO: what about other types of spaces?
+		free(trimmed_line);
 		if (point_info == NULL)
 		{
-			free(line);
 			clean_read_map(&first); //??
 			ft_printf("Input data error\n"); //TODO: do we need to clean first and separate?
 			exit(EXIT_FAILURE);
 		}
-		//checks for point_info
-		free(line);
+		arr_len = array_len(point_info);
+		if (y == 0)
+			exp_len = arr_len;
+		else if (arr_len != exp_len)
+		{
+			clean_read_map(&first);
+			clean_arr(point_info);
+			ft_printf("Map is not rectangular\n");
+			exit(EXIT_FAILURE);
+		}
 		//printf("x:%d", x);
 		x = 0;
 		while (point_info[x] != NULL)
 		{
+			if (point_info[x][0] == '\0')
+			{
+        		x++;
+        		continue;
+    		}
 			//printf("[%d] '%s' - x, point_info[x]\n", x, point_info[x]);
 			if (contains_comma(point_info[x]) == 1)
 			{

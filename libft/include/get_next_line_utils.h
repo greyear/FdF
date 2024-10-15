@@ -15,7 +15,7 @@
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin_stash(char *stash, char *buf);
-char	*ft_substr(char *stash, unsigned int start, size_t len);
+char	*ft_substrg(char *stash, unsigned int start, size_t len);
 size_t	find_nl(char *stash);
 
 #endif

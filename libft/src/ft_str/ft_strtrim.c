@@ -42,8 +42,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (min < len && ft_fromset(s1[min], set))
 		min++;
 	max = len - 1;
-	while (max > 0 && ft_fromset(s1[max], set))
+	while (max > min && ft_fromset(s1[max], set))
 		max--;
+	if (min > max)
+		return (ft_strdup(""));
 	res = ft_substr(s1, min, max - min + 1);
 	return (res);
 }
