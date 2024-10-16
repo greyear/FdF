@@ -37,7 +37,10 @@ int	main(int argc, char *argv[])
 	//clock_t time_start= clock(); 
 
 	if (argc != 2 || !argv[1])
-		exit(EXIT_FAILURE); //TODO: do we need error msg here?
+	{
+		ft_printf("Invalid map\n");
+		exit(EXIT_FAILURE);
+	}
 	read = read_map(argv[1]);
 	//print_nodes(read);
 	if (!read)

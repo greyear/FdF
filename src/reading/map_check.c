@@ -13,6 +13,8 @@
 #include "../../include/fdf.h"
 
 /*
++ 1 arg, 3 args - "Invalid arguments", no leaks
+
 + non existing map - gives "Error opening file: No such file or directory", no leaks
 
 + empty map - gives "Invalid map", no leaks
@@ -27,6 +29,8 @@ another kind of spaces -
 + 2 points - draws a line, no leaks
 
 + folder fdf - "Invalid map: is a directory", no leaks
+
++ just existing folder - "Invalid map", no leaks
 
 + not rectangular
 specificly:
