@@ -44,7 +44,7 @@ t_read	*read_map(char *file_name)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		trimmed_line = ft_strtrim(line, " \n\t"); //TODO: add all others
+		trimmed_line = ft_strtrim(line, " \n\t\r\f\v");
 		free(line);
 		if (trimmed_line[0] == '\0')
 		{

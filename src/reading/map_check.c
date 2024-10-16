@@ -38,4 +38,8 @@ specificly:
 + map with letters instead of number
  - with colors - gives "Input data error", no leaks
  - without colors - gives "Input data error", no leaks
+
++ maps with wrong put color
+
+ + map with >MAX_INT, <MIN_INT - give "Input data error", no leaks
 */

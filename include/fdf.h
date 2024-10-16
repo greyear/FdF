@@ -22,6 +22,7 @@
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h> //TODO: abs??
+# include <limits.h>
 # include <time.h> //TODO: measures
 
 typedef struct s_color
