@@ -29,21 +29,26 @@ void	clean_read_map(t_read **stack)
 	*stack = NULL;
 }
 
-void	clean_iso_matrix(t_iso_matrix *matrix)
+void	clean_iso_map(t_iso ***map, int height)
 {
-	int j;
+	int	j;
 
-	// TODO: so if map is null then we don't have height and width, right?
-	if (!matrix || !matrix->map)
+	if (!map || !(*map))
 		return ;
 	j = 0;
-	while (j < matrix->height)
+	while (j < height && (*map)[j] != NULL)
 	{
-		if (matrix->map[j])
-			free(matrix->map[j]);
+		free((*map)[j]);
 		j++;
 	}
-	free(matrix->map);
+	free(*map);
+}
+
+void	clean_iso_matrix(t_iso_matrix *matrix)
+{
+	if (!matrix || !matrix->map)
+		return ;
+	clean_iso_map(&(matrix->map), matrix->height);
 	matrix->map = NULL;
 }
 

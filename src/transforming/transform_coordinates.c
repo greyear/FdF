@@ -40,16 +40,21 @@ t_iso_matrix	to_iso_matrix(t_read *stack, double angle)
 	height = last_elem(stack)->y + 1;
 
 	map = (t_iso **)malloc(height * sizeof(t_iso *));
-	//what to return? what error msg?
 	if (!map)
+	{
+		clean_read_map(&stack);
 		exit(EXIT_FAILURE);
+	}
 	j = 0;
 	while (j < height)
 	{
 		map[j] = (t_iso *)malloc(width * sizeof(t_iso));
-		//what to return? what error msg?
 		if (!map[j])
+		{
+			clean_read_map(&stack);
+			clean_iso_map(&map, j);
 			exit(EXIT_FAILURE);
+		}
 		j++;
 	}
 	cur = stack;
@@ -59,13 +64,6 @@ t_iso_matrix	to_iso_matrix(t_read *stack, double angle)
 		i = 0;
 		while (i < width)
 		{
-			if (!cur)
-			{
-				// TODO: clean?
-				//printf("i = %d, j = %d, map[j][i - 1].z = %d", i, j, map[j][i - 1].z);
-				ft_printf("Invalid map structure\n"); //TODO: why does this appear for mars map
-				exit(EXIT_FAILURE);
-			}
 			map[j][i] = transform_point(*cur, angle);
 			cur = cur->next;
 			i++;

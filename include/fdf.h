@@ -82,6 +82,13 @@ typedef struct s_extremum
 	int		min_z;
 }	t_extremum;
 
+typedef struct s_draw
+{
+	mlx_t		*mlx;
+	mlx_image_t	*image;
+	t_read		*read;
+}	t_draw;
+
 //Reading
 t_read			*read_map(char *file_name);
 
@@ -113,9 +120,13 @@ t_extremum		find_extremum(t_iso_matrix matrix); // TODO: static
 double			find_zoom(t_extremum extremum, int width, int height);
 int				is_colorful_input(t_iso_matrix matrix);
 int				is_inside(t_px a, int limit_x, int limit_y);
+int				draw_picture(mlx_t *mlx, t_read *read, t_draw *pic);
+void			delete_exit(mlx_t *mlx, mlx_image_t *image);
+void			track_keys(mlx_key_data_t keydata, void *param);
 
 //Cleaners
 void			clean_read_map(t_read **stack);
+void			clean_iso_map(t_iso ***map, int height);
 void			clean_iso_matrix(t_iso_matrix *matrix);
 void			clean_px_matrix(t_px_matrix *matrix);
 void			clean_arr(char **arr);

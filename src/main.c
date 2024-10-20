@@ -26,13 +26,39 @@ static void print_nodes(t_read *head) {
     }
 }*/
 
+int	draw_picture(mlx_t *mlx, t_read *read, t_draw *pic)
+{
+	t_iso_matrix	iso_matrix;
+	t_px_matrix		pixel_matrix;
+	mlx_image_t		*image;
+
+	iso_matrix = to_iso_matrix(read, M_PI / 6);
+	
+	if (!(image = mlx_new_image(mlx, 1000, 1000)))
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return (EXIT_FAILURE);
+	}
+	pixel_matrix = to_px_matrix(image, iso_matrix);
+	put_px_matrix(image, pixel_matrix);
+	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
+	{
+		mlx_close_window(mlx);
+		puts(mlx_strerror(mlx_errno));
+		return (EXIT_FAILURE);
+	}
+	pic->mlx = mlx;
+	pic->image = image;
+	pic->read = read;
+	return (EXIT_SUCCESS);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_read			*read;
-	t_iso_matrix	iso_matrix;
 	mlx_t			*mlx;
-	mlx_image_t		*image;
-	t_px_matrix		pixel_matrix;
+	t_draw			pic;
 
 	//clock_t time_start= clock(); 
 
@@ -48,28 +74,15 @@ int	main(int argc, char *argv[])
 		ft_printf("Invalid map\n");
 		exit(EXIT_FAILURE);
 	}
-	// TODO: checks of read
-	// TODO: if here function returned exit, will I have problems with memory?
-	iso_matrix = to_iso_matrix(read, M_PI / 6);
 	if (!(mlx = mlx_init(1000, 1000, "FDF", true)))
 	{
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
-	if (!(image = mlx_new_image(mlx, 1000, 1000)))
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return (EXIT_FAILURE);
-	}
-	pixel_matrix = to_px_matrix(image, iso_matrix);
-	put_px_matrix(image, pixel_matrix);
-	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
-	{
-		mlx_close_window(mlx);
-		puts(mlx_strerror(mlx_errno));
-		return (EXIT_FAILURE);
-	}
+
+	draw_picture(mlx, read, &pic);
+	mlx_key_hook(mlx, track_keys, &pic);
+
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	/*
