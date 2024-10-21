@@ -85,6 +85,7 @@ int	main(int argc, char *argv[])
 	mlx_scroll_hook(mlx, track_scroll, &pic);
 
 	mlx_loop(mlx);
+	clean_read_map(&read);
 	mlx_terminate(mlx);
 	/*
 	clock_t time_2 = clock() - time_start;

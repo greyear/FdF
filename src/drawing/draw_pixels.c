@@ -32,6 +32,8 @@ t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix, t_draw *pi
 	// TODO: if not 0
 	// TODO: change 1000!
 	zoom = find_zoom(extremum, 1000, 1000) * pic->zoom; //hardcode
+	//printf("zoom: %lf\n", pic->zoom);
+	//fflush(stdout);
 	offset_x = (1000 - zoom * (extremum.max_x - extremum.min_x)) / 2;
 	offset_y = (1000 - zoom * (extremum.max_y - extremum.min_y)) / 2;
 	colorful = is_colorful_input(iso_matrix);
@@ -55,8 +57,8 @@ t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix, t_draw *pi
 			res.map[j][i].x = (iso_matrix.map[j][i].x - extremum.min_x) * zoom + offset_x;
 			res.map[j][i].y = (iso_matrix.map[j][i].y - extremum.min_y) * zoom + offset_y;
 			res.map[j][i].z = iso_matrix.map[j][i].z;
-			//TODO: check if inside
-			mlx_put_pixel(image, res.map[j][i].x, res.map[j][i].y, color);
+			if (is_inside(res.map[j][i].x, res.map[j][i].y, 1000, 1000)) //hardcode
+				mlx_put_pixel(image, res.map[j][i].x, res.map[j][i].y, color);
 			i++;
 		}
 		j++;
@@ -89,14 +91,14 @@ void	draw_line(mlx_image_t *image, t_px a, t_px b)
 		sign_y = -1;
 	error = del_x - del_y;
 	pixel_color = mix_rgba(b.color.r, b.color.g, b.color.b, b.color.a);
-	if (is_inside(b, image->width, image->height)) // hardcode
+	if (is_inside(b.x, b.y, image->width, image->height))
 		mlx_put_pixel(image, b.x, b.y, pixel_color);
 	a_copy = a;
 	while (a.x != b.x || a.y != b.y)
 	{
 		color = color_between(a_copy, a, b);
 		pixel_color = mix_rgba(color.r, color.g, color.b, color.a);
-		if (is_inside(a, 1000, 1000)) //hardcode
+		if (is_inside(a.x, a.y, 1000, 1000)) //hardcode
 			mlx_put_pixel(image, a.x, a.y, pixel_color);
 		error2 = error * 2;
 		if (error2 > -del_y)

@@ -101,9 +101,9 @@ int	is_colorful_input(t_iso_matrix matrix)
 	return (0);
 }
 
-int	is_inside(t_px a, int limit_x, int limit_y)
+int	is_inside(int point_x, int point_y, int limit_x, int limit_y)
 {
-	if (a.x <= limit_x && a.y <= limit_y) //TODO: or <?
+	if ((point_x >= 0) && (point_y >= 0) && (point_x < limit_x) && (point_y < limit_y))
 		return (1);
 	return (0);
 }
