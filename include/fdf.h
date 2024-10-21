@@ -87,6 +87,7 @@ typedef struct s_draw
 	mlx_t		*mlx;
 	mlx_image_t	*image;
 	t_read		*read;
+	double		zoom;
 }	t_draw;
 
 //Reading
@@ -113,16 +114,19 @@ t_color			color_between(t_px start, t_px cur, t_px end);
 int				color_len(char *str);
 
 //Drawing
-t_px_matrix		to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix);
+t_px_matrix		to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix, t_draw *pic);
 void			put_px_matrix(mlx_image_t *image, t_px_matrix matrix);
 void			draw_line(mlx_image_t *image, t_px a, t_px b);
 t_extremum		find_extremum(t_iso_matrix matrix); // TODO: static
 double			find_zoom(t_extremum extremum, int width, int height);
 int				is_colorful_input(t_iso_matrix matrix);
 int				is_inside(t_px a, int limit_x, int limit_y);
+void			default_picture(t_draw *pic);
 int				draw_picture(mlx_t *mlx, t_read *read, t_draw *pic);
+void			refresh_picture(mlx_t *mlx, mlx_image_t *image, t_draw *pic);
 void			delete_exit(mlx_t *mlx, mlx_image_t *image);
 void			track_keys(mlx_key_data_t keydata, void *param);
+void			track_scroll(double xdelta, double ydelta, void *param);
 
 //Cleaners
 void			clean_read_map(t_read **stack);

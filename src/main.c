@@ -26,21 +26,20 @@ static void print_nodes(t_read *head) {
     }
 }*/
 
-int	draw_picture(mlx_t *mlx, t_read *read, t_draw *pic)
+int	draw_picture(mlx_t *mlx, t_read *read, t_draw *pic) // maybe just pic?
 {
 	t_iso_matrix	iso_matrix;
 	t_px_matrix		pixel_matrix;
 	mlx_image_t		*image;
 
 	iso_matrix = to_iso_matrix(read, M_PI / 6);
-	
-	if (!(image = mlx_new_image(mlx, 1000, 1000)))
+	if (!(image = mlx_new_image(mlx, 1000, 1000))) //TODO: how to put it to main but execute it after iso matrix creation?
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
-	pixel_matrix = to_px_matrix(image, iso_matrix);
+	pixel_matrix = to_px_matrix(image, iso_matrix, pic);
 	put_px_matrix(image, pixel_matrix);
 	if (mlx_image_to_window(mlx, image, 0, 0) == -1)
 	{
@@ -80,8 +79,10 @@ int	main(int argc, char *argv[])
 		return (EXIT_FAILURE);
 	}
 
-	draw_picture(mlx, read, &pic);
+	default_picture(&pic);
+	draw_picture(mlx, read, &pic); //Syuda idet uzhe s zoomom
 	mlx_key_hook(mlx, track_keys, &pic);
+	mlx_scroll_hook(mlx, track_scroll, &pic);
 
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

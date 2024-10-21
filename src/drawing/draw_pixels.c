@@ -13,7 +13,7 @@
 #include "../../include/fdf.h"
 #include <stdio.h>
 
-t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
+t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix, t_draw *pic)
 {
 	int				i;
 	int				j;
@@ -31,7 +31,7 @@ t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix)
 	extremum = find_extremum(iso_matrix);
 	// TODO: if not 0
 	// TODO: change 1000!
-	zoom = find_zoom(extremum, 1000, 1000); //hardcode
+	zoom = find_zoom(extremum, 1000, 1000) * pic->zoom; //hardcode
 	offset_x = (1000 - zoom * (extremum.max_x - extremum.min_x)) / 2;
 	offset_y = (1000 - zoom * (extremum.max_y - extremum.min_y)) / 2;
 	colorful = is_colorful_input(iso_matrix);

@@ -74,5 +74,7 @@ t_iso_matrix	to_iso_matrix(t_read *stack, double angle)
 	matrix.width = width;
 	matrix.height = height;
 	clean_read_map(&stack);
+
+	//TODO: how can I reuse linked list for bonus if I already cleaned it...
 	return (matrix);
 }
