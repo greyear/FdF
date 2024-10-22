@@ -5,6 +5,8 @@
 void	default_picture(t_draw *pic)
 {
 	pic->zoom = 1; //Or should I put that zoom which came from width calculations?
+	pic->move_x = 0;
+	pic->move_y = 0;
 }
 
 void	refresh_picture(t_draw *pic)
@@ -25,9 +27,18 @@ void	track_keys(mlx_key_data_t keydata, void *param)
 {
 	t_draw	*pic;
 
-	pic = param;
+	pic = (t_draw *)param;
 	if (keydata.key == MLX_KEY_ESCAPE)
 		delete_exit(pic);
+	if (keydata.key == MLX_KEY_UP) //do we need any limits set? maybe double limits?
+		pic->move_y -= 5; //why are they reversed???
+	if (keydata.key == MLX_KEY_DOWN)
+		pic->move_y += 5;
+	if (keydata.key == MLX_KEY_LEFT)
+		pic->move_x -= 5;
+	if (keydata.key == MLX_KEY_RIGHT)
+		pic->move_x += 5;
+	refresh_picture(pic);
 }
 
 void	track_scroll(double xdelta, double ydelta, void *param)

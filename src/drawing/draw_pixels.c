@@ -30,12 +30,11 @@ t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix, t_draw *pi
 	res.map = (t_px **)malloc(res.height * sizeof(t_px *));
 	extremum = find_extremum(iso_matrix);
 	// TODO: if not 0
-	// TODO: change 1000!
 	zoom = find_zoom(extremum, 1000, 1000) * pic->zoom; //hardcode
 	//printf("zoom: %lf\n", pic->zoom);
 	//fflush(stdout);
-	offset_x = (1000 - zoom * (extremum.max_x - extremum.min_x)) / 2;
-	offset_y = (1000 - zoom * (extremum.max_y - extremum.min_y)) / 2;
+	offset_x = (1000 - zoom * (extremum.max_x - extremum.min_x)) / 2 + pic->move_x;
+	offset_y = (1000 - zoom * (extremum.max_y - extremum.min_y)) / 2 + pic->move_y;
 	colorful = is_colorful_input(iso_matrix);
 	j = 0;
 	while (j < res.height)

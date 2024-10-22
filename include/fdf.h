@@ -88,6 +88,8 @@ typedef struct s_draw
 	mlx_image_t	*image;
 	t_read		*read;
 	double		zoom;
+	double		move_x;
+	double		move_y;
 }	t_draw;
 
 //Reading
