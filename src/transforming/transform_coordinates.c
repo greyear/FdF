@@ -13,12 +13,14 @@
 #include "../../include/fdf.h"
 #include <stdio.h>
 
-static t_iso	transform_point(t_read p, double ang)
+static t_iso	transform_point(t_read p, double ang, t_draw *pic)
 {
 	t_iso		res;
 	double		rot;
 
 	rot = 2 * M_PI / 3;
+	//adding here for changing height as a bonus
+	p.z += pic->flat_z;
 	res.x = p.x * cos(ang) + p.y * cos(ang + rot) + p.z * cos(ang - rot);
 	res.y = p.x * sin(ang) + p.y * sin(ang + rot) + p.z * sin(ang - rot);
 	res.z = p.z;
@@ -26,7 +28,7 @@ static t_iso	transform_point(t_read p, double ang)
 	return (res);
 }
 
-t_iso_matrix	to_iso_matrix(t_read *stack, double angle)
+t_iso_matrix	to_iso_matrix(t_read *stack, double angle, t_draw *pic)
 {
 	t_read			*cur;
 	int				i;
@@ -64,7 +66,7 @@ t_iso_matrix	to_iso_matrix(t_read *stack, double angle)
 		i = 0;
 		while (i < width)
 		{
-			map[j][i] = transform_point(*cur, angle);
+			map[j][i] = transform_point(*cur, angle, pic);
 			cur = cur->next;
 			i++;
 		}
@@ -73,6 +75,5 @@ t_iso_matrix	to_iso_matrix(t_read *stack, double angle)
 	matrix.map = map;
 	matrix.width = width;
 	matrix.height = height;
-	//TODO: how can I reuse linked list for bonus if I already cleaned it...
 	return (matrix);
 }

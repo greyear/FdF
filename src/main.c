@@ -32,7 +32,7 @@ int	draw_picture(mlx_t *mlx, t_read *read, t_draw *pic) // maybe just pic?
 	t_px_matrix		pixel_matrix;
 	mlx_image_t		*image;
 
-	iso_matrix = to_iso_matrix(read, M_PI / 6);
+	iso_matrix = to_iso_matrix(read, M_PI / 6, pic);
 	if (!(image = mlx_new_image(mlx, 1000, 1000))) //TODO: how to put it to main but execute it after iso matrix creation?
 	{
 		mlx_close_window(mlx);

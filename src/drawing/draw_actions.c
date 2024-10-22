@@ -7,6 +7,7 @@ void	default_picture(t_draw *pic)
 	pic->zoom = 1; //Or should I put that zoom which came from width calculations?
 	pic->move_x = 0;
 	pic->move_y = 0;
+	pic->flat_z = 0;
 }
 
 void	refresh_picture(t_draw *pic)
@@ -38,6 +39,10 @@ void	track_keys(mlx_key_data_t keydata, void *param)
 		pic->move_x -= 5;
 	if (keydata.key == MLX_KEY_RIGHT)
 		pic->move_x += 5;
+	if (keydata.key == MLX_KEY_F)
+		pic->flat_z -= 10;
+	if (keydata.key == MLX_KEY_H)
+		pic->flat_z += 10;
 	refresh_picture(pic);
 }
 

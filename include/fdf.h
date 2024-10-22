@@ -90,6 +90,7 @@ typedef struct s_draw
 	double		zoom;
 	double		move_x;
 	double		move_y;
+	int			flat_z;
 }	t_draw;
 
 //Reading
@@ -103,7 +104,7 @@ int				is_nl(char *str);
 int				array_len(char	**separate);
 
 //Transforming to 2D
-t_iso_matrix	to_iso_matrix(t_read *stack, double angle);
+t_iso_matrix	to_iso_matrix(t_read *stack, double angle, t_draw *pic);
 
 //Colors
 int				mix_rgba(int r, int g, int b, int a);
