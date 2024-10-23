@@ -20,7 +20,7 @@ static t_iso	transform_point(t_read p, double ang, t_draw *pic)
 
 	rot = 2 * M_PI / 3;
 	//adding here for changing height as a bonus
-	p.z += pic->flat_z;
+	p.z /= pic->flat;
 	res.x = p.x * cos(ang) + p.y * cos(ang + rot) + p.z * cos(ang - rot);
 	res.y = p.x * sin(ang) + p.y * sin(ang + rot) + p.z * sin(ang - rot);
 	res.z = p.z;

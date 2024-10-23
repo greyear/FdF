@@ -90,7 +90,7 @@ typedef struct s_draw
 	double		zoom;
 	double		move_x;
 	double		move_y;
-	int			flat_z;
+	float		flat; //can it be double?
 }	t_draw;
 
 //Reading
