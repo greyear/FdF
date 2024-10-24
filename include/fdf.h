@@ -91,6 +91,9 @@ typedef struct s_draw
 	double		move_x;
 	double		move_y;
 	float		flat; //can it be double?
+	double		alpha;
+	double		beta;
+	double		gamma;
 }	t_draw;
 
 //Reading
@@ -130,6 +133,12 @@ void			refresh_picture(t_draw *pic);
 void			delete_exit(t_draw *pic);
 void			track_keys(mlx_key_data_t keydata, void *param);
 void			track_scroll(double xdelta, double ydelta, void *param);
+
+//Bonus functions
+void			move(mlx_key_data_t keydata, t_draw	*pic);
+void			zoom(double ydelta, t_draw	*pic);
+void			rotate(mlx_key_data_t keydata, t_draw *pic);
+void			flatten(mlx_key_data_t keydata, t_draw	*pic);
 
 //Cleaners
 void			clean_read_map(t_read **stack);

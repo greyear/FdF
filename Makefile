@@ -46,7 +46,8 @@ DRAWING_DIR			=	$(SRC_DIR)/drawing/draw_pixels.c \
 						$(SRC_DIR)/drawing/draw_utils.c \
 						$(SRC_DIR)/drawing/colors.c \
 						$(SRC_DIR)/drawing/colors_rgba.c \
-						$(SRC_DIR)/drawing/draw_actions.c
+						$(SRC_DIR)/drawing/draw_actions.c \
+						$(SRC_DIR)/drawing/bonus_functions.c
 SRC					=	$(READING_DIR) \
 						$(TRANSFORMING_DIR) \
 						$(DRAWING_DIR) \
