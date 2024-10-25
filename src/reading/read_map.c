@@ -71,16 +71,14 @@ t_read	*read_map(char *file_name)
 			ft_printf("Map is not rectangular\n");
 			exit(EXIT_FAILURE);
 		}
-		//printf("x:%d", x);
 		x = 0;
 		while (point_info[x] != NULL)
 		{
 			if (point_info[x][0] == '\0')
 			{
-        		x++;
-        		continue;
-    		}
-			//printf("[%d] '%s' - x, point_info[x]\n", x, point_info[x]);
+				x++;
+				continue;
+			}
 			if (contains_comma(point_info[x]) == 1)
 			{
 				separate = ft_split(point_info[x], ',');
@@ -126,7 +124,6 @@ t_read	*read_map(char *file_name)
 		clean_arr(point_info);
 		y++;
 	}
-	//printf("y:%d", y);
 	close(fd);
 	return (first);
 }

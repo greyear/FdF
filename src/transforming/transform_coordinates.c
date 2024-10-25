@@ -47,14 +47,21 @@ static t_iso	transform_point(t_read p, double ang, t_draw *pic)
 	t_iso		res;
 	double		rot;
 
+	//rot = M_PI / 6;
 	rot = 2 * M_PI / 3; //why?
 	p.z /= pic->flat;
 	rotate_x(&p.y, &p.z, pic->alpha);
 	rotate_y(&p.x, &p.z, pic->beta);
 	rotate_z(&p.x, &p.y, pic->gamma);
-	res.x = p.x * cos(ang) + p.y * cos(ang + rot) + p.z * cos(ang - rot);
-	res.y = p.x * sin(ang) + p.y * sin(ang + rot) + p.z * sin(ang - rot);
-	res.z = p.z;
+	res.x = p.x;
+	res.y = p.y;
+	(void)ang;
+	if (pic->parallel == 0)
+	{
+		res.x = p.x * cos(ang) + p.y * cos(ang + rot) + p.z * cos(ang - rot);
+		res.y = p.x * sin(ang) + p.y * sin(ang + rot) + p.z * sin(ang - rot);
+		res.z = p.z;
+	}
 	res.color = p.color;
 	return (res);
 }

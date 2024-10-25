@@ -12,7 +12,7 @@
 
 #include "../../include/fdf.h"
 
-void    move(mlx_key_data_t keydata, t_draw	*pic)
+void	move(mlx_key_data_t keydata, t_draw	*pic)
 {
 	if (keydata.key == MLX_KEY_UP) //do we need any limits set? maybe double limits?
 		pic->move_y -= 5; //why are they reversed???
@@ -25,7 +25,7 @@ void    move(mlx_key_data_t keydata, t_draw	*pic)
 	refresh_picture(pic);
 }
 
-void    zoom(double ydelta, t_draw	*pic)
+void	zoom(double ydelta, t_draw	*pic)
 {
 	if (ydelta > 0 && pic->zoom < 100)
 		pic->zoom *= 1.02;
@@ -34,7 +34,7 @@ void    zoom(double ydelta, t_draw	*pic)
 	refresh_picture(pic);
 }
 
-void    rotate(mlx_key_data_t keydata, t_draw *pic)
+void	rotate(mlx_key_data_t keydata, t_draw *pic)
 {
 	if (keydata.key == MLX_KEY_KP_1 || keydata.key == MLX_KEY_1)
 		pic->alpha -= 0.05;
@@ -46,8 +46,8 @@ void    rotate(mlx_key_data_t keydata, t_draw *pic)
 		pic->beta += 0.05;
 	else if (keydata.key == MLX_KEY_KP_3 || keydata.key == MLX_KEY_3)
 		pic->gamma -= 0.05;
-	else if (keydata.key == MLX_KEY_KP_9 || keydata.key == MLX_KEY_9)
-		pic->gamma += 0.05;
+	else if (keydata.key == MLX_KEY_KP_9 || keydata.key == MLX_KEY_9) //9 doesn't work in parallel
+		pic->gamma += 0.0;
 	refresh_picture(pic);
 }
 
@@ -64,5 +64,17 @@ void	flatten(mlx_key_data_t keydata, t_draw *pic)
 		pic->flat = 0.5;
 	else if (pic->flat > 3.0)
 		pic->flat = 3.0;
+	refresh_picture(pic);
+}
+
+void	projection(mlx_key_data_t keydata, t_draw *pic)
+{
+	pic->alpha = 0;
+	pic->beta = 0;
+	pic->gamma = 0;
+	if (keydata.key == MLX_KEY_P)
+		pic->parallel = 1;
+	if (keydata.key == MLX_KEY_I)
+		pic->parallel = 0;
 	refresh_picture(pic);
 }

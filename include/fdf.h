@@ -91,9 +91,10 @@ typedef struct s_draw
 	double		move_x;
 	double		move_y;
 	float		flat; //can it be double?
-	double		alpha;
+	double		alpha; // or float?
 	double		beta;
 	double		gamma;
+	int			parallel;
 }	t_draw;
 
 //Reading
@@ -139,6 +140,7 @@ void			move(mlx_key_data_t keydata, t_draw	*pic);
 void			zoom(double ydelta, t_draw	*pic);
 void			rotate(mlx_key_data_t keydata, t_draw *pic);
 void			flatten(mlx_key_data_t keydata, t_draw	*pic);
+void			projection(mlx_key_data_t keydata, t_draw *pic);
 
 //Cleaners
 void			clean_read_map(t_read **stack);

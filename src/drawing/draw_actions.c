@@ -22,6 +22,7 @@ void	default_picture(t_draw *pic)
 	pic->alpha = 0;
 	pic->beta = 0;
 	pic->gamma = 0;
+	pic->parallel = 0;
 }
 
 void	refresh_picture(t_draw *pic)
@@ -55,9 +56,15 @@ void	track_keys(mlx_key_data_t keydata, void *param)
 		|| keydata.key == MLX_KEY_KP_3 || keydata.key == MLX_KEY_3
 		|| keydata.key == MLX_KEY_KP_9 || keydata.key == MLX_KEY_9) //TODO: numlock?
 		rotate(keydata, pic);
+	else if (keydata.key == MLX_KEY_KP_0 || keydata.key == MLX_KEY_0)
+	{
+		default_picture(pic); //maybe not needed
+		refresh_picture(pic);
+	}
 	else if (keydata.key == MLX_KEY_F || keydata.key == MLX_KEY_H)
 		flatten(keydata, pic);
-	refresh_picture(pic);
+	else if (keydata.key == MLX_KEY_P || keydata.key == MLX_KEY_I)
+		projection(keydata, pic);
 }
 
 void	track_scroll(double xdelta, double ydelta, void *param)
