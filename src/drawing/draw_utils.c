@@ -12,9 +12,9 @@
 
 #include "../../include/fdf.h"
 
-t_extremum find_extremum(t_iso_matrix matrix)
+t_extr find_extremum(t_iso_mtx matrix)
 {
-	t_extremum		extremum;
+	t_extr		extremum;
 	int				i;
 	int				j;
 
@@ -50,7 +50,7 @@ t_extremum find_extremum(t_iso_matrix matrix)
 	return (extremum);
 }
 
-double	find_zoom(t_extremum extremum, int width, int height)
+double	find_zoom(t_extr extremum, int width, int height)
 {
 	double		zoom;
 	double		del_x;
@@ -78,10 +78,10 @@ int	is_fake(t_color c)
 {
 	if (c.r == -1 && c.g == -1 && c.b == -1 && c.a == -1)
 		return (1);
-	return(0);
+	return (0);
 }
 
-int	is_colorful_input(t_iso_matrix matrix)
+int	is_colorful_input(t_iso_mtx matrix)
 {
 	int	i;
 	int	j;
@@ -101,9 +101,9 @@ int	is_colorful_input(t_iso_matrix matrix)
 	return (0);
 }
 
-int	is_inside(int point_x, int point_y, int limit_x, int limit_y)
+int	is_inside(int x, int y, int limit_x, int limit_y)
 {
-	if ((point_x >= 0) && (point_y >= 0) && (point_x < limit_x) && (point_y < limit_y))
+	if ((x >= 0) && (y >= 0) && (x < limit_x) && (y < limit_y))
 		return (1);
 	return (0);
 }

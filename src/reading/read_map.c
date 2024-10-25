@@ -49,7 +49,7 @@ t_read	*read_map(char *file_name)
 		if (trimmed_line[0] == '\0')
 		{
 			free(trimmed_line);
-			continue;
+			continue ;
 		}
 		point_info = ft_split(trimmed_line, ' '); //TODO: what about other types of spaces?
 		free(trimmed_line);
@@ -57,7 +57,7 @@ t_read	*read_map(char *file_name)
 		{
 			clean_read_map(&first);
 			clean_gnl(fd);
-			ft_printf("Input data error\n"); //TODO: do we need to clean first and separate?
+			ft_printf("Input data error\n");
 			exit(EXIT_FAILURE);
 		}
 		arr_len = array_len(point_info);
@@ -84,7 +84,7 @@ t_read	*read_map(char *file_name)
 				separate = ft_split(point_info[x], ',');
 				if (array_len(separate) != 2 || height_check(separate[0]) || color_check(separate[1]))
 				{
-					ft_printf("Input data error\n"); //TODO: do we need to clean first and separate?
+					ft_printf("Input data error\n");
 					clean_read_map(&first);
 					clean_arr(point_info);
 					clean_arr(separate);
@@ -99,7 +99,7 @@ t_read	*read_map(char *file_name)
 			{
 				if (height_check(point_info[x]))
 				{
-					ft_printf("Input data error\n"); //TODO: do we need to clean first and separate?
+					ft_printf("Input data error\n");
 					clean_read_map(&first);
 					clean_arr(point_info);
 					clean_gnl(fd);

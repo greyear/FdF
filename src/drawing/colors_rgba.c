@@ -12,7 +12,7 @@
 
 #include "../../include/fdf.h"
 
-static t_color extract_eight(int color)
+static t_color	extract_eight(int color)
 {
 	t_color	res;
 
@@ -23,7 +23,7 @@ static t_color extract_eight(int color)
 	return (res);
 }
 
-static t_color extract_six(int color)
+static t_color	extract_six(int color)
 {
 	t_color	res;
 
@@ -34,7 +34,7 @@ static t_color extract_six(int color)
 	return (res);
 }
 
-static t_color extract_four(int color)
+static t_color	extract_four(int color)
 {
 	t_color	res;
 
@@ -45,7 +45,7 @@ static t_color extract_four(int color)
 	return (res);
 }
 
-static t_color extract_two(int color)
+static t_color	extract_two(int color)
 {
 	t_color	res;
 
@@ -56,7 +56,7 @@ static t_color extract_two(int color)
 	return (res);
 }
 
-t_color extract_rgba(int color, int len) // TODO: make dependence on LENGTH!
+t_color	extract_rgba(int color, int len)
 {
 	t_color	res;
 
@@ -71,4 +71,3 @@ t_color extract_rgba(int color, int len) // TODO: make dependence on LENGTH!
 		res = extract_two(color);
 	return (res);
 }
-

@@ -44,7 +44,7 @@ void	clean_iso_map(t_iso ***map, int height)
 	free(*map);
 }
 
-void	clean_iso_matrix(t_iso_matrix *matrix)
+void	clean_iso_mtx(t_iso_mtx *matrix)
 {
 	if (!matrix || !matrix->map)
 		return ;
@@ -52,11 +52,10 @@ void	clean_iso_matrix(t_iso_matrix *matrix)
 	matrix->map = NULL;
 }
 
-void	clean_px_matrix(t_px_matrix *matrix)
+void	clean_px_mtx(t_px_mtx *matrix)
 {
-	int j;
+	int	j;
 
-	// TODO: so if map is null then we don't have height and width, right?
 	if (!matrix || !matrix->map)
 		return ;
 	j = 0;

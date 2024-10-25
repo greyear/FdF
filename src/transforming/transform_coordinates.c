@@ -15,7 +15,7 @@
 
 static void	rotate_x(int *y, int *z, double alpha)
 {
-	int previous_y;
+	int	previous_y;
 
 	previous_y = *y;
 	*y = previous_y * cos(alpha) + *z * sin(alpha);
@@ -24,7 +24,7 @@ static void	rotate_x(int *y, int *z, double alpha)
 
 static void	rotate_y(int *x, int *z, double beta)
 {
-	int previous_x;
+	int	previous_x;
 
 	previous_x = *x;
 	*x = previous_x * cos(beta) + *z * sin(beta);
@@ -33,8 +33,8 @@ static void	rotate_y(int *x, int *z, double beta)
 
 static void	rotate_z(int *x, int *y, double gamma)
 {
-	int previous_x;
-	int previous_y;
+	int	previous_x;
+	int	previous_y;
 
 	previous_x = *x;
 	previous_y = *y;
@@ -44,8 +44,8 @@ static void	rotate_z(int *x, int *y, double gamma)
 
 static t_iso	transform_point(t_read p, double ang, t_draw *pic)
 {
-	t_iso		res;
-	double		rot;
+	t_iso	res;
+	double	rot;
 
 	//rot = M_PI / 6;
 	rot = 2 * M_PI / 3; //why?
@@ -66,15 +66,17 @@ static t_iso	transform_point(t_read p, double ang, t_draw *pic)
 	return (res);
 }
 
-t_iso_matrix	to_iso_matrix(t_read *stack, double angle, t_draw *pic)
+//Вращение я делаю тут, но цвета определяю в to_put_matrix, которая идет позже
+
+t_iso_mtx	to_iso_mtx(t_read *stack, double angle, t_draw *pic)
 {
-	t_read			*cur;
-	int				i;
-	int				j;
-	int				width;
-	int				height;
+	t_read		*cur;
+	int			i;
+	int			j;
+	int			width;
+	int			height;
 	t_iso		**map;
-	t_iso_matrix	matrix;
+	t_iso_mtx	matrix;
 
 	width = last_elem(stack)->x + 1;
 	height = last_elem(stack)->y + 1;

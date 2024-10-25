@@ -24,29 +24,6 @@ t_read	*last_elem(t_read *stack)
 		cur = cur->next;
 	return (cur);
 }
-/*
-int	add_back(t_read **stack, int x, int y, int z, t_color color)
-{
-	t_read	*last;
-	t_read	*new;
-
-	new = (t_read *)malloc(sizeof(t_read));
-	if (!new)
-		return (EXIT_FAILURE);
-	new->x = x;
-	new->y = y;
-	new->z = z;
-	new->color = color;
-	new->next = NULL;
-	if (!*stack)
-		*stack = new;
-	else
-	{
-		last = last_elem(*stack);
-		last->next = new;
-	}
-	return (EXIT_SUCCESS);
-}*/
 
 t_read	*add_to_last(t_read **old_last, int x, int y, int z, t_color color)
 {
@@ -78,16 +55,6 @@ int	contains_comma(char *str)
 			return (1);
 		i++;
 	}
-	return (0);
-}
-
-int	is_nl(char *str) //TODO: check if we need it
-{
-	char	*str2;
-
-	str2 = "\n";
-	if (ft_strncmp(str, str2, 1) == 0)
-		return (1);
 	return (0);
 }
 

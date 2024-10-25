@@ -13,29 +13,27 @@
 #include "../../include/fdf.h"
 #include <stdio.h>
 
-t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix, t_draw *pic)
+t_px_mtx	to_px_mtx(mlx_image_t *image, t_iso_mtx iso_mtx, t_draw *pic)
 {
 	int				i;
 	int				j;
 	int				colorful;
-	t_extremum		extremum;
+	t_extr		extr;
 	double			zoom;
 	double		offset_x;
 	double		offset_y;
-	t_px_matrix		res;
+	t_px_mtx		res;
 	int				color;
 
-	res.width = iso_matrix.width;
-	res.height = iso_matrix.height;
+	res.width = iso_mtx.width;
+	res.height = iso_mtx.height;
 	res.map = (t_px **)malloc(res.height * sizeof(t_px *));
-	extremum = find_extremum(iso_matrix);
+	extr = find_extremum(iso_mtx);
 	// TODO: if not 0
-	zoom = find_zoom(extremum, 1000, 1000) * pic->zoom; //hardcode
-	//printf("zoom: %lf\n", pic->zoom);
-	//fflush(stdout);
-	offset_x = (1000 - zoom * (extremum.max_x - extremum.min_x)) / 2 + pic->move_x;
-	offset_y = (1000 - zoom * (extremum.max_y - extremum.min_y)) / 2 + pic->move_y;
-	colorful = is_colorful_input(iso_matrix);
+	zoom = find_zoom(extr, 1000, 1000) * pic->zoom; //hardcode
+	offset_x = (1000 - zoom * (extr.max_x - extr.min_x)) / 2 + pic->move_x;
+	offset_y = (1000 - zoom * (extr.max_y - extr.min_y)) / 2 + pic->move_y;
+	colorful = is_colorful_input(iso_mtx);
 	j = 0;
 	while (j < res.height)
 	{
@@ -45,24 +43,24 @@ t_px_matrix	to_px_matrix(mlx_image_t *image, t_iso_matrix iso_matrix, t_draw *pi
 		{
 			if (colorful == 1)
 			{
-				if (is_fake(iso_matrix.map[j][i].color) == 1)
+				if (is_fake(iso_mtx.map[j][i].color) == 1)
 					res.map[j][i].color = white_color();
 				else
-					res.map[j][i].color = iso_matrix.map[j][i].color;
+					res.map[j][i].color = iso_mtx.map[j][i].color;
 			}
 			else
-				res.map[j][i].color = set_color_to_height(iso_matrix.map[j][i].z, extremum.max_z, extremum.min_z);
+				res.map[j][i].color = set_color_to_height(iso_mtx.map[j][i].z, extr.max_z, extr.min_z);
 			color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
-			res.map[j][i].x = (iso_matrix.map[j][i].x - extremum.min_x) * zoom + offset_x;
-			res.map[j][i].y = (iso_matrix.map[j][i].y - extremum.min_y) * zoom + offset_y;
-			res.map[j][i].z = iso_matrix.map[j][i].z;
+			res.map[j][i].x = (iso_mtx.map[j][i].x - extr.min_x) * zoom + offset_x;
+			res.map[j][i].y = (iso_mtx.map[j][i].y - extr.min_y) * zoom + offset_y;
+			res.map[j][i].z = iso_mtx.map[j][i].z;
 			if (is_inside(res.map[j][i].x, res.map[j][i].y, 1000, 1000)) //hardcode
 				mlx_put_pixel(image, res.map[j][i].x, res.map[j][i].y, color);
 			i++;
 		}
 		j++;
 	}
-	clean_iso_matrix(&iso_matrix);
+	clean_iso_mtx(&iso_mtx);
 	return (res);
 }
 
@@ -113,36 +111,36 @@ void	draw_line(mlx_image_t *image, t_px a, t_px b)
 	}
 }
 
-void	put_px_matrix(mlx_image_t *image, t_px_matrix matrix)
+void	put_px_mtx(mlx_image_t *image, t_px_mtx mtx)
 {
 	int	i;
 	int	j;
 
 	j = 0;
-	while (j < matrix.height - 1)
+	while (j < mtx.height - 1)
 	{
 		i = 0;
-		while (i < matrix.width - 1)
+		while (i < mtx.width - 1)
 		{
-			draw_line(image, matrix.map[j][i], matrix.map[j][i + 1]);
-			draw_line(image, matrix.map[j][i], matrix.map[j + 1][i]);
+			draw_line(image, mtx.map[j][i], mtx.map[j][i + 1]);
+			draw_line(image, mtx.map[j][i], mtx.map[j + 1][i]);
 			i++;
 		}
 		j++;
 	}
-	j = matrix.height - 1;
+	j = mtx.height - 1;
 	i = 0;
-	while (i < matrix.width - 1)
+	while (i < mtx.width - 1)
 	{
-		draw_line(image, matrix.map[j][i], matrix.map[j][i + 1]);
+		draw_line(image, mtx.map[j][i], mtx.map[j][i + 1]);
 		i++;
 	}
-	i = matrix.width - 1;
+	i = mtx.width - 1;
 	j = 0;
-	while (j < matrix.height - 1)
+	while (j < mtx.height - 1)
 	{
-		draw_line(image, matrix.map[j][i], matrix.map[j + 1][i]);
+		draw_line(image, mtx.map[j][i], mtx.map[j + 1][i]);
 		j++;
 	}
-	clean_px_matrix(&matrix);
+	clean_px_mtx(&mtx);
 }

@@ -55,7 +55,7 @@ int	height_check(char *str)
 	if (overflow_check(str))
 		return (EXIT_FAILURE);
 	value = ft_atoi(str);
-	if (value < INT_MIN || value > INT_MAX) //TODO: hardcode values, which are still less than INT_MAX
+	if (value < INT_MIN || value > INT_MAX)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
