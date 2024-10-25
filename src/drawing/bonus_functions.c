@@ -14,7 +14,7 @@
 
 void	move(mlx_key_data_t keydata, t_draw	*pic)
 {
-	if (keydata.key == MLX_KEY_UP) //do we need any limits set? maybe double limits?
+	if (keydata.key == MLX_KEY_UP) //do we need any limits set? double limits?
 		pic->move_y -= 5; //why are they reversed???
 	else if (keydata.key == MLX_KEY_DOWN)
 		pic->move_y += 5;
@@ -38,7 +38,7 @@ void	rotate(mlx_key_data_t keydata, t_draw *pic)
 {
 	if (keydata.key == MLX_KEY_KP_1 || keydata.key == MLX_KEY_1)
 		pic->alpha -= 0.05;
-	else if(keydata.key == MLX_KEY_KP_7 || keydata.key == MLX_KEY_7)
+	else if (keydata.key == MLX_KEY_KP_7 || keydata.key == MLX_KEY_7)
 		pic->alpha += 0.05;
 	else if (keydata.key == MLX_KEY_KP_2 || keydata.key == MLX_KEY_2)
 		pic->beta -= 0.05;
@@ -51,7 +51,6 @@ void	rotate(mlx_key_data_t keydata, t_draw *pic)
 		pic->gamma += 0.05;
 		printf("Gamma is %f\n", pic->gamma); //to check keyboard lag on home pc
 	}
-		
 	refresh_picture(pic);
 }
 

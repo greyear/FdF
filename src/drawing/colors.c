@@ -47,3 +47,23 @@ t_color	color_between(t_px start, t_px cur, t_px end)
 	res.a = start.color.a + ((end.color.a - start.color.a) * d_small) / d_big;
 	return (res);
 }
+
+int	is_colorful_input(t_iso_mtx matrix)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < matrix.width)
+	{
+		j = 0;
+		while (j < matrix.height)
+		{
+			if (is_fake(matrix.map[j][i].color) == 0)
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
