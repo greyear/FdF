@@ -42,7 +42,7 @@ int	height_check(char *str)
 	if (!str)
 		return (EXIT_FAILURE);
 	if (!ft_isdigit(str[0]) && !ft_issign(str[0]))
-			return (EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	if (ft_issign(str[0]) && (!ft_isdigit(str[1]) || str[1] == '\0'))
 		return (EXIT_FAILURE);
 	i = 1;

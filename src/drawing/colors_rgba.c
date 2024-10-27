@@ -60,7 +60,7 @@ t_color	extract_rgba(int color, int len)
 {
 	t_color	res;
 
-	res = (t_color){255, 255, 255, 255}; //TODO: Does it make sense?
+	res = (t_color){255, 255, 255, 255};
 	if (len == 8)
 		res = extract_eight(color);
 	else if (len == 6)

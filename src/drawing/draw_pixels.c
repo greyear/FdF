@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
-#include <stdio.h>
 
 t_px_mtx	to_px_mtx(mlx_image_t *image, t_iso_mtx iso_mtx, t_draw *pic)
 {
@@ -49,7 +48,7 @@ t_px_mtx	to_px_mtx(mlx_image_t *image, t_iso_mtx iso_mtx, t_draw *pic)
 					res.map[j][i].color = iso_mtx.map[j][i].color;
 			}
 			else
-				res.map[j][i].color = set_color_to_height(iso_mtx.map[j][i].orig_z, extr.max_z, extr.min_z);
+				res.map[j][i].color = set_color_to_height(iso_mtx.map[j][i].or_z, extr.max_z, extr.min_z);
 			color = mix_rgba(res.map[j][i].color.r, res.map[j][i].color.g, res.map[j][i].color.b, res.map[j][i].color.a);
 			res.map[j][i].x = (iso_mtx.map[j][i].x - extr.min_x) * zoom + offset_x;
 			res.map[j][i].y = (iso_mtx.map[j][i].y - extr.min_y) * zoom + offset_y;

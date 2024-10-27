@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
-#include <stdio.h>
 
 static void	rotate_x(int *y, int *z, double alpha)
 {
@@ -47,9 +46,8 @@ static t_iso	transform_point(t_read p, double ang, t_draw *pic)
 	t_iso	res;
 	double	rot;
 
-	//rot = M_PI / 6;
-	rot = 2 * M_PI / 3; //why?
-	res.orig_z = p.z;
+	rot = 2 * M_PI / 3;
+	res.or_z = p.z;
 	p.z /= pic->flat;
 	rotate_x(&p.y, &p.z, pic->alpha);
 	rotate_y(&p.x, &p.z, pic->beta);
@@ -66,8 +64,6 @@ static t_iso	transform_point(t_read p, double ang, t_draw *pic)
 	res.color = p.color;
 	return (res);
 }
-
-//Вращение я делаю тут, но цвета определяю в to_put_matrix, которая идет позже
 
 t_iso_mtx	to_iso_mtx(t_read *stack, double angle, t_draw *pic)
 {

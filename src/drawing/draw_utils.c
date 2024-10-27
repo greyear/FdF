@@ -21,8 +21,8 @@ static t_extr	default_extremum(t_iso_mtx matrix)
 	extremum.min_x = matrix.map[0][0].x;
 	extremum.max_y = matrix.map[0][0].y;
 	extremum.min_y = matrix.map[0][0].y;
-	extremum.max_z = matrix.map[0][0].orig_z;
-	extremum.min_z = matrix.map[0][0].orig_z;
+	extremum.max_z = matrix.map[0][0].or_z;
+	extremum.min_z = matrix.map[0][0].or_z;
 
 	return (extremum);
 }
@@ -42,13 +42,15 @@ t_extr	find_extremum(t_iso_mtx matrix)
 		j = 0;
 		while (j < matrix.height)
 		{
-			m = matrix.map[j][i]; //will change all z onto orig_z
+			m = matrix.map[j][i];
 			ex.max_x = (m.x > ex.max_x) * m.x + (ex.max_x >= m.x) * ex.max_x;
 			ex.max_y = (m.y > ex.max_y) * m.y + (ex.max_y >= m.y) * ex.max_y;
-			ex.max_z = (m.orig_z > ex.max_z) * m.orig_z + (ex.max_z >= m.orig_z) * ex.max_z;
+			ex.max_z = (m.or_z > ex.max_z) * m.or_z + 
+				(ex.max_z >= m.or_z) * ex.max_z;
 			ex.min_x = (m.x < ex.min_x) * m.x + (ex.min_x <= m.x) * ex.min_x;
 			ex.min_y = (m.y < ex.min_y) * m.y + (ex.min_y <= m.y) * ex.min_y;
-			ex.min_z = (m.orig_z < ex.min_z) * m.orig_z + (ex.min_z <= m.orig_z) * ex.min_z;
+			ex.min_z = (m.or_z < ex.min_z) * m.or_z + 
+				(ex.min_z <= m.or_z) * ex.min_z;
 			j++;
 		}
 		i++;
@@ -65,7 +67,7 @@ double	find_zoom(t_extr extremum, int width, int height)
 	del_x = extremum.max_x - extremum.min_x;
 	del_y = extremum.max_y - extremum.min_y;
 	if (del_x == 0 && del_y == 0)
-		zoom = 1.0; //TODO: is this right?
+		zoom = 1.0;
 	else if (del_x == 0)
 		zoom = height / del_y * 0.9;
 	else if (del_y == 0)

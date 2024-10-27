@@ -14,14 +14,22 @@
 
 void	move(mlx_key_data_t keydata, t_draw	*pic)
 {
-	if (keydata.key == MLX_KEY_UP) //do we need any limits set? double limits?
-		pic->move_y -= 5; //why are they reversed???
+	if (keydata.key == MLX_KEY_UP)
+		pic->move_y -= 5;
 	else if (keydata.key == MLX_KEY_DOWN)
 		pic->move_y += 5;
 	else if (keydata.key == MLX_KEY_LEFT)
 		pic->move_x -= 5;
 	else if (keydata.key == MLX_KEY_RIGHT)
 		pic->move_x += 5;
+	if (pic->move_y < -1000)
+		pic->move_y = -1000;
+	else if (pic->move_y > 1000)
+		pic->move_y = 1000;
+	if (pic->move_x < -1000)
+		pic->move_x = -1000;
+	else if (pic->move_x > 1000)
+		pic->move_x = 1000;
 	refresh_picture(pic);
 }
 

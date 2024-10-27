@@ -25,6 +25,31 @@ t_read	*last_elem(t_read *stack)
 	return (cur);
 }
 
+t_read	*new_elem(int x, int y, int z, t_color color)
+{
+	t_read	*new;
+
+	new = (t_read *)malloc(sizeof(t_read));
+	if (!new)
+		return (NULL);
+	new->x = x;
+	new->y = y;
+	new->z = z;
+	new->color = color;
+	new->next = NULL;
+	return (new);
+}
+
+t_read	*add_to_back(t_read **old_last, t_read *new_last)
+{
+	/*if (!new_last)
+		return ; OR VOID*/
+	if (*old_last)
+		(*old_last)->next = new_last;
+	return (new_last);
+}
+
+/*
 t_read	*add_to_last(t_read **old_last, int x, int y, int z, t_color color)
 {
 	t_read	*new;
@@ -40,7 +65,7 @@ t_read	*add_to_last(t_read **old_last, int x, int y, int z, t_color color)
 	if (*old_last)
 		(*old_last)->next = new;
 	return (new);
-}
+}*/
 
 int	contains_comma(char *str)
 {
@@ -63,7 +88,7 @@ int	array_len(char	**separate)
 	int	len;
 
 	len = 0;
-	while (separate[len] != NULL) // TODO: \n?
+	while (separate[len] != NULL)
 		len++;
 	return (len);
 }

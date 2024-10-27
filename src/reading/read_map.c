@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
-#include <stdio.h> // TODO: delete
 
 t_read	*read_map(char *file_name)
 {
@@ -24,6 +23,7 @@ t_read	*read_map(char *file_name)
 	int		z;
 	t_color	color;
 	t_read	*first;
+	t_read	*new;
 	t_read	*last;
 	char	*trimmed_line;
 	int		exp_len;
@@ -51,7 +51,7 @@ t_read	*read_map(char *file_name)
 			free(trimmed_line);
 			continue ;
 		}
-		point_info = ft_split(trimmed_line, ' '); //TODO: what about other types of spaces?
+		point_info = ft_split(trimmed_line, ' ');
 		free(trimmed_line);
 		if (point_info == NULL)
 		{
@@ -77,7 +77,7 @@ t_read	*read_map(char *file_name)
 			if (point_info[x][0] == '\0')
 			{
 				x++;
-				continue;
+				continue ;
 			}
 			if (contains_comma(point_info[x]) == 1)
 			{
@@ -108,19 +108,20 @@ t_read	*read_map(char *file_name)
 				z = ft_atoi(point_info[x]);
 				color = fake_color();
 			}
-			last = add_to_last(&last, x, y, z, color);
-			if (last == NULL)
+			new = new_elem(x, y, z, color);
+			if (new == NULL)
 			{
 				clean_read_map(&first);
 				clean_arr(point_info);
 				clean_gnl(fd);
 				exit(EXIT_FAILURE);
 			}
+			last = add_to_back(&last, new);
 			if (first == NULL)
 				first = last;
 			x++;
 		}
-		line = NULL; //why do I need it?
+		line = NULL;
 		clean_arr(point_info);
 		y++;
 	}

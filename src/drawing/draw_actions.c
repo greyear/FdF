@@ -11,11 +11,10 @@
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
-#include <stdio.h>
 
 void	default_picture(t_draw *pic)
 {
-	pic->zoom = 1; //Or should I put that zoom which came from width calculations?
+	pic->zoom = 1;
 	pic->move_x = 0;
 	pic->move_y = 0;
 	pic->flat = 1;
@@ -54,11 +53,11 @@ void	track_keys(mlx_key_data_t keydata, void *param)
 		|| keydata.key == MLX_KEY_KP_2 || keydata.key == MLX_KEY_2
 		|| keydata.key == MLX_KEY_KP_8 || keydata.key == MLX_KEY_8
 		|| keydata.key == MLX_KEY_KP_3 || keydata.key == MLX_KEY_3
-		|| keydata.key == MLX_KEY_KP_9 || keydata.key == MLX_KEY_9) //TODO: numlock?
+		|| keydata.key == MLX_KEY_KP_9 || keydata.key == MLX_KEY_9)
 		rotate(keydata, pic);
 	else if (keydata.key == MLX_KEY_KP_0 || keydata.key == MLX_KEY_0)
 	{
-		default_picture(pic); //maybe not needed
+		default_picture(pic);
 		refresh_picture(pic);
 	}
 	else if (keydata.key == MLX_KEY_F || keydata.key == MLX_KEY_H)

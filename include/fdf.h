@@ -46,7 +46,7 @@ typedef struct s_iso
 	double	x;
 	double	y;
 	int		z;
-	int		orig_z;
+	int		or_z;
 	t_color	color;
 }	t_iso;
 
@@ -102,7 +102,8 @@ t_read		*read_map(char *file_name);
 
 //Utils
 t_read		*last_elem(t_read *stack);
-t_read		*add_to_last(t_read **old_last, int x, int y, int z, t_color color);
+t_read		*new_elem(int x, int y, int z, t_color color);
+t_read		*add_to_back(t_read **old_last, t_read *new_last);
 int			contains_comma(char *str);
 int			array_len(char	**separate);
 
