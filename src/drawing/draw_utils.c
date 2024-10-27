@@ -21,8 +21,8 @@ static t_extr	default_extremum(t_iso_mtx matrix)
 	extremum.min_x = matrix.map[0][0].x;
 	extremum.max_y = matrix.map[0][0].y;
 	extremum.min_y = matrix.map[0][0].y;
-	extremum.max_z = matrix.map[0][0].z;
-	extremum.min_z = matrix.map[0][0].z;
+	extremum.max_z = matrix.map[0][0].orig_z;
+	extremum.min_z = matrix.map[0][0].orig_z;
 
 	return (extremum);
 }
@@ -42,13 +42,13 @@ t_extr	find_extremum(t_iso_mtx matrix)
 		j = 0;
 		while (j < matrix.height)
 		{
-			m = matrix.map[j][i];
+			m = matrix.map[j][i]; //will change all z onto orig_z
 			ex.max_x = (m.x > ex.max_x) * m.x + (ex.max_x >= m.x) * ex.max_x;
 			ex.max_y = (m.y > ex.max_y) * m.y + (ex.max_y >= m.y) * ex.max_y;
-			ex.max_z = (m.z > ex.max_z) * m.z + (ex.max_z >= m.z) * ex.max_z;
+			ex.max_z = (m.orig_z > ex.max_z) * m.orig_z + (ex.max_z >= m.orig_z) * ex.max_z;
 			ex.min_x = (m.x < ex.min_x) * m.x + (ex.min_x <= m.x) * ex.min_x;
 			ex.min_y = (m.y < ex.min_y) * m.y + (ex.min_y <= m.y) * ex.min_y;
-			ex.min_z = (m.z < ex.min_z) * m.z + (ex.min_z <= m.z) * ex.min_z;
+			ex.min_z = (m.orig_z < ex.min_z) * m.orig_z + (ex.min_z <= m.orig_z) * ex.min_z;
 			j++;
 		}
 		i++;

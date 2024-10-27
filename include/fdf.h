@@ -46,6 +46,7 @@ typedef struct s_iso
 	double	x;
 	double	y;
 	int		z;
+	int		orig_z;
 	t_color	color;
 }	t_iso;
 

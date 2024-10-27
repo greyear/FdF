@@ -49,6 +49,7 @@ static t_iso	transform_point(t_read p, double ang, t_draw *pic)
 
 	//rot = M_PI / 6;
 	rot = 2 * M_PI / 3; //why?
+	res.orig_z = p.z;
 	p.z /= pic->flat;
 	rotate_x(&p.y, &p.z, pic->alpha);
 	rotate_y(&p.x, &p.z, pic->beta);
