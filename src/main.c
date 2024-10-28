@@ -19,8 +19,8 @@ int	draw_picture(mlx_t *mlx, t_read *read, t_draw *pic)
 	mlx_image_t	*image;
 
 	iso_matrix = to_iso_mtx(read, M_PI / 6, pic);
-	//if (!(image = mlx_new_image(mlx, 1000, 1000)))
-	if (!(image = mlx_new_image(mlx, mlx->width, mlx->height)))
+	image = mlx_new_image(mlx, mlx->width, mlx->height);
+	if (!image)
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
@@ -51,7 +51,8 @@ int	main(int argc, char *argv[])
 	read = read_map(argv[1]);
 	if (!read)
 		map_error();
-	if (!(mlx = mlx_init(1000, 1000, "FDF", true)))
+	mlx = mlx_init(1000, 1000, "FDF", true);
+	if (!mlx)
 	{
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
