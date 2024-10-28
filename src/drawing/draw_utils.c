@@ -17,13 +17,12 @@ static t_extr	default_extremum(t_iso_mtx matrix)
 	t_extr	extremum;
 
 	// TODO: check if map exists, if it has fields
-	extremum.max_x = matrix.map[0][0].x;
-	extremum.min_x = matrix.map[0][0].x;
-	extremum.max_y = matrix.map[0][0].y;
-	extremum.min_y = matrix.map[0][0].y;
-	extremum.max_z = matrix.map[0][0].or_z;
-	extremum.min_z = matrix.map[0][0].or_z;
-
+	extremum.b_x = matrix.map[0][0].x;
+	extremum.s_x = matrix.map[0][0].x;
+	extremum.b_y = matrix.map[0][0].y;
+	extremum.s_y = matrix.map[0][0].y;
+	extremum.b_z = matrix.map[0][0].or_z;
+	extremum.s_z = matrix.map[0][0].or_z;
 	return (extremum);
 }
 
@@ -43,14 +42,12 @@ t_extr	find_extremum(t_iso_mtx matrix)
 		while (j < matrix.height)
 		{
 			m = matrix.map[j][i];
-			ex.max_x = (m.x > ex.max_x) * m.x + (ex.max_x >= m.x) * ex.max_x;
-			ex.max_y = (m.y > ex.max_y) * m.y + (ex.max_y >= m.y) * ex.max_y;
-			ex.max_z = (m.or_z > ex.max_z) * m.or_z + 
-				(ex.max_z >= m.or_z) * ex.max_z;
-			ex.min_x = (m.x < ex.min_x) * m.x + (ex.min_x <= m.x) * ex.min_x;
-			ex.min_y = (m.y < ex.min_y) * m.y + (ex.min_y <= m.y) * ex.min_y;
-			ex.min_z = (m.or_z < ex.min_z) * m.or_z + 
-				(ex.min_z <= m.or_z) * ex.min_z;
+			ex.b_x = (m.x > ex.b_x) * m.x + (ex.b_x >= m.x) * ex.b_x;
+			ex.b_y = (m.y > ex.b_y) * m.y + (ex.b_y >= m.y) * ex.b_y;
+			ex.b_z = (m.or_z > ex.b_z) * m.or_z + (ex.b_z >= m.or_z) * ex.b_z;
+			ex.s_x = (m.x < ex.s_x) * m.x + (ex.s_x <= m.x) * ex.s_x;
+			ex.s_y = (m.y < ex.s_y) * m.y + (ex.s_y <= m.y) * ex.s_y;
+			ex.s_z = (m.or_z < ex.s_z) * m.or_z + (ex.s_z <= m.or_z) * ex.s_z;
 			j++;
 		}
 		i++;
@@ -64,8 +61,8 @@ double	find_zoom(t_extr extremum, int width, int height)
 	double		del_x;
 	double		del_y;
 
-	del_x = extremum.max_x - extremum.min_x;
-	del_y = extremum.max_y - extremum.min_y;
+	del_x = extremum.b_x - extremum.s_x;
+	del_y = extremum.b_y - extremum.s_y;
 	if (del_x == 0 && del_y == 0)
 		zoom = 1.0;
 	else if (del_x == 0)

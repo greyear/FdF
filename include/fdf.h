@@ -21,7 +21,6 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 # include <stdio.h>
-# include <stdlib.h> //TODO: abs??
 # include <limits.h>
 
 typedef struct s_color
@@ -74,12 +73,12 @@ typedef struct s_px_mtx
 
 typedef struct s_extr
 {
-	double	max_x;
-	double	min_x;
-	double	max_y;
-	double	min_y;
-	int		max_z;
-	int		min_z;
+	double	b_x;
+	double	s_x;
+	double	b_y;
+	double	s_y;
+	int		b_z;
+	int		s_z;
 }	t_extr;
 
 typedef struct s_draw
@@ -90,8 +89,8 @@ typedef struct s_draw
 	double		zoom;
 	double		move_x;
 	double		move_y;
-	float		flat; //can it be double?
-	double		alpha; // or float?
+	float		flat;
+	double		alpha;
 	double		beta;
 	double		gamma;
 	int			parallel;
@@ -100,7 +99,7 @@ typedef struct s_draw
 //Reading
 t_read		*read_map(char *file_name);
 
-//Utils
+//Reading utils
 t_read		*last_elem(t_read *stack);
 t_read		*new_elem(int x, int y, int z, t_color color);
 t_read		*add_to_back(t_read **old_last, t_read *new_last);
@@ -124,7 +123,7 @@ int			color_len(char *str);
 t_px_mtx	to_px_mtx(mlx_image_t *image, t_iso_mtx iso_matrix, t_draw *pic);
 void		put_px_mtx(mlx_image_t *image, t_px_mtx matrix);
 void		draw_line(mlx_image_t *image, t_px a, t_px b);
-t_extr	find_extremum(t_iso_mtx matrix); // TODO: static
+t_extr		find_extremum(t_iso_mtx matrix);
 double		find_zoom(t_extr extremum, int width, int height);
 int			is_colorful_input(t_iso_mtx matrix);
 int			is_inside(int point_x, int point_y, int limit_x, int limit_y);
