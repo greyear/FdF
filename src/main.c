@@ -19,7 +19,8 @@ int	draw_picture(mlx_t *mlx, t_read *read, t_draw *pic)
 	mlx_image_t	*image;
 
 	iso_matrix = to_iso_mtx(read, M_PI / 6, pic);
-	if (!(image = mlx_new_image(mlx, 1000, 1000)))
+	//if (!(image = mlx_new_image(mlx, 1000, 1000)))
+	if (!(image = mlx_new_image(mlx, mlx->width, mlx->height)))
 	{
 		mlx_close_window(mlx);
 		puts(mlx_strerror(mlx_errno));
@@ -46,16 +47,10 @@ int	main(int argc, char *argv[])
 	t_draw	pic;
 
 	if (argc != 2 || !argv[1])
-	{
-		ft_printf("Invalid map\n");
-		exit(EXIT_FAILURE);
-	}
+		args_error();
 	read = read_map(argv[1]);
 	if (!read)
-	{
-		ft_printf("Invalid map\n");
-		exit(EXIT_FAILURE);
-	}
+		map_error();
 	if (!(mlx = mlx_init(1000, 1000, "FDF", true)))
 	{
 		puts(mlx_strerror(mlx_errno));

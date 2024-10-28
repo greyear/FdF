@@ -63,53 +63,6 @@ t_px_mtx	to_px_mtx(mlx_image_t *image, t_iso_mtx iso_mtx, t_draw *pic)
 	return (res);
 }
 
-void	draw_line(mlx_image_t *image, t_px a, t_px b)
-{
-	int		del_x;
-	int		del_y;
-	int		sign_x;
-	int		sign_y;
-	int		error;
-	int		error2;
-	t_color	color;
-	int		pixel_color;
-	t_px	a_copy;
-
-	del_x = abs(b.x - a.x);
-	del_y = abs(b.y - a.y);
-	if (a.x < b.x)
-		sign_x = 1;
-	else
-		sign_x = -1;
-	if (a.y < b.y)
-		sign_y = 1;
-	else
-		sign_y = -1;
-	error = del_x - del_y;
-	pixel_color = mix_rgba(b.color.r, b.color.g, b.color.b, b.color.a);
-	if (is_inside(b.x, b.y, image->width, image->height))
-		mlx_put_pixel(image, b.x, b.y, pixel_color);
-	a_copy = a;
-	while (a.x != b.x || a.y != b.y)
-	{
-		color = color_between(a_copy, a, b);
-		pixel_color = mix_rgba(color.r, color.g, color.b, color.a);
-		if (is_inside(a.x, a.y, 1000, 1000)) //hardcode
-			mlx_put_pixel(image, a.x, a.y, pixel_color);
-		error2 = error * 2;
-		if (error2 > -del_y)
-		{
-			error -= del_y;
-			a.x += sign_x;
-		}
-		if (error2 < del_x)
-		{
-			error += del_x;
-			a.y += sign_y;
-		}
-	}
-}
-
 void	put_px_mtx(mlx_image_t *image, t_px_mtx mtx)
 {
 	int	i;
@@ -137,38 +90,3 @@ void	put_px_mtx(mlx_image_t *image, t_px_mtx mtx)
 	}
 	clean_px_mtx(&mtx);
 }
-
-/*
-void	put_px_mtx(mlx_image_t *image, t_px_mtx mtx)
-{
-	int	i;
-	int	j;
-
-	j = 0;
-	while (j < mtx.height - 1)
-	{
-		i = 0;
-		while (i < mtx.width - 1)
-		{
-			draw_line(image, mtx.map[j][i], mtx.map[j][i + 1]);
-			draw_line(image, mtx.map[j][i], mtx.map[j + 1][i]);
-			i++;
-		}
-		j++;
-	}
-	j = mtx.height - 1;
-	i = 0;
-	while (i < mtx.width - 1)
-	{
-		draw_line(image, mtx.map[j][i], mtx.map[j][i + 1]);
-		i++;
-	}
-	i = mtx.width - 1;
-	j = 0;
-	while (j < mtx.height - 1)
-	{
-		draw_line(image, mtx.map[j][i], mtx.map[j + 1][i]);
-		j++;
-	}
-	clean_px_mtx(&mtx);
-}*/

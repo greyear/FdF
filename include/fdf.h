@@ -81,6 +81,15 @@ typedef struct s_extr
 	int		s_z;
 }	t_extr;
 
+typedef struct s_line
+{
+	int		del_x;
+	int		del_y;
+	int		sign_x;
+	int		sign_y;
+	int		error;
+}	t_line;
+
 typedef struct s_draw
 {
 	mlx_t		*mlx;
@@ -152,5 +161,9 @@ void		clean_gnl(int fd);
 //Checkers
 int			height_check(char *str);
 int			color_check(char *str);
+
+//Errors
+void		args_error(void);
+void		map_error(void);
 
 #endif

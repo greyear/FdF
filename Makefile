@@ -40,9 +40,11 @@ READING_DIR			=	$(SRC_DIR)/reading/read_map.c \
 						$(SRC_DIR)/reading/read_utils.c \
 						$(SRC_DIR)/reading/map_check.c \
 						$(SRC_DIR)/reading/checkers.c \
-						$(SRC_DIR)/reading/cleaners.c
+						$(SRC_DIR)/reading/cleaners.c \
+						$(SRC_DIR)/reading/errors.c
 TRANSFORMING_DIR	= 	$(SRC_DIR)/transforming/transform_coordinates.c
-DRAWING_DIR			=	$(SRC_DIR)/drawing/draw_pixels.c \
+DRAWING_DIR			=	$(SRC_DIR)/drawing/draw_all.c \
+						$(SRC_DIR)/drawing/draw_line.c \
 						$(SRC_DIR)/drawing/draw_utils.c \
 						$(SRC_DIR)/drawing/colors.c \
 						$(SRC_DIR)/drawing/colors_rgba.c \

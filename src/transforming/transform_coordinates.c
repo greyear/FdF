@@ -77,7 +77,6 @@ t_iso_mtx	to_iso_mtx(t_read *stack, double angle, t_draw *pic)
 
 	width = last_elem(stack)->x + 1;
 	height = last_elem(stack)->y + 1;
-
 	map = (t_iso **)malloc(height * sizeof(t_iso *));
 	if (!map)
 	{
