@@ -27,9 +27,16 @@ t_px_mtx	to_px_mtx(mlx_image_t *image, t_iso_mtx iso_mtx, t_draw *pic)
 	res.width = iso_mtx.width;
 	res.height = iso_mtx.height;
 	res.map = (t_px **)malloc(res.height * sizeof(t_px *));
+	if (!res.map)
+	{
+		//what to clean?
+		clean_read_map(&(pic->read));
+		clean_iso_mtx(&iso_mtx);
+		exit(EXIT_FAILURE);
+	}
 	extr = find_extremum(iso_mtx);
 	// TODO: if not 0
-	zoom = find_zoom(extr, 1000, 1000) * pic->zoom; //hardcode
+	zoom = find_zoom(extr, image->width, image->height) * pic->zoom;
 	offset_x = (1000 - zoom * (extr.b_x - extr.s_x)) / 2 + pic->move_x;
 	offset_y = (1000 - zoom * (extr.b_y - extr.s_y)) / 2 + pic->move_y;
 	colorful = is_colorful_input(iso_mtx);
@@ -37,6 +44,14 @@ t_px_mtx	to_px_mtx(mlx_image_t *image, t_iso_mtx iso_mtx, t_draw *pic)
 	while (j < res.height)
 	{
 		res.map[j] = (t_px *)malloc(res.width * sizeof(t_px));
+		if (!res.map[j])
+		{
+			//what to clean?
+			clean_read_map(&(pic->read));
+			clean_iso_mtx(&iso_mtx);
+			clean_px_map(&res.map, j);
+			exit(EXIT_FAILURE);
+		}
 		i = 0;
 		while (i < res.width)
 		{
@@ -53,7 +68,7 @@ t_px_mtx	to_px_mtx(mlx_image_t *image, t_iso_mtx iso_mtx, t_draw *pic)
 			res.map[j][i].x = (iso_mtx.map[j][i].x - extr.s_x) * zoom + offset_x;
 			res.map[j][i].y = (iso_mtx.map[j][i].y - extr.s_y) * zoom + offset_y;
 			res.map[j][i].z = iso_mtx.map[j][i].z;
-			if (is_inside(res.map[j][i].x, res.map[j][i].y, 1000, 1000)) //hardcode
+			if (is_inside(res.map[j][i].x, res.map[j][i].y, image->width, image->height))
 				mlx_put_pixel(image, res.map[j][i].x, res.map[j][i].y, color);
 			i++;
 		}

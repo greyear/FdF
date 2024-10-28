@@ -27,7 +27,7 @@ void	default_picture(t_draw *pic)
 void	refresh_picture(t_draw *pic)
 {
 	mlx_delete_image(pic->mlx, pic->image);
-	draw_picture(pic->mlx, pic->read, pic);
+	draw_picture(pic);
 }
 
 void	delete_exit(t_draw *pic)

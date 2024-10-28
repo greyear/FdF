@@ -52,6 +52,30 @@ void	clean_iso_mtx(t_iso_mtx *matrix)
 	matrix->map = NULL;
 }
 
+void	clean_px_map(t_px ***map, int height)
+{
+	int	j;
+
+	if (!map || !(*map))
+		return ;
+	j = 0;
+	while (j < height && (*map)[j] != NULL)
+	{
+		free((*map)[j]);
+		j++;
+	}
+	free(*map);
+}
+
+void	clean_px_mtx(t_px_mtx *matrix)
+{
+	if (!matrix || !matrix->map)
+		return ;
+	clean_px_map(&(matrix->map), matrix->height);
+	matrix->map = NULL;
+}
+
+/*
 void	clean_px_mtx(t_px_mtx *matrix)
 {
 	int	j;
@@ -67,7 +91,7 @@ void	clean_px_mtx(t_px_mtx *matrix)
 	}
 	free(matrix->map);
 	matrix->map = NULL;
-}
+}*/
 
 void	clean_arr(char **arr)
 {
