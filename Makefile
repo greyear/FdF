@@ -40,18 +40,20 @@ READING_DIR			=	$(SRC_DIR)/reading/read_map.c \
 						$(SRC_DIR)/reading/read_utils.c \
 						$(SRC_DIR)/reading/map_check.c \
 						$(SRC_DIR)/reading/checkers.c \
-						$(SRC_DIR)/reading/cleaners.c \
+						$(SRC_DIR)/reading/clean_maps.c \
+						$(SRC_DIR)/reading/clean_other.c \
 						$(SRC_DIR)/reading/errors.c
 TRANSFORMING_DIR	= 	$(SRC_DIR)/transforming/rotate.c \
-						$(SRC_DIR)/transforming/transform_coordinates.c
-DRAWING_DIR			=	$(SRC_DIR)/drawing/draw_all.c \
+						$(SRC_DIR)/transforming/iso_matrix.c
+DRAWING_DIR			=	$(SRC_DIR)/drawing/px_matrix.c \
 						$(SRC_DIR)/drawing/draw_line.c \
 						$(SRC_DIR)/drawing/draw_utils.c \
 						$(SRC_DIR)/drawing/colors.c \
 						$(SRC_DIR)/drawing/colors_rgba.c \
 						$(SRC_DIR)/drawing/colors_utils.c \
 						$(SRC_DIR)/drawing/draw_actions.c \
-						$(SRC_DIR)/drawing/bonus_functions.c
+						$(SRC_DIR)/drawing/bonus_functions.c \
+						$(SRC_DIR)/drawing/picture.c
 SRC					=	$(READING_DIR) \
 						$(TRANSFORMING_DIR) \
 						$(DRAWING_DIR) \

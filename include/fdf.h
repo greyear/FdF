@@ -96,8 +96,13 @@ typedef struct s_draw
 	mlx_image_t	*image;
 	t_read		*read;
 	double		zoom;
-	double		move_x;
-	double		move_y;
+	double		mult;
+	t_extr		ext;
+	int			colorful;
+	double		of_x;
+	double		of_y;
+	double		mv_x;
+	double		mv_y;
 	float		flat;
 	double		alpha;
 	double		beta;
@@ -122,25 +127,27 @@ void		rotate_z(int *x, int *y, double gamma);
 t_iso_mtx	fill_iso_mtx(double angle, t_draw *pic);
 
 //Colors
+t_color		extract_rgba(int color, int len);
 int			mix_rgba(int r, int g, int b, int a);
+t_color		set_color_to_height(int z, int max_z, int min_z);
+t_color		color_between(t_px start, t_px cur, t_px end);
+int			is_colorful_input(t_iso_mtx matrix);
+t_color		for_colorful_or_not(t_iso p, t_draw *pic);
+int			color_len(char *str);
 t_color		fake_color(void);
 t_color		white_color(void);
 int			is_fake(t_color c);
-t_color		extract_rgba(int color, int len);
-t_color		set_color_to_height(int z, int max_z, int min_z);
-t_color		color_between(t_px start, t_px cur, t_px end);
-int			color_len(char *str);
 
 //Drawing
-t_px_mtx	to_px_mtx(mlx_image_t *image, t_iso_mtx iso_matrix, t_draw *pic);
+t_px_mtx	fill_px_mtx(t_iso_mtx iso_mtx, t_draw *pic);
 void		put_px_mtx(mlx_image_t *image, t_px_mtx matrix);
 void		draw_line(mlx_image_t *image, t_px a, t_px b);
 t_extr		find_extremum(t_iso_mtx matrix);
 double		find_zoom(t_extr extremum, int width, int height);
-int			is_colorful_input(t_iso_mtx matrix);
 int			is_inside(int point_x, int point_y, int limit_x, int limit_y);
 void		default_picture(t_draw *pic);
 int			draw_picture(t_draw *pic);
+void		pic_params(t_extr e, t_draw *pic);
 void		refresh_picture(t_draw *pic);
 void		delete_exit(t_draw *pic);
 void		track_keys(mlx_key_data_t keydata, void *param);

@@ -16,27 +16,25 @@ int	draw_picture(t_draw *pic)
 {
 	t_iso_mtx	iso_matrix;
 	t_px_mtx	pixel_matrix;
-	mlx_image_t	*image;
 
 	iso_matrix = fill_iso_mtx(M_PI / 6, pic);
-	image = mlx_new_image(pic->mlx, pic->mlx->width, pic->mlx->height);
-	if (!image)
+	pic->image = mlx_new_image(pic->mlx, pic->mlx->width, pic->mlx->height);
+	if (!pic->image)
 	{
 		//clean all
 		mlx_close_window(pic->mlx);
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
-	pixel_matrix = to_px_mtx(image, iso_matrix, pic);
-	put_px_mtx(image, pixel_matrix);
-	if (mlx_image_to_window(pic->mlx, image, 0, 0) == -1)
+	pixel_matrix = fill_px_mtx(iso_matrix, pic);
+	put_px_mtx(pic->image, pixel_matrix);
+	if (mlx_image_to_window(pic->mlx, pic->image, 0, 0) == -1)
 	{
 		//clean all
 		mlx_close_window(pic->mlx);
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
-	pic->image = image;
 	return (EXIT_SUCCESS);
 }
 

@@ -15,21 +15,21 @@
 void	move(mlx_key_data_t keydata, t_draw	*pic)
 {
 	if (keydata.key == MLX_KEY_UP)
-		pic->move_y -= 5;
+		pic->mv_y -= 5;
 	else if (keydata.key == MLX_KEY_DOWN)
-		pic->move_y += 5;
+		pic->mv_y += 5;
 	else if (keydata.key == MLX_KEY_LEFT)
-		pic->move_x -= 5;
+		pic->mv_x -= 5;
 	else if (keydata.key == MLX_KEY_RIGHT)
-		pic->move_x += 5;
-	if (pic->move_y < -1000)
-		pic->move_y = -1000;
-	else if (pic->move_y > 1000)
-		pic->move_y = 1000;
-	if (pic->move_x < -1000)
-		pic->move_x = -1000;
-	else if (pic->move_x > 1000)
-		pic->move_x = 1000;
+		pic->mv_x += 5;
+	if (pic->mv_y < -1000)
+		pic->mv_y = -1000;
+	else if (pic->mv_y > 1000)
+		pic->mv_y = 1000;
+	if (pic->mv_x < -1000)
+		pic->mv_x = -1000;
+	else if (pic->mv_x > 1000)
+		pic->mv_x = 1000;
 	refresh_picture(pic);
 }
 

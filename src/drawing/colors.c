@@ -67,3 +67,19 @@ int	is_colorful_input(t_iso_mtx matrix)
 	}
 	return (0);
 }
+
+t_color	for_colorful_or_not(t_iso p, t_draw *pic)
+{
+	t_color	c;
+
+	if (pic->colorful == 1)
+	{
+		if (is_fake(p.color) == 1)
+			c = white_color();
+		else
+			c = p.color;
+	}
+	else
+		c = set_color_to_height(p.or_z, pic->ext.b_z, pic->ext.s_z);
+	return (c);
+}

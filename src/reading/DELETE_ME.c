@@ -15,7 +15,7 @@
 /*
 + 1 arg, 3 args - "Invalid arguments", no leaks
 
-+ non existing map - gives "Error opening file: No such file or directory", no leaks
++ non existing - "Error opening file: No such file or directory", no leaks
 
 + empty map - gives "Invalid map", no leaks
 

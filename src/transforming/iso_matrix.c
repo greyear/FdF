@@ -36,7 +36,7 @@ static t_iso	transform_point(t_read p, double ang, t_draw *pic)
 	return (res);
 }
 
-void	create_iso_mtx(t_iso_mtx *matrix, t_read *stack)
+static void	create_iso_mtx(t_iso_mtx *matrix, t_read *stack)
 {
 	int	j;
 

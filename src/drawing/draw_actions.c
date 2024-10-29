@@ -15,8 +15,8 @@
 void	default_picture(t_draw *pic)
 {
 	pic->zoom = 1;
-	pic->move_x = 0;
-	pic->move_y = 0;
+	pic->mv_x = 0;
+	pic->mv_y = 0;
 	pic->flat = 1;
 	pic->alpha = 0;
 	pic->beta = 0;
