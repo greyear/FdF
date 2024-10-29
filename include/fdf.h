@@ -176,5 +176,6 @@ int			color_check(char *str);
 //Errors
 void		args_error(void);
 void		map_error(void);
+void		error_opening(void);
 
 #endif

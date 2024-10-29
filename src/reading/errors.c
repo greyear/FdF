@@ -23,3 +23,9 @@ void	map_error(void)
 	ft_printf("Invalid map\n");
 	exit(EXIT_FAILURE);
 }
+
+void	error_opening(void)
+{
+	perror("Error opening file");
+	exit(EXIT_FAILURE);
+}

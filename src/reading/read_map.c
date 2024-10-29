@@ -12,6 +12,16 @@
 
 #include "../../include/fdf.h"
 
+static int	open_file(char *file_name)
+{
+	int	fd;
+
+	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+		error_opening();
+	return (fd);
+}
+
 t_read	*read_map(char *file_name)
 {
 	int		fd;
@@ -29,12 +39,7 @@ t_read	*read_map(char *file_name)
 	int		exp_len;
 	int		arr_len;
 
-	fd = open(file_name, O_RDONLY);
-	if (fd == -1)
-	{
-		perror("Error opening file");
-		exit(EXIT_FAILURE);
-	}
+	fd = open_file(file_name);
 	first = NULL;
 	last = NULL;
 	exp_len = -1;
