@@ -18,7 +18,7 @@ int	draw_picture(t_draw *pic)
 	t_px_mtx	pixel_matrix;
 	mlx_image_t	*image;
 
-	iso_matrix = to_iso_mtx(pic->read, M_PI / 6, pic);
+	iso_matrix = fill_iso_mtx(M_PI / 6, pic);
 	image = mlx_new_image(pic->mlx, pic->mlx->width, pic->mlx->height);
 	if (!image)
 	{

@@ -42,7 +42,8 @@ READING_DIR			=	$(SRC_DIR)/reading/read_map.c \
 						$(SRC_DIR)/reading/checkers.c \
 						$(SRC_DIR)/reading/cleaners.c \
 						$(SRC_DIR)/reading/errors.c
-TRANSFORMING_DIR	= 	$(SRC_DIR)/transforming/transform_coordinates.c
+TRANSFORMING_DIR	= 	$(SRC_DIR)/transforming/rotate.c \
+						$(SRC_DIR)/transforming/transform_coordinates.c
 DRAWING_DIR			=	$(SRC_DIR)/drawing/draw_all.c \
 						$(SRC_DIR)/drawing/draw_line.c \
 						$(SRC_DIR)/drawing/draw_utils.c \

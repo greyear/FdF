@@ -75,24 +75,6 @@ void	clean_px_mtx(t_px_mtx *matrix)
 	matrix->map = NULL;
 }
 
-/*
-void	clean_px_mtx(t_px_mtx *matrix)
-{
-	int	j;
-
-	if (!matrix || !matrix->map)
-		return ;
-	j = 0;
-	while (j < matrix->height)
-	{
-		if (matrix->map[j])
-			free(matrix->map[j]);
-		j++;
-	}
-	free(matrix->map);
-	matrix->map = NULL;
-}*/
-
 void	clean_arr(char **arr)
 {
 	int	len;

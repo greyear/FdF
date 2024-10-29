@@ -116,7 +116,10 @@ int			contains_comma(char *str);
 int			array_len(char	**separate);
 
 //Transforming to 2D
-t_iso_mtx	to_iso_mtx(t_read *stack, double angle, t_draw *pic);
+void		rotate_x(int *y, int *z, double alpha);
+void		rotate_y(int *x, int *z, double beta);
+void		rotate_z(int *x, int *y, double gamma);
+t_iso_mtx	fill_iso_mtx(double angle, t_draw *pic);
 
 //Colors
 int			mix_rgba(int r, int g, int b, int a);

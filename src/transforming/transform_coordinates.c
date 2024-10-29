@@ -12,35 +12,6 @@
 
 #include "../../include/fdf.h"
 
-static void	rotate_x(int *y, int *z, double alpha)
-{
-	int	previous_y;
-
-	previous_y = *y;
-	*y = previous_y * cos(alpha) + *z * sin(alpha);
-	*z = -previous_y * sin(alpha) + *z * cos(alpha);
-}
-
-static void	rotate_y(int *x, int *z, double beta)
-{
-	int	previous_x;
-
-	previous_x = *x;
-	*x = previous_x * cos(beta) + *z * sin(beta);
-	*z = -previous_x * sin(beta) + *z * cos(beta);
-}
-
-static void	rotate_z(int *x, int *y, double gamma)
-{
-	int	previous_x;
-	int	previous_y;
-
-	previous_x = *x;
-	previous_y = *y;
-	*x = previous_x * cos(gamma) - previous_y * sin(gamma);
-	*y = previous_x * sin(gamma) + previous_y * cos(gamma);
-}
-
 static t_iso	transform_point(t_read p, double ang, t_draw *pic)
 {
 	t_iso	res;
@@ -65,51 +36,52 @@ static t_iso	transform_point(t_read p, double ang, t_draw *pic)
 	return (res);
 }
 
-t_iso_mtx	to_iso_mtx(t_read *stack, double angle, t_draw *pic)
+void	create_iso_mtx(t_iso_mtx *matrix, t_read *stack)
 {
-	t_read		*cur;
-	int			i;
-	int			j;
-	int			width;
-	int			height;
-	t_iso		**map;
-	t_iso_mtx	matrix;
+	int	j;
 
-	width = last_elem(stack)->x + 1;
-	height = last_elem(stack)->y + 1;
-	map = (t_iso **)malloc(height * sizeof(t_iso *));
-	if (!map)
+	matrix->map = (t_iso **)malloc(matrix->height * sizeof(t_iso *));
+	if (!matrix->map)
 	{
 		clean_read_map(&stack);
 		exit(EXIT_FAILURE);
 	}
 	j = 0;
-	while (j < height)
+	while (j < matrix->height)
 	{
-		map[j] = (t_iso *)malloc(width * sizeof(t_iso));
-		if (!map[j])
+		matrix->map[j] = (t_iso *)malloc(matrix->width * sizeof(t_iso));
+		if (!matrix->map[j])
 		{
 			clean_read_map(&stack);
-			clean_iso_map(&map, j);
+			clean_iso_map(&(matrix->map), j);
 			exit(EXIT_FAILURE);
 		}
 		j++;
 	}
-	cur = stack;
+}
+
+t_iso_mtx	fill_iso_mtx(double angle, t_draw *pic)
+{
+	t_read		*cur;
+	int			i;
+	int			j;
+	t_iso_mtx	matrix;
+
+	matrix.width = last_elem(pic->read)->x + 1;
+	matrix.height = last_elem(pic->read)->y + 1;
+	create_iso_mtx(&matrix, pic->read);
+	cur = pic->read;
 	j = 0;
-	while (j < height)
+	while (j < matrix.height)
 	{
 		i = 0;
-		while (i < width)
+		while (i < matrix.width)
 		{
-			map[j][i] = transform_point(*cur, angle, pic);
+			matrix.map[j][i] = transform_point(*cur, angle, pic);
 			cur = cur->next;
 			i++;
 		}
 		j++;
 	}
-	matrix.map = map;
-	matrix.width = width;
-	matrix.height = height;
 	return (matrix);
 }
