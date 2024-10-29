@@ -110,6 +110,13 @@ typedef struct s_draw
 	int			parallel;
 }	t_draw;
 
+typedef struct s_start
+{
+	int		fd;
+	char	*line;
+	t_read	*read;
+}	t_start;
+
 //Reading
 t_read		*read_map(char *file_name);
 
