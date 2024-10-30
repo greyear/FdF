@@ -31,7 +31,7 @@ t_read	*read_map(char *file_name)
 	start.last = NULL;
 	start.exp_len = -1;
 	start.y = 0;
-	while (1) //while line != NULL
+	while (1)
 	{
 		start.line = get_next_line(start.fd);
 		if (start.line == NULL)

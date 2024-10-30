@@ -19,6 +19,13 @@ char	**separate_line(t_start *start)
 
 	trimmed_line = ft_strtrim(start->line, " \n\t\r\f\v");
 	free(start->line);
+	if (trimmed_line == NULL)
+	{
+		clean_read_map(&(start->first));
+		clean_gnl(start->fd);
+		ft_printf("Input data error\n");
+		exit(EXIT_FAILURE);
+	}
 	if (trimmed_line[0] == '\0')
 	{
 		free(trimmed_line);
