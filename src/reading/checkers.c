@@ -12,6 +12,20 @@
 
 #include "../../include/fdf.h"
 
+void	check_rectangular(int y, int arr_len, t_start *start)
+{
+	if (y == 0)
+		start->exp_len = arr_len;
+	else if (arr_len != start->exp_len)
+	{
+		clean_read_map(&(start->first));
+		clean_arr(start->point_info);
+		clean_gnl(start->fd);
+		ft_printf("Map is not rectangular\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
 static int	overflow_check(char *str)
 {
 	long	sign;

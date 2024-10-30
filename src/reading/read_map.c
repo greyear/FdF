@@ -22,236 +22,28 @@ static int	open_file(char *file_name)
 	return (fd);
 }
 
-static char **separate_line(t_start *start)
-{
-	char	*trimmed_line;
-	char	**point_info;
-
-	trimmed_line = ft_strtrim(start->line, " \n\t\r\f\v");
-	free(start->line);
-	if (trimmed_line[0] == '\0')
-	{
-		free(trimmed_line);
-		return (NULL);
-	}
-	point_info = ft_split(trimmed_line, ' ');
-	free(trimmed_line);
-	if (point_info == NULL)
-	{
-		clean_read_map(&(start->read));
-		clean_gnl(start->fd);
-		ft_printf("Input data error\n");
-		exit(EXIT_FAILURE);
-	}
-	return (point_info);
-}
-
 t_read	*read_map(char *file_name)
 {
 	t_start	start;
-	char	**point_info;
-	char	**separate;
-	int		x;
-	int		y;
-	int		z;
-	t_color	color;
-	t_read	*first;
-	t_read	*new;
-	t_read	*last;
-	int		exp_len;
-	int		arr_len;
 
 	start.fd = open_file(file_name);
-	first = NULL;
-	last = NULL;
-	exp_len = -1;
-	y = 0;
+	start.first = NULL;
+	start.last = NULL;
+	start.exp_len = -1;
+	start.y = 0;
 	while (1) //while line != NULL
 	{
 		start.line = get_next_line(start.fd);
 		if (start.line == NULL)
 			break ;
-		point_info = separate_line(&start);
-		if (point_info == NULL)
+		start.point_info = separate_line(&start);
+		if (start.point_info == NULL)
 			continue ;
-		arr_len = array_len(point_info);
-		if (y == 0)
-			exp_len = arr_len;
-		else if (arr_len != exp_len)
-		{
-			clean_read_map(&first);
-			clean_arr(point_info);
-			clean_gnl(start.fd);
-			ft_printf("Map is not rectangular\n");
-			exit(EXIT_FAILURE);
-		}
-		x = 0;
-		while (point_info[x] != NULL)
-		{
-			if (point_info[x][0] == '\0')
-			{
-				x++;
-				continue ;
-			}
-			if (contains_comma(point_info[x]) == 1)
-			{
-				separate = ft_split(point_info[x], ',');
-				if (array_len(separate) != 2 || height_check(separate[0]) || color_check(separate[1]))
-				{
-					ft_printf("Input data error\n");
-					clean_read_map(&first);
-					clean_arr(point_info);
-					clean_arr(separate);
-					clean_gnl(start.fd);
-					exit(EXIT_FAILURE);
-				}
-				z = ft_atoi(separate[0]);
-				color = extract_rgba(ft_atoi_color(separate[1]), ft_strlen(separate[1]) - 2);
-				clean_arr(separate);
-			}
-			else
-			{
-				if (height_check(point_info[x]))
-				{
-					ft_printf("Input data error\n");
-					clean_read_map(&first);
-					clean_arr(point_info);
-					clean_gnl(start.fd);
-					exit(EXIT_FAILURE);
-				}
-				z = ft_atoi(point_info[x]);
-				color = fake_color();
-			}
-			new = new_elem(x, y, z, color);
-			if (new == NULL)
-			{
-				clean_read_map(&first);
-				clean_arr(point_info);
-				clean_gnl(start.fd);
-				exit(EXIT_FAILURE);
-			}
-			last = add_to_back(&last, new);
-			if (first == NULL)
-				first = last;
-			x++;
-		}
-		start.line = NULL;
-		clean_arr(point_info);
-		y++;
+		start.arr_len = array_len(start.point_info);
+		check_rectangular(start.y, start.arr_len, &start);
+		parse_line(&start);
+		start.y++;
 	}
 	close(start.fd);
-	return (first);
+	return (start.first);
 }
-
-/*
-t_read	*read_map(char *file_name)
-{
-	t_start	start;
-	char	*line;
-	char	**point_info;
-	char	**separate;
-	int		x;
-	int		y;
-	int		z;
-	t_color	color;
-	t_read	*first;
-	t_read	*new;
-	t_read	*last;
-	char	*trimmed_line;
-	int		exp_len;
-	int		arr_len;
-
-	start.fd = open_file(file_name);
-	first = NULL;
-	last = NULL;
-	exp_len = -1;
-	y = 0;
-	while (1) //while line != NULL
-	{
-		line = get_next_line(start.fd);
-		if (line == NULL)
-			break ;
-		trimmed_line = ft_strtrim(line, " \n\t\r\f\v");
-		free(line);
-		if (trimmed_line[0] == '\0')
-		{
-			free(trimmed_line);
-			continue ;
-		}
-		point_info = ft_split(trimmed_line, ' ');
-		free(trimmed_line);
-		if (point_info == NULL)
-		{
-			clean_read_map(&first);
-			clean_gnl(start.fd);
-			ft_printf("Input data error\n");
-			exit(EXIT_FAILURE);
-		}
-		arr_len = array_len(point_info);
-		if (y == 0)
-			exp_len = arr_len;
-		else if (arr_len != exp_len)
-		{
-			clean_read_map(&first);
-			clean_arr(point_info);
-			clean_gnl(start.fd);
-			ft_printf("Map is not rectangular\n");
-			exit(EXIT_FAILURE);
-		}
-		x = 0;
-		while (point_info[x] != NULL)
-		{
-			if (point_info[x][0] == '\0')
-			{
-				x++;
-				continue ;
-			}
-			if (contains_comma(point_info[x]) == 1)
-			{
-				separate = ft_split(point_info[x], ',');
-				if (array_len(separate) != 2 || height_check(separate[0]) || color_check(separate[1]))
-				{
-					ft_printf("Input data error\n");
-					clean_read_map(&first);
-					clean_arr(point_info);
-					clean_arr(separate);
-					clean_gnl(start.fd);
-					exit(EXIT_FAILURE);
-				}
-				z = ft_atoi(separate[0]);
-				color = extract_rgba(ft_atoi_color(separate[1]), ft_strlen(separate[1]) - 2);
-				clean_arr(separate);
-			}
-			else
-			{
-				if (height_check(point_info[x]))
-				{
-					ft_printf("Input data error\n");
-					clean_read_map(&first);
-					clean_arr(point_info);
-					clean_gnl(start.fd);
-					exit(EXIT_FAILURE);
-				}
-				z = ft_atoi(point_info[x]);
-				color = fake_color();
-			}
-			new = new_elem(x, y, z, color);
-			if (new == NULL)
-			{
-				clean_read_map(&first);
-				clean_arr(point_info);
-				clean_gnl(start.fd);
-				exit(EXIT_FAILURE);
-			}
-			last = add_to_back(&last, new);
-			if (first == NULL)
-				first = last;
-			x++;
-		}
-		line = NULL;
-		clean_arr(point_info);
-		y++;
-	}
-	close(start.fd);
-	return (first);
-}*/

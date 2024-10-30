@@ -114,11 +114,21 @@ typedef struct s_start
 {
 	int		fd;
 	char	*line;
-	t_read	*read;
+	t_read	*first;
+	t_read	*last;
+	char	**point_info;
+	int		exp_len;
+	int		arr_len;
+	int		x;
+	int		y;
+	int		z;
+	t_color	color;
 }	t_start;
 
 //Reading
 t_read		*read_map(char *file_name);
+char		**separate_line(t_start *start);
+void		parse_line(t_start *start);
 
 //Reading utils
 t_read		*last_elem(t_read *stack);
@@ -177,6 +187,7 @@ void		clean_arr(char **arr);
 void		clean_gnl(int fd);
 
 //Checkers
+void		check_rectangular(int y, int arr_len, t_start *start);
 int			height_check(char *str);
 int			color_check(char *str);
 

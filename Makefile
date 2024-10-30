@@ -37,6 +37,7 @@ RM				=	rm -f
 
 # Source files
 READING_DIR			=	$(SRC_DIR)/reading/read_map.c \
+						$(SRC_DIR)/reading/parse.c \
 						$(SRC_DIR)/reading/read_utils.c \
 						$(SRC_DIR)/reading/checkers.c \
 						$(SRC_DIR)/reading/clean_maps.c \
