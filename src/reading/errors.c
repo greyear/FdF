@@ -34,6 +34,7 @@ void	input_data_error(t_start *start)
 {
 	clean_read_map(&(start->first));
 	clean_gnl(start->fd);
+	close(start->fd);
 	ft_printf("Input data error\n");
 	exit(EXIT_FAILURE);
 }

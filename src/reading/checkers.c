@@ -21,6 +21,7 @@ void	check_rectangular(int y, int arr_len, t_start *start)
 		clean_read_map(&(start->first));
 		clean_arr(start->point_info);
 		clean_gnl(start->fd);
+		close(start->fd);
 		ft_printf("Map is not rectangular\n");
 		exit(EXIT_FAILURE);
 	}

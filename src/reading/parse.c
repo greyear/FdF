@@ -76,6 +76,7 @@ static void	parse_and_add_point_data(t_start *start)
 		clean_read_map(&(start->first));
 		clean_arr(start->point_info);
 		clean_gnl(start->fd);
+		close(start->fd);
 		exit(EXIT_FAILURE);
 	}
 	start->last = add_to_back(&(start->last), new);
