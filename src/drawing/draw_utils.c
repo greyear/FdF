@@ -16,7 +16,6 @@ static t_extr	default_extremum(t_iso_mtx matrix)
 {
 	t_extr	extremum;
 
-	// TODO: check if map exists, if it has fields
 	extremum.b_x = matrix.map[0][0].x;
 	extremum.s_x = matrix.map[0][0].x;
 	extremum.b_y = matrix.map[0][0].y;
@@ -33,7 +32,6 @@ t_extr	find_extremum(t_iso_mtx matrix)
 	int		i;
 	int		j;
 
-	// TODO: check if map exists, if it has fields
 	ex = default_extremum(matrix);
 	i = 0;
 	while (i < matrix.width)

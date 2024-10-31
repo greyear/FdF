@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/fdf.h"
-#include "../../libft/include/get_next_line.h"
 
 t_read	*last_elem(t_read *stack)
 {

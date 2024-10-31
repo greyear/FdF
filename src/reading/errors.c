@@ -29,3 +29,11 @@ void	error_opening(void)
 	perror("Error opening file");
 	exit(EXIT_FAILURE);
 }
+
+void	input_data_error(t_start *start)
+{
+	clean_read_map(&(start->first));
+	clean_gnl(start->fd);
+	ft_printf("Input data error\n");
+	exit(EXIT_FAILURE);
+}

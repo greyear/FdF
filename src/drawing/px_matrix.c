@@ -19,7 +19,6 @@ static void	create_px_mtx(t_px_mtx *px_mtx, t_iso_mtx *iso_mtx, t_draw *pic)
 	px_mtx->map = (t_px **)malloc(px_mtx->height * sizeof(t_px *));
 	if (!px_mtx->map)
 	{
-		//what to clean?
 		clean_read_map(&(pic->read));
 		clean_iso_mtx(iso_mtx);
 		exit(EXIT_FAILURE);
@@ -30,7 +29,6 @@ static void	create_px_mtx(t_px_mtx *px_mtx, t_iso_mtx *iso_mtx, t_draw *pic)
 		px_mtx->map[j] = (t_px *)malloc(px_mtx->width * sizeof(t_px));
 		if (!px_mtx->map[j])
 		{
-			//what to clean?
 			clean_read_map(&(pic->read));
 			clean_iso_mtx(iso_mtx);
 			clean_px_map(&(px_mtx->map), j);
@@ -82,7 +80,6 @@ t_px_mtx	fill_px_mtx(t_iso_mtx iso_mtx, t_draw *pic)
 	create_px_mtx(&res, &iso_mtx, pic);
 	pic->colorful = is_colorful_input(iso_mtx);
 	pic->ext = find_extremum(iso_mtx);
-	// TODO: if not 0
 	pic_params(pic->ext, pic);
 	fill_px_map(&res, &iso_mtx, pic);
 	clean_iso_mtx(&iso_mtx);

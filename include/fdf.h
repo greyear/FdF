@@ -195,5 +195,6 @@ int			color_check(char *str);
 void		args_error(void);
 void		map_error(void);
 void		error_opening(void);
+void		input_data_error(t_start *start);
 
 #endif

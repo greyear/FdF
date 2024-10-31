@@ -20,12 +20,7 @@ char	**separate_line(t_start *start)
 	trimmed_line = ft_strtrim(start->line, " \n\t\r\f\v");
 	free(start->line);
 	if (trimmed_line == NULL)
-	{
-		clean_read_map(&(start->first));
-		clean_gnl(start->fd);
-		ft_printf("Input data error\n");
-		exit(EXIT_FAILURE);
-	}
+		input_data_error(start);
 	if (trimmed_line[0] == '\0')
 	{
 		free(trimmed_line);
@@ -34,12 +29,7 @@ char	**separate_line(t_start *start)
 	point_info = ft_split(trimmed_line, ' ');
 	free(trimmed_line);
 	if (point_info == NULL)
-	{
-		clean_read_map(&(start->first));
-		clean_gnl(start->fd);
-		ft_printf("Input data error\n");
-		exit(EXIT_FAILURE);
-	}
+		input_data_error(start);
 	return (point_info);
 }
 
@@ -50,12 +40,9 @@ static int	parse_colored_point_data(char *point, t_start *start)
 	sep = ft_split(point, ',');
 	if (array_len(sep) != 2 || height_check(sep[0]) || color_check(sep[1]))
 	{
-		ft_printf("Input data error\n");
-		clean_read_map(&(start->first));
 		clean_arr(start->point_info);
 		clean_arr(sep);
-		clean_gnl(start->fd);
-		exit(EXIT_FAILURE);
+		input_data_error(start);
 	}
 	start->z = ft_atoi(sep[0]);
 	start->color = extract_rgba(ft_atoi_color(sep[1]), ft_strlen(sep[1]) - 2);
@@ -67,11 +54,8 @@ static int	parse_point_data(char *point, t_start *start)
 {
 	if (height_check(point))
 	{
-		ft_printf("Input data error\n");
-		clean_read_map(&(start->first));
 		clean_arr(start->point_info);
-		clean_gnl(start->fd);
-		exit(EXIT_FAILURE);
+		input_data_error(start);
 	}
 	start->z = ft_atoi(point);
 	start->color = fake_color();

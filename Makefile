@@ -59,7 +59,7 @@ SRC					=	$(READING_DIR) \
 						$(DRAWING_DIR) \
 						$(SRC_DIR)/main.c
 
-# Object files         
+# Object files
 OBJ 			=	$(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
 
 #Build rules
@@ -79,7 +79,6 @@ $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c
 				@mkdir -p $(@D)
 				@$(CC) $(CFLAGS) $(INCLUDE_DIR) -Imlx -c $< -o $@
 
-#TODO: Check!
 clean:
 				@$(RM) -r $(OBJ_DIR)
 				@$(RM) .cache_exists
