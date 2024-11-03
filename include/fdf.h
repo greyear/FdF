@@ -185,8 +185,10 @@ void		clean_px_map(t_px ***map, int height);
 void		clean_px_mtx(t_px_mtx *matrix);
 void		clean_arr(char **arr);
 void		clean_gnl(int fd);
+void		mix_clean_exit(t_start *start);
 
 //Checkers
+void		name_check(char *name);
 void		check_rectangular(int y, int arr_len, t_start *start);
 int			height_check(char *str);
 int			color_check(char *str);

@@ -38,6 +38,11 @@ static int	parse_colored_point_data(char *point, t_start *start)
 	char	**sep;
 
 	sep = ft_split(point, ',');
+	if (!sep)
+	{
+		clean_arr(start->point_info);
+		mix_clean_exit(start);
+	}
 	if (array_len(sep) != 2 || height_check(sep[0]) || color_check(sep[1]))
 	{
 		clean_arr(start->point_info);
@@ -73,11 +78,8 @@ static void	parse_and_add_point_data(t_start *start)
 	new = new_elem(start->x, start->y, start->z, start->color);
 	if (new == NULL)
 	{
-		clean_read_map(&(start->first));
 		clean_arr(start->point_info);
-		clean_gnl(start->fd);
-		close(start->fd);
-		exit(EXIT_FAILURE);
+		mix_clean_exit(start);
 	}
 	start->last = add_to_back(&(start->last), new);
 	if (start->first == NULL)

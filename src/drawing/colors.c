@@ -41,6 +41,8 @@ t_color	color_between(t_px start, t_px cur, t_px end)
 
 	d_small = abs(cur.x - start.x) + abs(cur.y - start.y);
 	d_big = abs(end.x - start.x) + abs(end.y - start.y);
+	if (d_big == 0)
+		return (start.color);
 	res.r = start.color.r + ((end.color.r - start.color.r) * d_small) / d_big;
 	res.g = start.color.g + ((end.color.g - start.color.g) * d_small) / d_big;
 	res.b = start.color.b + ((end.color.b - start.color.b) * d_small) / d_big;

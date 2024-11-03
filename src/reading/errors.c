@@ -14,13 +14,13 @@
 
 void	args_error(void)
 {
-	ft_printf("Invalid arguments\n");
+	ft_putstr_fd("Invalid arguments\n", 2);
 	exit(EXIT_FAILURE);
 }
 
 void	map_error(void)
 {
-	ft_printf("Invalid map\n");
+	ft_putstr_fd("Invalid map\n", 2);
 	exit(EXIT_FAILURE);
 }
 
@@ -35,6 +35,14 @@ void	input_data_error(t_start *start)
 	clean_read_map(&(start->first));
 	clean_gnl(start->fd);
 	close(start->fd);
-	ft_printf("Input data error\n");
+	ft_putstr_fd("Input data error\n", 2);
+	exit(EXIT_FAILURE);
+}
+
+void	mix_clean_exit(t_start *start)
+{
+	clean_read_map(&(start->first));
+	clean_gnl(start->fd);
+	close(start->fd);
 	exit(EXIT_FAILURE);
 }

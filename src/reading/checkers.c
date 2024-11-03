@@ -12,6 +12,19 @@
 
 #include "../../include/fdf.h"
 
+void	name_check(char *name)
+{
+	int	l;
+
+	l = ft_strlen(name);
+	if (l < 5 || name[l - 1] != 'f' || name[l - 2] != 'd' ||
+		name[l - 3] != 'f' || name[l - 4] != '.')
+	{
+		ft_putstr_fd("File is not *.fdf\n", 2);
+		exit(EXIT_FAILURE);
+	}
+}
+
 void	check_rectangular(int y, int arr_len, t_start *start)
 {
 	if (y == 0)
@@ -22,7 +35,7 @@ void	check_rectangular(int y, int arr_len, t_start *start)
 		clean_arr(start->point_info);
 		clean_gnl(start->fd);
 		close(start->fd);
-		ft_printf("Map is not rectangular\n");
+		ft_putstr_fd("Map is not rectangular\n", 2);
 		exit(EXIT_FAILURE);
 	}
 }

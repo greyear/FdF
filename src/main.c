@@ -18,6 +18,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 2 || !argv[1])
 		args_error();
+	name_check(argv[1]);
 	pic.read = read_map(argv[1]);
 	if (!pic.read)
 		map_error();
@@ -25,7 +26,7 @@ int	main(int argc, char *argv[])
 	if (!pic.mlx)
 	{
 		clean_read_map(&(pic.read));
-		puts(mlx_strerror(mlx_errno));
+		ft_putstr_fd("Error initializing MLX\n", 2);
 		return (EXIT_FAILURE);
 	}
 	default_picture(&pic);

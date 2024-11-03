@@ -24,8 +24,8 @@ int	draw_picture(t_draw *pic)
 		clean_read_map(&(pic->read));
 		clean_iso_mtx(&iso_matrix);
 		mlx_close_window(pic->mlx);
-		puts(mlx_strerror(mlx_errno));
-		return (EXIT_FAILURE);
+		ft_putstr_fd("Error creating MLX image\n", 2);
+		exit(EXIT_FAILURE); //выйти?
 	}
 	pixel_matrix = fill_px_mtx(iso_matrix, pic);
 	put_px_mtx(pic->image, pixel_matrix);
@@ -35,8 +35,8 @@ int	draw_picture(t_draw *pic)
 		clean_iso_mtx(&iso_matrix);
 		clean_px_mtx(&pixel_matrix);
 		mlx_close_window(pic->mlx);
-		puts(mlx_strerror(mlx_errno));
-		return (EXIT_FAILURE);
+		ft_putstr_fd("Error displaying image in MLX window\n", 2);
+		exit(EXIT_FAILURE); //выйти?
 	}
 	return (EXIT_SUCCESS);
 }
