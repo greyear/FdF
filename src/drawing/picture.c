@@ -21,22 +21,18 @@ int	draw_picture(t_draw *pic)
 	pic->image = mlx_new_image(pic->mlx, pic->mlx->width, pic->mlx->height);
 	if (!pic->image)
 	{
-		clean_read_map(&(pic->read));
 		clean_iso_mtx(&iso_matrix);
-		mlx_close_window(pic->mlx);
 		ft_putstr_fd("Error creating MLX image\n", 2);
-		exit(EXIT_FAILURE); //выйти?
+		picture_cleaner(pic);
 	}
 	pixel_matrix = fill_px_mtx(iso_matrix, pic);
 	put_px_mtx(pic->image, pixel_matrix);
 	if (mlx_image_to_window(pic->mlx, pic->image, 0, 0) == -1)
 	{
-		clean_read_map(&(pic->read));
 		clean_iso_mtx(&iso_matrix);
 		clean_px_mtx(&pixel_matrix);
-		mlx_close_window(pic->mlx);
 		ft_putstr_fd("Error displaying image in MLX window\n", 2);
-		exit(EXIT_FAILURE); //выйти?
+		picture_cleaner(pic);
 	}
 	return (EXIT_SUCCESS);
 }

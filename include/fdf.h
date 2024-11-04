@@ -186,6 +186,7 @@ void		clean_px_mtx(t_px_mtx *matrix);
 void		clean_arr(char **arr);
 void		clean_gnl(int fd);
 void		mix_clean_exit(t_start *start);
+void		picture_cleaner(t_draw *pic);
 
 //Checkers
 void		name_check(char *name);

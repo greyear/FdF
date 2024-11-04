@@ -17,8 +17,8 @@ void	name_check(char *name)
 	int	l;
 
 	l = ft_strlen(name);
-	if (l < 5 || name[l - 1] != 'f' || name[l - 2] != 'd' ||
-		name[l - 3] != 'f' || name[l - 4] != '.')
+	if (l < 5 || name[l - 1] != 'f' || name[l - 2] != 'd'
+		|| name[l - 3] != 'f' || name[l - 4] != '.')
 	{
 		ft_putstr_fd("File is not *.fdf\n", 2);
 		exit(EXIT_FAILURE);

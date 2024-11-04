@@ -1,5 +1,14 @@
-
-// TODO: header, check libs and definitions
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.h                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: azinchen <azinchen@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/04 16:18:06 by azinchen          #+#    #+#             */
+/*   Updated: 2024/11/04 16:18:08 by azinchen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_UTILS_H
 # define GET_NEXT_LINE_UTILS_H
@@ -9,7 +18,7 @@
 # include <limits.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1000000
 # endif
 
 size_t	ft_strlen(const char *str);

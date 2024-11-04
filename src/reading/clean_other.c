@@ -38,3 +38,10 @@ void	clean_gnl(int fd)
 		line = get_next_line(fd);
 	}
 }
+
+void	picture_cleaner(t_draw *pic)
+{
+	clean_read_map(&(pic->read));
+	mlx_close_window(pic->mlx);
+	exit(EXIT_FAILURE);
+}
